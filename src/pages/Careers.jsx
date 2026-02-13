@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Briefcase, MapPin, Clock, Upload, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
