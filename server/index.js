@@ -4,132 +4,110 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 
-// Initialize app
-const app = express();
-
-// Load env vars
+// Load environment variables
 dotenv.config();
 
-// 1. GLOBAL CORS
-// Allow both production and local development origins
-const allowedOrigins = [
-    'https://katalyx.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000'
-];
+const app = express();
 
+// 1. FORCEFUL CORS HANDLER (MUST BE FIRST)
+// This handles CORS headers manually to guarantee they are present even on errors
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    // Allow any origin during debugging, or restrict to your domains
+    res.header('Access-Control-Allow-Origin', origin || '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');
+
+    // Immediately respond to preflight requests with 200
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    next();
+});
+
+// 2. STANDARD CORS MIDDLEWARE (Backup)
 app.use(cors({
-    origin: function (origin, callback) {
-        // allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            // During debugging, we can return true or log it
-            // For now, let's be permissive and log
-            console.log('Origin not in allowed list:', origin);
-            return callback(null, true);
-        }
-        return callback(null, true);
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-    credentials: true,
-    optionsSuccessStatus: 200
+    origin: true,
+    credentials: true
 }));
 
-// Handle OPTIONS explicitly for any route
-app.options('*', cors());
-
-// 2. Body Parsers
+// 3. BODY PARSERS
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 3. Health Check (Always accessible, no DB needed)
+// 4. HEALTH CHECK (No DB dependency)
 app.get('/health', (req, res) => {
     res.status(200).json({
-        status: 'ok',
+        status: 'online',
         time: new Date().toISOString(),
-        node: process.version,
-        env: process.env.NODE_ENV,
-        hasMongo: !!process.env.MONGO_URI ? 'Yes' : 'No'
+        config: {
+            hasMongo: !!process.env.MONGO_URI,
+            hasJWT: !!process.env.JWT_SECRET,
+            nodeEnv: process.env.NODE_ENV
+        }
     });
 });
 
-// 4. Database Connection Utility
+// 5. DATABASE CONNECTION UTILITY
 const connectDB = async () => {
     if (mongoose.connection.readyState >= 1) return;
 
-    const mongoUri = process.env.MONGO_URI;
-    if (!mongoUri) {
-        console.error('CRITICAL: MONGO_URI is not defined');
-        return; // Don't throw here, let the middleware handle it
+    if (!process.env.MONGO_URI) {
+        console.error('SERVER_CRASH: MONGO_URI is missing');
+        throw new Error('Database configuration missing');
     }
 
-    try {
-        await mongoose.connect(mongoUri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000,
-        });
-        console.log('MongoDB Connected successfully');
-    } catch (err) {
-        console.error('MongoDB Initial Connection Error:', err.message);
-    }
+    // Options for high reliability on Vercel
+    await mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+    });
+    console.log('MongoDB Connected');
 };
 
-// 5. DB Middleware
-const dbMiddleware = async (req, res, next) => {
-    // Skip DB check for health and options
-    if (req.path === '/health' || req.method === 'OPTIONS') return next();
-
-    if (!process.env.MONGO_URI) {
-        return res.status(500).json({
-            error: 'Backend Configuration Error',
-            message: 'MONGO_URI environment variable is missing in Vercel settings.'
-        });
-    }
-
+// 6. DB CONNECTION MIDDLEWARE
+// Ensures every API request has a working DB connection
+const dbConn = async (req, res, next) => {
     try {
         await connectDB();
         next();
     } catch (err) {
-        console.error('DB Middleware Error:', err.message);
-        res.status(500).json({ error: 'Database connection failed', message: err.message });
+        console.error('DB_CONN_FAILURE:', err.message);
+        // Explicitly send headers here too just in case
+        res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+        res.status(500).json({
+            error: 'Backend Connection Error',
+            message: 'Failed to connect to the database. Check your MONGO_URI.'
+        });
     }
 };
 
-// Apply DB middleware to all /api routes
-app.use('/api', dbMiddleware);
+// 7. API ROUTES (Protected by DB middleware)
+app.use('/api/auth', dbConn, require('./routes/auth'));
+app.use('/api/jobs', dbConn, require('./routes/jobs'));
+app.use('/api/applications', dbConn, require('./routes/applications'));
+app.use('/api/contact', dbConn, require('./routes/contact'));
+app.use('/api/candidate', dbConn, require('./routes/candidate'));
+app.use('/api/subscribe', dbConn, require('./routes/subscribers'));
 
-// 6. Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/jobs', require('./routes/jobs'));
-app.use('/api/applications', require('./routes/applications'));
-app.use('/api/contact', require('./routes/contact'));
-app.use('/api/candidate', require('./routes/candidate'));
-app.use('/api/subscribe', require('./routes/subscribers'));
-
-// Static folder
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// 7. Global 404
+// 8. GLOBAL 404 & ERROR HANDLING
 app.use((req, res) => {
     res.status(404).json({ error: 'Route Not Found', path: req.path });
 });
 
-// 8. Global Error Handler
 app.use((err, req, res, next) => {
-    console.error('Server Unhandled Error:', err);
-    res.status(500).json({
-        error: 'Internal Server Error',
-        message: err.message,
-        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
-    });
+    console.error('UNHANDLED_ERROR:', err);
+    res.status(500).json({ error: 'Internal Server Error', message: err.message });
 });
 
-// For local development
+// 9. LOCAL LISTEN (Only if not on Vercel)
 if (process.env.NODE_ENV !== 'production') {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }
 
+// Export for Vercel
 module.exports = app;
