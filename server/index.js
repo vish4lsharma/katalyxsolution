@@ -34,10 +34,35 @@ app.use('/api/subscribe', require('./routes/subscribers'));
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/katalyx';
 
-console.log('Using PORT:', PORT);
+// MongoDB connection with caching for serverless
+let cachedDb = null;
 
-mongoose.connect(MONGO_URI)
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log(err));
+async function connectToDatabase() {
+    if (cachedDb) {
+        return cachedDb;
+    }
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+    try {
+        const connection = await mongoose.connect(MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        cachedDb = connection;
+        console.log('MongoDB Connected');
+        return connection;
+    } catch (err) {
+        console.error('MongoDB connection error:', err);
+        throw err;
+    }
+}
+
+// Connect to database
+connectToDatabase();
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+}
+
+// Export for Vercel serverless
+module.exports = app;
