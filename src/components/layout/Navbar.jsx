@@ -55,13 +55,8 @@ const Navbar = () => {
                 }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
-                <Link to="/" className="z-50 flex items-center gap-2 group">
-                    <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl text-white font-bold text-xl shadow-lg group-hover:shadow-blue-500/50 transition-all duration-300">
-                        K
-                    </div>
-                    <span className={`text-xl font-bold tracking-tight ${scrolled || isDarkHero ? 'text-white' : 'text-gray-900'}`}>
-                        Katalyx
-                    </span>
+                <Link to="/" className="z-50 group">
+                    <Logo className="w-10 h-10" textClassName="text-xl" />
                 </Link>
 
                 {/* Desktop Menu */}

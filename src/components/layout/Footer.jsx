@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
 import api from '../../utils/api';
+import Logo from './Logo';
 
 const Footer = () => {
     return (
@@ -9,8 +10,8 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     {/* Brand */}
                     <div className="space-y-4">
-                        <Link to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
-                            Katalyx
+                        <Link to="/" className="inline-block">
+                            <Logo className="w-10 h-10" textClassName="text-xl" />
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed">
                             Pioneering the future of digital transformation with AI-driven analytics, cloud solutions, and strategic consulting.
