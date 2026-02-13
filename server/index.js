@@ -25,11 +25,9 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/candidate', require('./routes/candidate'));
 app.use('/api/subscribe', require('./routes/subscribers'));
 
-// Force PORT to 5000 for development
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/katalyx';
 
-console.log('Environment PORT:', process.env.PORT);
 console.log('Using PORT:', PORT);
 
 mongoose.connect(MONGO_URI)
