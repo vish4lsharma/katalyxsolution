@@ -71,14 +71,31 @@ const Home = () => {
                         </motion.div>
                     </motion.div>
 
+                    {/* Mobile: Static Tech Visual | Desktop: 3D Globe */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="md:h-[600px] h-[400px] w-full relative"
+                        className="md:h-[600px] h-[300px] w-full relative flex items-center justify-center"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl opacity-50" />
-                        <Globe />
+                        {/* Static Visual for Mobile */}
+                        <div className="md:hidden relative w-full h-full flex items-center justify-center">
+                            <div className="absolute w-48 h-48 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+                            <div className="relative z-10 p-8 rounded-3xl border border-blue-500/20 bg-gray-900/40 backdrop-blur-xl flex flex-col items-center">
+                                <Cpu size={48} className="text-blue-400 mb-4 animate-bounce" />
+                                <div className="flex gap-2">
+                                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-ping" />
+                                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-ping delay-100" />
+                                    <div className="w-2 h-2 bg-cyan-500 rounded-full animate-ping delay-200" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 3D Globe for Desktop */}
+                        <div className="hidden md:block w-full h-full relative">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl opacity-50" />
+                            <Globe />
+                        </div>
                     </motion.div>
                 </div>
             </section>

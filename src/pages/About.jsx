@@ -60,11 +60,24 @@ const About = () => {
                         <h2 className="text-3xl font-bold text-white mb-4">Our Journey</h2>
                         <p className="text-gray-400">From a small startup to a global innovation partner.</p>
                         {/* Timeline component might need dark mode check, assuming it adapts or is transparent */}
-                        <div className="mt-12 text-gray-400 italic">Timeline Visualization</div>
-                        {/* Replaced Timeline temporarily if it has fixed colors, or keep it if adaptable. 
-                           Timeline usually has custom styles. Leaving simpler placeholder to avoid breaking if it's light-mode hardcoded 
-                           Actually, safe to keep if simple code. Let's try to keep it but wrap in div */}
-                        <Timeline />
+                        <div className="hidden md:block">
+                            <Timeline />
+                        </div>
+                        {/* Static Vertical Timeline for Mobile */}
+                        <div className="md:hidden mt-12 space-y-8 text-left max-w-sm mx-auto">
+                            {[
+                                { year: '2025', text: 'Inception: Founded by Vishal Sharma & Yash Gupta.' },
+                                { year: 'Q4 2025', text: 'Product Launch: Camu ERP & ClinicX24 launched.' },
+                                { year: '2026', text: 'Scale: Global Innovation Partnership status.' }
+                            ].map((milestone, i) => (
+                                <div key={i} className="flex gap-4 items-start">
+                                    <div className="bg-blue-600 px-3 py-1 rounded text-white font-bold text-sm min-w-[70px] text-center">
+                                        {milestone.year}
+                                    </div>
+                                    <p className="text-gray-300 text-sm leading-relaxed">{milestone.text}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
