@@ -162,7 +162,7 @@ const AdminDashboard = () => {
                             <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-500">Total Jobs</p>
+                                        <p className="text-sm font-medium text-gray-600">Total Jobs</p>
                                         <h3 className="text-3xl font-bold text-gray-900 mt-1">{jobs.length}</h3>
                                     </div>
                                     <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -173,7 +173,7 @@ const AdminDashboard = () => {
                             <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-500">Applications</p>
+                                        <p className="text-sm font-medium text-gray-600">Applications</p>
                                         <h3 className="text-3xl font-bold text-gray-900 mt-1">{applications.length}</h3>
                                     </div>
                                     <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
@@ -184,7 +184,7 @@ const AdminDashboard = () => {
                             <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-500">Inquiries</p>
+                                        <p className="text-sm font-medium text-gray-600">Inquiries</p>
                                         <h3 className="text-3xl font-bold text-gray-900 mt-1">{inquiries.length}</h3>
                                     </div>
                                     <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
@@ -220,7 +220,7 @@ const AdminDashboard = () => {
                                         <tbody className="divide-y divide-gray-200">
                                             {jobs.length === 0 ? (
                                                 <tr>
-                                                    <td colSpan="5" className="px-6 py-12 text-center text-gray-500">
+                                                    <td colSpan="5" className="px-6 py-12 text-center text-gray-600 font-medium">
                                                         No jobs posted yet. Click "Post New Job" to get started.
                                                     </td>
                                                 </tr>
@@ -321,37 +321,37 @@ const AdminDashboard = () => {
                     {showJobModal && (
                         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
                             <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-8">
-                                <h2 className="text-2xl font-bold mb-6">Post New Opportunity</h2>
+                                <h2 className="text-2xl font-bold mb-6 text-gray-900">Post New Opportunity</h2>
                                 <form onSubmit={handleJobSubmit} className="space-y-4">
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium mb-1">Job Title</label>
-                                            <input required className="w-full border p-2 rounded-lg" value={jobForm.title} onChange={e => setJobForm({ ...jobForm, title: e.target.value })} />
+                                            <label className="block text-sm font-medium mb-1 text-gray-700">Job Title</label>
+                                            <input required className="w-full border p-2 rounded-lg text-gray-900" value={jobForm.title} onChange={e => setJobForm({ ...jobForm, title: e.target.value })} />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium mb-1">Department</label>
-                                            <input required className="w-full border p-2 rounded-lg" value={jobForm.department} onChange={e => setJobForm({ ...jobForm, department: e.target.value })} />
+                                            <label className="block text-sm font-medium mb-1 text-gray-700">Department</label>
+                                            <input required className="w-full border p-2 rounded-lg text-gray-900" value={jobForm.department} onChange={e => setJobForm({ ...jobForm, department: e.target.value })} />
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium mb-1">Location</label>
-                                            <input required className="w-full border p-2 rounded-lg" value={jobForm.location} onChange={e => setJobForm({ ...jobForm, location: e.target.value })} />
+                                            <label className="block text-sm font-medium mb-1 text-gray-700">Location</label>
+                                            <input required className="w-full border p-2 rounded-lg text-gray-900" value={jobForm.location} onChange={e => setJobForm({ ...jobForm, location: e.target.value })} />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium mb-1">Type</label>
-                                            <select className="w-full border p-2 rounded-lg" value={jobForm.type} onChange={e => setJobForm({ ...jobForm, type: e.target.value })}>
+                                            <label className="block text-sm font-medium mb-1 text-gray-700">Type</label>
+                                            <select className="w-full border p-2 rounded-lg text-gray-900" value={jobForm.type} onChange={e => setJobForm({ ...jobForm, type: e.target.value })}>
                                                 <option>Full-time</option><option>Part-time</option><option>Remote</option><option>Contract</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-1">Description</label>
-                                        <textarea required rows="4" className="w-full border p-2 rounded-lg" value={jobForm.description} onChange={e => setJobForm({ ...jobForm, description: e.target.value })}></textarea>
+                                        <label className="block text-sm font-medium mb-1 text-gray-700">Description</label>
+                                        <textarea required rows="4" className="w-full border p-2 rounded-lg text-gray-900" value={jobForm.description} onChange={e => setJobForm({ ...jobForm, description: e.target.value })}></textarea>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-1">Requirements (one per line)</label>
-                                        <textarea required rows="4" className="w-full border p-2 rounded-lg" value={jobForm.requirements} onChange={e => setJobForm({ ...jobForm, requirements: e.target.value })}></textarea>
+                                        <label className="block text-sm font-medium mb-1 text-gray-700">Requirements (one per line)</label>
+                                        <textarea required rows="4" className="w-full border p-2 rounded-lg text-gray-900" value={jobForm.requirements} onChange={e => setJobForm({ ...jobForm, requirements: e.target.value })}></textarea>
                                     </div>
                                     <div className="flex justify-end gap-3 mt-6">
                                         <button type="button" onClick={() => setShowJobModal(false)} className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">Cancel</button>
