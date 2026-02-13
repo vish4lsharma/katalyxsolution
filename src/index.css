@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #007BFF;
+  --secondary: #333333;
+  --bg-light: #F8F9FA;
+  --bg-dark: #212529;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #e5e7eb;
+  background-color: #0f0f1a;
+  overflow-x: hidden;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #007BFF, #00C6FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  animation: progress 1s ease-in-out;
+}
