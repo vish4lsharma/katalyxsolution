@@ -41,6 +41,8 @@ const Careers = () => {
         setSelectedJob(job);
     };
 
+    const [submitted, setSubmitted] = useState(false);
+
     const handleApply = async (e) => {
         e.preventDefault();
         setSubmitting(true);
@@ -53,9 +55,12 @@ const Careers = () => {
                 jobId: selectedJob._id,
                 resumeLink: formData.resumeLink
             });
-            alert('Application submitted successfully!');
-            setSelectedJob(null);
-            setFormData({ name: '', email: '', phone: '', resumeLink: '' });
+            setSubmitted(true);
+            setTimeout(() => {
+                setSelectedJob(null);
+                setSubmitted(false);
+                setFormData({ name: '', email: '', phone: '', resumeLink: '' });
+            }, 3000);
         } catch (err) {
             alert('Failed to submit application. Please try again.');
         }
@@ -93,10 +98,7 @@ const Careers = () => {
                         className="flex flex-wrap justify-center gap-4"
                     >
                         <Link to="/candidate/login" className="bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/30">
-                            Candidate Login
-                        </Link>
-                        <Link to="/candidate/login" className="bg-transparent border border-blue-400 text-blue-300 px-8 py-3 rounded-full font-bold hover:bg-blue-900/30 transition-colors">
-                            Register Now
+                            Candidate Portal
                         </Link>
                     </motion.div>
                 </div>
@@ -108,7 +110,10 @@ const Careers = () => {
                 <div className="container mx-auto px-6 relative z-10">
                     <h2 className="text-3xl font-bold mb-12 text-white">Open Positions</h2>
                     {jobs.length === 0 ? (
-                        <p className="text-center text-gray-400">No open positions currently. Check back soon!</p>
+                        <div className="text-center py-20 bg-gray-900/50 rounded-3xl border border-gray-800 backdrop-blur-sm">
+                            <Briefcase size={48} className="mx-auto text-gray-700 mb-4" />
+                            <p className="text-xl text-gray-400">No open positions currently. Check back soon!</p>
+                        </div>
                     ) : (
                         <div className="grid gap-6">
                             {jobs.map((job, index) => (
@@ -118,19 +123,19 @@ const Careers = () => {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     transition={{ delay: index * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="bg-gradient-to-r from-gray-900 to-gray-800 p-6 rounded-xl border border-gray-700 flex flex-col md:flex-row justify-between items-center hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all group"
+                                    className="bg-gradient-to-r from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 flex flex-col md:flex-row justify-between items-center hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all group"
                                 >
-                                    <div className="mb-4 md:mb-0">
-                                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{job.title}</h3>
-                                        <div className="flex gap-4 text-sm text-gray-400">
-                                            <span className="flex items-center gap-1"><Briefcase size={14} className="text-blue-500" /> {job.department}</span>
-                                            <span className="flex items-center gap-1"><MapPin size={14} className="text-purple-500" /> {job.location}</span>
-                                            <span className="flex items-center gap-1"><Clock size={14} className="text-green-500" /> {job.type}</span>
+                                    <div className="mb-6 md:mb-0">
+                                        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{job.title}</h3>
+                                        <div className="flex flex-wrap gap-6 text-sm text-gray-400">
+                                            <span className="flex items-center gap-2"><Briefcase size={16} className="text-blue-500" /> {job.department}</span>
+                                            <span className="flex items-center gap-2"><MapPin size={16} className="text-purple-500" /> {job.location}</span>
+                                            <span className="flex items-center gap-2"><Clock size={16} className="text-green-500" /> {job.type}</span>
                                         </div>
                                     </div>
                                     <button
                                         onClick={() => handleApplyClick(job)}
-                                        className="text-blue-400 font-semibold hover:bg-blue-500/10 px-6 py-2 rounded-lg transition-colors border border-blue-500/30 hover:border-blue-400"
+                                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-600/20 active:scale-95"
                                     >
                                         Apply Now
                                     </button>
@@ -142,72 +147,88 @@ const Careers = () => {
             </section>
 
             {/* Application Modal */}
-            {selectedJob && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-                    <motion.div
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="bg-white rounded-2xl w-full max-w-lg p-8 relative shadow-2xl"
-                    >
-                        <button
-                            onClick={() => setSelectedJob(null)}
-                            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-2"
+            <AnimatePresence>
+                {selectedJob && (
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 px-4 py-10 overflow-y-auto">
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            className="bg-[#1a1a2e] border border-gray-700 rounded-3xl w-full max-w-lg p-8 md:p-10 relative shadow-2xl"
                         >
-                            <X size={20} />
-                        </button>
-
-                        <h2 className="text-2xl font-bold mb-1">Apply for {selectedJob.title}</h2>
-                        <p className="text-gray-500 text-sm mb-6">{selectedJob.location} • {selectedJob.type}</p>
-
-                        <form onSubmit={handleApply} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                <input required type="text" className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                <input required type="email" className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                                <input required type="tel" className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Resume Google Drive Link</label>
-                                <input
-                                    required
-                                    type="url"
-                                    placeholder="https://drive.google.com/file/d/..."
-                                    className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                                    value={formData.resumeLink || ''}
-                                    onChange={e => setFormData({ ...formData, resumeLink: e.target.value })}
-                                />
-                                {/* <p className="text-xs text-gray-500 mt-1">
-                                    Upload your resume to Google Drive and share the link here.
-                                    <a
-                                        href="https://drive.google.com/drive/folders/1meKIlmlg6UofT0xn5xkwXjHiu2Ziscdh?usp=sharing"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-blue-600 hover:underline ml-1"
-                                    >
-                                        Upload to shared folder
-                                    </a>
-                                </p> */}
-                            </div>
                             <button
-                                disabled={submitting}
-                                type="submit"
-                                className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors disabled:opacity-50 mt-4"
+                                onClick={() => setSelectedJob(null)}
+                                className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors p-2 bg-gray-800/50 rounded-full"
                             >
-                                {submitting ? 'Submitting...' : 'Submit Application'}
+                                <X size={20} />
                             </button>
-                        </form>
-                    </motion.div>
-                </div>
-            )}
+
+                            {submitted ? (
+                                <div className="py-12 text-center">
+                                    <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center text-green-500 mx-auto mb-6 border border-green-500/30">
+                                        <Clock size={40} className="animate-pulse" />
+                                    </div>
+                                    <h2 className="text-3xl font-bold text-white mb-2">Application Received!</h2>
+                                    <p className="text-gray-400">Our team will review your profile and get back to you soon.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="mb-8">
+                                        <h2 className="text-3xl font-bold text-white mb-2">Apply Now</h2>
+                                        <p className="text-blue-400 font-medium">{selectedJob.title} <span className="text-gray-500 mx-2">•</span> {selectedJob.location}</p>
+                                    </div>
+
+                                    <form onSubmit={handleApply} className="space-y-6">
+                                        <div className="grid grid-cols-1 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+                                                <input required type="text" className="w-full bg-gray-900/50 border border-gray-700 p-3.5 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none focus:border-transparent transition-all"
+                                                    value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                                                <input required type="email" className="w-full bg-gray-900/50 border border-gray-700 p-3.5 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none focus:border-transparent transition-all"
+                                                    value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-400 mb-2">Phone Number</label>
+                                                <input required type="tel" className="w-full bg-gray-900/50 border border-gray-700 p-3.5 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none focus:border-transparent transition-all"
+                                                    value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-400 mb-2">Resume Link (Google Drive/Dropbox)</label>
+                                                <div className="relative">
+                                                    <input
+                                                        required
+                                                        type="url"
+                                                        placeholder="https://..."
+                                                        className="w-full bg-gray-900/50 border border-gray-700 p-3.5 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none focus:border-transparent transition-all pl-12"
+                                                        value={formData.resumeLink || ''}
+                                                        onChange={e => setFormData({ ...formData, resumeLink: e.target.value })}
+                                                    />
+                                                    <Upload className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button
+                                            disabled={submitting}
+                                            type="submit"
+                                            className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all disabled:opacity-50 mt-4 shadow-xl shadow-blue-600/20 active:scale-95 flex items-center justify-center gap-2"
+                                        >
+                                            {submitting ? (
+                                                <>
+                                                    <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                                    Processing...
+                                                </>
+                                            ) : 'Submit Application'}
+                                        </button>
+                                    </form>
+                                </>
+                            )}
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </>
     );
 };

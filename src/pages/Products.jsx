@@ -5,13 +5,26 @@ import { OrbitControls, Box } from '@react-three/drei';
 import { Check } from 'lucide-react';
 
 const ProductViz = () => (
-    <Canvas className="h-64 w-full">
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
+    <Canvas className="h-full w-full">
+        <ambientLight intensity={0.7} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+        <pointLight position={[-10, -10, -10]} color="#3b82f6" />
         <Box args={[2, 2, 2]}>
-            <meshStandardMaterial color="#007BFF" />
+            <meshStandardMaterial
+                color="#2563eb"
+                metalness={0.6}
+                roughness={0.2}
+                wireframe={true}
+            />
         </Box>
-        <OrbitControls enableZoom={false} autoRotate />
+        <Box args={[1.5, 1.5, 1.5]}>
+            <meshStandardMaterial
+                color="#9333ea"
+                metalness={0.8}
+                roughness={0.1}
+            />
+        </Box>
+        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={4} />
     </Canvas>
 );
 
@@ -50,9 +63,8 @@ const Products = () => {
                             viewport={{ once: true }}
                             className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-3xl overflow-hidden h-96 border border-blue-500/20 shadow-2xl shadow-blue-500/10 backdrop-blur-sm"
                         >
-                            <div className="h-full w-full flex items-center justify-center">
-                                {/* Enhance the 3D placeholder or replace with image/illustration */}
-                                <div className="text-blue-400 opacity-50 text-6xl font-bold">3D Visual</div>
+                            <div className="h-full w-full">
+                                <ProductViz />
                             </div>
                         </motion.div>
                         <motion.div
