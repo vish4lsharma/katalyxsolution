@@ -1,15 +1,23 @@
 {
-  "name": "server",
+  "name": "katalyx-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Katalyx Solutions Backend API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "api",
+    "backend",
+    "katalyx"
+  ],
+  "author": "Katalyx Solutions",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": ">=18.x"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
@@ -17,7 +25,9 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.1",
-    "multer": "^2.0.2",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.11"
   }
 }
