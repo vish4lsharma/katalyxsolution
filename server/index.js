@@ -31,36 +31,45 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/candidate', require('./routes/candidate'));
 app.use('/api/subscribe', require('./routes/subscribers'));
 
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/katalyx';
+// Diagnostics for Vercel
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        env: process.env.NODE_ENV,
+        hasMongo: !!process.env.MONGO_URI,
+        hasJwt: !!process.env.JWT_SECRET
+    });
+});
 
-// MongoDB connection with caching for serverless
-let cachedDb = null;
-
-async function connectToDatabase() {
-    if (cachedDb) {
-        return cachedDb;
+// Middleware to ensure DB connection
+app.use(async (req, res, next) => {
+    if (!process.env.MONGO_URI) {
+        console.error('CRITICAL: MONGO_URI is missing');
+        // If it's a pre-flight OPTIONS request, we should still allow it to pass CORS
+        if (req.method === 'OPTIONS') return next();
+        return res.status(500).json({ error: 'Database configuration missing' });
     }
 
     try {
-        const connection = await mongoose.connect(MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        cachedDb = connection;
-        console.log('MongoDB Connected');
-        return connection;
+        if (mongoose.connection.readyState !== 1) {
+            await mongoose.connect(process.env.MONGO_URI, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                serverSelectionTimeoutMS: 5000
+            });
+            console.log('MongoDB Connected');
+        }
+        next();
     } catch (err) {
-        console.error('MongoDB connection error:', err);
-        throw err;
+        console.error('Database connection error:', err);
+        if (req.method === 'OPTIONS') return next();
+        res.status(500).json({ error: 'Database connection failed' });
     }
-}
-
-// Connect to database
-connectToDatabase();
+});
 
 // For local development
 if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }
 
