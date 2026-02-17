@@ -33,8 +33,8 @@ const Navbar = () => {
         location.pathname === '/' ||
         location.pathname === '/services' ||
         location.pathname === '/careers' ||
-        location.pathname.startsWith('/products') || // Assuming Products page is /products
-        location.pathname.startsWith('/projects') || // Assuming Projects page is /projects
+        location.pathname.startsWith('/products') ||
+        location.pathname.startsWith('/projects') ||
         location.pathname === '/about' ||
         location.pathname === '/contact' ||
         location.pathname === '/blog' ||
@@ -42,7 +42,8 @@ const Navbar = () => {
         location.pathname === '/privacy' ||
         location.pathname === '/candidate/login' ||
         location.pathname === '/candidate/register' ||
-        location.pathname === '/admin/login';
+        location.pathname === '/admin/login' ||
+        location.pathname === '/get-started';
 
     return (
         <motion.nav
@@ -77,7 +78,7 @@ const Navbar = () => {
                     ))}
 
                     <Link
-                        to="/contact"
+                        to="/get-started"
                         className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 shadow-lg ${scrolled || isDarkHero
                             ? 'bg-white text-gray-900 hover:bg-gray-100 hover:shadow-white/20'
                             : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-blue-600/30'
@@ -118,7 +119,7 @@ const Navbar = () => {
                                 </NavLink>
                             ))}
                             <Link
-                                to="/contact"
+                                to="/get-started"
                                 onClick={() => setIsOpen(false)}
                                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg shadow-blue-600/30"
                             >

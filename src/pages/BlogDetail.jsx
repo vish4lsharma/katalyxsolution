@@ -124,9 +124,36 @@ const BlogDetail = () => {
                             <div className="flex items-center gap-4">
                                 <span className="text-gray-400 font-semibold flex items-center gap-2 italic"><Share2 size={18} /> Share this article:</span>
                                 <div className="flex gap-4">
-                                    <button className="text-gray-400 hover:text-blue-500 transition-colors"><Facebook size={20} /></button>
-                                    <button className="text-gray-400 hover:text-blue-400 transition-colors"><Twitter size={20} /></button>
-                                    <button className="text-gray-400 hover:text-blue-700 transition-colors"><Linkedin size={20} /></button>
+                                    <button
+                                        onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                        className="text-gray-400 hover:text-blue-500 transition-colors"
+                                        aria-label="Share on Facebook"
+                                    >
+                                        <Facebook size={20} />
+                                    </button>
+                                    <button
+                                        onClick={() => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`, '_blank')}
+                                        className="text-gray-400 hover:text-blue-400 transition-colors"
+                                        aria-label="Share on Twitter"
+                                    >
+                                        <Twitter size={20} />
+                                    </button>
+                                    <button
+                                        onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                        className="text-gray-400 hover:text-blue-700 transition-colors"
+                                        aria-label="Share on LinkedIn"
+                                    >
+                                        <Linkedin size={20} />
+                                    </button>
+                                    {navigator.share && (
+                                        <button
+                                            onClick={() => navigator.share({ title: post.title, text: post.excerpt, url: window.location.href })}
+                                            className="text-gray-400 hover:text-green-500 transition-colors"
+                                            aria-label="Share via..."
+                                        >
+                                            <Share2 size={20} />
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                             <Link to="/contact">

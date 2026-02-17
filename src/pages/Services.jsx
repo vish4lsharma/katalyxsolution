@@ -78,9 +78,9 @@ const Services = () => {
                                 transition={{ delay: index * 0.1 }}
                                 viewport={{ once: true }}
                                 whileHover={{ y: -10 }}
-                                className="bg-gradient-to-br from-blue-900/10 to-purple-900/10 p-8 rounded-2xl shadow-lg border border-gray-800 hover:border-blue-500/30 hover:shadow-blue-500/10 transition-all group backdrop-blur-sm"
+                                className="bg-[#16213e] p-8 rounded-2xl shadow-lg border border-gray-700 hover:border-blue-500/50 hover:shadow-blue-500/20 transition-all group backdrop-blur-sm"
                             >
-                                <div className="w-14 h-14 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform border border-blue-500/20">
+                                <div className="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform border border-blue-500/20">
                                     <service.icon size={28} />
                                 </div>
                                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">{service.title}</h3>

@@ -9,6 +9,10 @@
   --bg-dark: #212529;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   color: #e5e7eb;

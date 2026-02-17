@@ -125,20 +125,31 @@ const Careers = () => {
                                     viewport={{ once: true }}
                                     className="bg-gradient-to-r from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 flex flex-col md:flex-row justify-between items-center hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all group"
                                 >
-                                    <div className="mb-6 md:mb-0">
+                                    <div className="mb-6 md:mb-0 w-full md:w-2/3 pr-6">
                                         <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{job.title}</h3>
-                                        <div className="flex flex-wrap gap-6 text-sm text-gray-400">
-                                            <span className="flex items-center gap-2"><Briefcase size={16} className="text-blue-500" /> {job.department}</span>
-                                            <span className="flex items-center gap-2"><MapPin size={16} className="text-purple-500" /> {job.location}</span>
-                                            <span className="flex items-center gap-2"><Clock size={16} className="text-green-500" /> {job.type}</span>
+                                        <div className="flex flex-wrap gap-4 text-sm text-gray-400 mb-4">
+                                            <span className="flex items-center gap-2 bg-gray-800/50 px-3 py-1 rounded-full border border-gray-700"><Briefcase size={14} className="text-blue-500" /> {job.department}</span>
+                                            <span className="flex items-center gap-2 bg-gray-800/50 px-3 py-1 rounded-full border border-gray-700"><MapPin size={14} className="text-purple-500" /> {job.location}</span>
+                                            <span className="flex items-center gap-2 bg-gray-800/50 px-3 py-1 rounded-full border border-gray-700"><Clock size={14} className="text-green-500" /> {job.type}</span>
+                                        </div>
+                                        <p className="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3 md:line-clamp-none">{job.description}</p>
+                                        <div className="space-y-2">
+                                            <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Requirements</h4>
+                                            <ul className="list-disc list-inside text-gray-400 text-sm space-y-1">
+                                                {job.requirements && job.requirements.map((req, i) => (
+                                                    <li key={i}>{req}</li>
+                                                ))}
+                                            </ul>
                                         </div>
                                     </div>
-                                    <button
-                                        onClick={() => handleApplyClick(job)}
-                                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-600/20 active:scale-95"
-                                    >
-                                        Apply Now
-                                    </button>
+                                    <div className="flex flex-col items-end gap-4 w-full md:w-auto mt-6 md:mt-0">
+                                        <button
+                                            onClick={() => handleApplyClick(job)}
+                                            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-600/20 active:scale-95 w-full md:w-auto text-center"
+                                        >
+                                            Apply Now
+                                        </button>
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>

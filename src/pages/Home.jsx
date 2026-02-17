@@ -2,11 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Zap, Shield, BarChart3, Users, Code, Globe as GlobeIcon, Cpu, ChevronRight, Calculator, Calendar, BookOpen } from 'lucide-react';
+import { ArrowRight, Zap, Shield, BarChart3, Users, Code, Globe as GlobeIcon, Cpu, ChevronRight, Calendar, BookOpen } from 'lucide-react';
 import Globe from '../components/3d/Globe';
-import CinematicBackground from '../components/effects/CinematicBackground';
-import AnimatedText from '../components/effects/AnimatedText';
 import EnergyButton from '../components/effects/EnergyButton';
+import Typewriter from '../components/ui/Typewriter';
+import Counter from '../components/ui/Counter';
 
 import camuImg from '../assets/images/camu.jpg';
 import clinicImg from '../assets/images/clinic.jpg';
@@ -24,14 +24,16 @@ const Home = () => {
             </Helmet>
 
             {/* Hero Section */}
-            <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] pt-20">
-                <CinematicBackground />
+            <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0f0f1a] pt-20">
+                {/* Clean Background with subtle gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#0f0f1a] to-[#0f0f1a] opacity-80" />
+
                 <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="z-10"
+                        className="z-10 order-2 md:order-1"
                     >
                         <motion.span
                             className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-6 border border-blue-500/30"
@@ -41,22 +43,40 @@ const Home = () => {
                         >
                             Startup Innovation Partner
                         </motion.span>
-                        <AnimatedText className="text-4xl md:text-7xl font-bold leading-tight mb-6">
-                            Building the Future, One Line of Code at a Time
-                        </AnimatedText>
-                        <motion.p
-                            className="text-xl text-gray-300 mb-8 leading-relaxed max-w-lg"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                        >
-                            We are a passionate team of innovators dedicated to crafting scalable, high-performance digital solutions for modern enterprises.
-                        </motion.p>
+
+                        {/* Heading Section */}
+                        <div className="mb-8 relative z-20">
+                            <motion.h1
+                                className="text-4xl md:text-7xl font-bold leading-tight text-white mb-6"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                            >
+                                <span className="block text-gray-400 text-3xl md:text-5xl mb-2">We build</span>
+                                <div className="min-h-[1.5em] md:min-h-[1.2em]">
+                                    <Typewriter
+                                        text="Future-Ready Digital Solutions"
+                                        speed={50}
+                                        delay={0.5}
+                                        className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"
+                                    />
+                                </div>
+                            </motion.h1>
+
+                            <motion.p
+                                className="text-xl text-gray-300 leading-relaxed max-w-lg mt-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1.5 }}
+                            >
+                                We are a passionate team of innovators dedicated to crafting scalable, high-performance digital solutions for modern enterprises.
+                            </motion.p>
+                        </div>
+
                         <motion.div
-                            className="flex gap-4"
+                            className="flex flex-wrap gap-4"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
+                            transition={{ delay: 1.7 }}
                         >
                             <Link to="/products">
                                 <EnergyButton variant="primary">
@@ -71,32 +91,13 @@ const Home = () => {
                         </motion.div>
                     </motion.div>
 
-                    {/* Mobile: Static Tech Visual | Desktop: 3D Globe */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="md:h-[600px] h-[300px] w-full relative flex items-center justify-center"
-                    >
-                        {/* Static Visual for Mobile */}
-                        <div className="md:hidden relative w-full h-full flex items-center justify-center">
-                            <div className="absolute w-48 h-48 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-                            <div className="relative z-10 p-8 rounded-3xl border border-blue-500/20 bg-gray-900/40 backdrop-blur-xl flex flex-col items-center">
-                                <Cpu size={48} className="text-blue-400 mb-4 animate-bounce" />
-                                <div className="flex gap-2">
-                                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-ping" />
-                                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-ping delay-100" />
-                                    <div className="w-2 h-2 bg-cyan-500 rounded-full animate-ping delay-200" />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* 3D Globe for Desktop */}
-                        <div className="hidden md:block w-full h-full relative">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl opacity-50" />
+                    {/* 3D Globe / Visual - Responsive */}
+                    <div className="order-1 md:order-2 h-[300px] md:h-[600px] w-full relative flex items-center justify-center">
+                        <div className="w-full h-full relative">
+                            <div className="absolute inset-0 bg-blue-500/10 rounded-full filter blur-3xl opacity-30" />
                             <Globe />
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -116,10 +117,12 @@ const Home = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 hover:border-blue-500/30 transition-all"
+                                className="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 hover:border-blue-500/30 transition-all group"
                             >
-                                <stat.icon className="w-8 h-8 mx-auto text-blue-400 mb-4" />
-                                <h3 className="text-3xl font-bold text-white mb-1">{stat.value}</h3>
+                                <stat.icon className="w-8 h-8 mx-auto text-blue-400 mb-4 group-hover:scale-110 transition-transform" />
+                                <h3 className="text-3xl font-bold text-white mb-1">
+                                    <Counter value={stat.value} />
+                                </h3>
                                 <p className="text-gray-400 font-medium text-sm">{stat.label}</p>
                             </motion.div>
                         ))}
@@ -154,14 +157,14 @@ const Home = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
-                            <div className="relative bg-gradient-to-br from-[#1a1a2e] to-[#16213e] p-8 rounded-2xl border border-gray-700">
+                            <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full" />
+                            <div className="relative bg-gradient-to-br from-[#1a1a2e] to-[#16213e] p-8 rounded-2xl border border-gray-700 hover:shadow-2xl hover:shadow-blue-500/10 transition-shadow">
                                 <div className="grid grid-cols-2 gap-4">
-                                    <div className="bg-gray-800/50 p-4 rounded-xl">
+                                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
                                         <Cpu className="text-blue-400 mb-2" size={24} />
                                         <h4 className="font-bold text-white">Modern Tech</h4>
                                     </div>
-                                    <div className="bg-gray-800/50 p-4 rounded-xl">
+                                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
                                         <GlobeIcon className="text-purple-400 mb-2" size={24} />
                                         <h4 className="font-bold text-white">Global Vision</h4>
                                     </div>
@@ -172,81 +175,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Our Journey / Timeline Section */}
-            <section className="py-24 bg-[#0f0f1a] relative overflow-hidden">
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">Our <span className="text-blue-500">Journey</span></h2>
-                        <p className="text-gray-400">From a small startup to a global innovation partner.</p>
-                    </div>
-
-                    <div className="max-w-4xl mx-auto relative">
-                        {/* Vertical Line */}
-                        <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-600 opacity-30"></div>
-
-                        {/* Timeline Item 1: 2025 Founding */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="relative flex flex-col md:flex-row items-center justify-between mb-12 md:mb-20"
-                        >
-                            <div className="md:w-5/12 w-full pl-12 md:pl-0 md:pr-12 md:text-right mb-4 md:mb-0">
-                                <h3 className="text-2xl font-bold text-white mb-2">Inception</h3>
-                                <p className="text-gray-400">Katalyx Solutions founded by Vishal Sharma and Yash Gupta with a vision to redefine digital transformation.</p>
-                            </div>
-                            <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-8 h-8 md:w-10 md:h-10 bg-blue-600 rounded-full border-4 border-[#0f0f1a] flex items-center justify-center z-10 shadow-[0_0_15px_rgba(37,99,235,0.5)]">
-                                <div className="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full"></div>
-                            </div>
-                            <div className="md:w-5/12 w-full pl-12 md:pl-12">
-                                <span className="text-blue-400 font-bold text-xl">2025</span>
-                            </div>
-                        </motion.div>
-
-                        {/* Timeline Item 2: Product Launch */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="relative flex flex-col md:flex-row-reverse items-center justify-between mb-12 md:mb-20"
-                        >
-                            <div className="md:w-5/12 w-full pl-12 md:pl-0 md:pl-12 text-left mb-4 md:mb-0">
-                                <h3 className="text-2xl font-bold text-white mb-2">Product Launch</h3>
-                                <p className="text-gray-400">Launched flagship solutions Camu ERP and ClinicX24, achieving rapid market adoption and client success.</p>
-                            </div>
-                            <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-8 h-8 md:w-10 md:h-10 bg-purple-600 rounded-full border-4 border-[#0f0f1a] flex items-center justify-center z-10 shadow-[0_0_15px_rgba(147,51,234,0.5)]">
-                                <div className="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full"></div>
-                            </div>
-                            <div className="md:w-5/12 w-full pl-12 md:pr-12 md:pl-0 md:text-right">
-                                <span className="text-purple-400 font-bold text-xl">Q4 2025</span>
-                            </div>
-                        </motion.div>
-
-                        {/* Timeline Item 3: Global Expansion */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4 }}
-                            className="relative flex flex-col md:flex-row items-center justify-between"
-                        >
-                            <div className="md:w-5/12 w-full pl-12 md:pl-0 md:pr-12 md:text-right mb-4 md:mb-0">
-                                <h3 className="text-2xl font-bold text-white mb-2">Global Innovation Partner</h3>
-                                <p className="text-gray-400">Scaling operations with over 100% growth, expanding our expert team, and entering international markets.</p>
-                            </div>
-                            <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-8 h-8 md:w-10 md:h-10 bg-cyan-500 rounded-full border-4 border-[#0f0f1a] flex items-center justify-center z-10 shadow-[0_0_15px_rgba(6,182,212,0.5)]">
-                                <div className="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full"></div>
-                            </div>
-                            <div className="md:w-5/12 w-full pl-12 md:pl-12">
-                                <span className="text-cyan-400 font-bold text-xl">2026</span>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Featured Projects Section (New with Real Images) */}
+            {/* Featured Projects Section */}
             <section className="py-24 bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] relative">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
@@ -266,13 +195,14 @@ const Home = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.2 }}
-                                className="group relative overflow-hidden rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all"
+                                className="group relative overflow-hidden rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all bg-[#16213e]"
                             >
-                                <div className="h-48 overflow-hidden bg-gray-900">
+                                <div className="h-48 overflow-hidden bg-gray-900 relative">
+                                    <div className="absolute inset-0 bg-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                                     <img src={project.img} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
                                 </div>
-                                <div className="p-6 bg-[#16213e]">
-                                    <h3 className="text-xl font-bold text-white mb-2">{project.name}</h3>
+                                <div className="p-6">
+                                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{project.name}</h3>
                                     <p className="text-gray-400 text-sm mb-4">{project.desc}</p>
                                     <Link to={`/products/${project.id}`} className="text-blue-400 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
                                         View Case Study <ChevronRight size={14} />
@@ -289,7 +219,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Core Solutions (Existing Services) */}
+            {/* Core Solutions */}
             <section className="py-24 bg-[#0f0f1a] relative">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
@@ -308,7 +238,7 @@ const Home = () => {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-gray-900/50 p-8 rounded-2xl border border-gray-700 hover:border-blue-500/40 transition-all hover:bg-gray-800/50"
+                                className="bg-gray-900/50 p-8 rounded-2xl border border-gray-700 hover:border-blue-500/40 transition-all hover:bg-gray-800 hover:-translate-y-1 duration-300"
                             >
                                 <service.icon className="w-10 h-10 text-blue-400 mb-6" />
                                 <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
@@ -319,56 +249,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Leadership Team (New) */}
-            <section className="py-24 bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1a] relative">
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">Meet The <span className="text-blue-500">Leadership</span></h2>
-                        <p className="text-gray-400">The visionaries behind Katalyx Solutions.</p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
-                        {[
-                            {
-                                name: 'Vishal Sharma',
-                                role: 'Co-Founder & CEO',
-                                initials: 'VS',
-                                bio: 'A visionary leader with deep expertise in strategic planning and business growth, driving Katalyx towards global recognition.'
-                            },
-                            {
-                                name: 'Yash Gupta',
-                                role: 'Co-Founder',
-                                initials: 'YG',
-                                bio: 'Passionate about product innovation and market strategy, ensuring our solutions solve real-world problems effectively.'
-                            },
-                            {
-                                name: 'Anmol Babu',
-                                role: 'CTO',
-                                initials: 'AB',
-                                bio: 'Tech architect with a mastery of cloud infrastructure and AI, leading our engineering teams to build scalable future-ready systems.'
-                            }
-                        ].map((leader, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.2 }}
-                                className="bg-[#16213e] p-8 rounded-2xl text-center border border-gray-700 hover:border-blue-500/50 transition-all hover:-translate-y-2 group"
-                            >
-                                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 ring-4 ring-gray-800 group-hover:ring-blue-500/30 transition-all shadow-lg">
-                                    {leader.initials}
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-1">{leader.name}</h3>
-                                <p className="text-blue-400 font-medium text-sm uppercase tracking-wider mb-4">{leader.role}</p>
-                                <p className="text-gray-400 text-sm leading-relaxed opacity-80">{leader.bio}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Recent Insights / Blog (New) */}
+            {/* Recent Insights */}
             <section className="py-24 bg-[#0f0f1a] relative border-t border-gray-800">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="flex justify-between items-end mb-12">
@@ -411,28 +292,29 @@ const Home = () => {
                                 image: strategyBlog
                             }
                         ].map((post, i) => (
-                            <Link to={`/blog/${post.id}`} key={i} className="group">
+                            <Link to={`/blog/${post.id}`} key={i} className="group h-full">
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all h-full flex flex-col group shadow-lg"
+                                    className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all h-full flex flex-col group shadow-lg hover:shadow-blue-500/10"
                                 >
                                     <div className="h-48 overflow-hidden relative">
-                                        <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-70 group-hover:opacity-100" />
-                                        <div className="absolute top-4 left-4">
+                                        <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-transparent transition-colors z-10" />
+                                        <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+                                        <div className="absolute top-4 left-4 z-20">
                                             <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">{post.category}</span>
                                         </div>
                                     </div>
-                                    <div className="p-6 flex-1">
+                                    <div className="p-6 flex-1 flex flex-col">
                                         <div className="flex items-center gap-3 mb-4">
                                             <span className="text-gray-500 text-xs flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{post.title}</h3>
+                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors flex-1">{post.title}</h3>
                                         <p className="text-gray-400 text-sm leading-relaxed mb-4">{post.excerpt}</p>
                                     </div>
-                                    <div className="px-6 py-4 border-t border-gray-800 flex items-center text-sm font-medium text-gray-400 group-hover:text-white transition-colors">
+                                    <div className="px-6 py-4 border-t border-gray-800 flex items-center text-sm font-medium text-gray-400 group-hover:text-white transition-colors mt-auto">
                                         Read Article <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </motion.div>
