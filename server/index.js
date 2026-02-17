@@ -12,16 +12,12 @@ const app = express();
 // 1. FORCEFUL CORS HANDLER (MUST BE FIRST)
 // This handles CORS headers manually to guarantee they are present even on errors
 app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    const allowedOrigins = [
-        'https://katalyx.vercel.app',
-        'https://katalyx-zvt8.vercel.app',
-        'http://localhost:5173',
-        'http://localhost:5000'
-    ];
+    // Check if the origin is allowed (localhost or any .vercel.app domain)
+    const isAllowed = !origin ||
+        origin.includes('localhost') ||
+        origin.endsWith('.vercel.app');
 
-    // Check if the origin is allowed
-    if (allowedOrigins.includes(origin) || !origin) {
+    if (isAllowed) {
         res.header('Access-Control-Allow-Origin', origin || '*');
     }
 
@@ -39,13 +35,10 @@ app.use((req, res, next) => {
 // 2. STANDARD CORS MIDDLEWARE (Backup)
 app.use(cors({
     origin: function (origin, callback) {
-        const allowedOrigins = [
-            'https://katalyx.vercel.app',
-            'https://katalyx-zvt8.vercel.app',
-            'http://localhost:5173',
-            'http://localhost:5000'
-        ];
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        const isAllowed = !origin ||
+            origin.includes('localhost') ||
+            origin.endsWith('.vercel.app');
+        if (isAllowed) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
