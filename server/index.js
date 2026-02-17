@@ -13,8 +13,18 @@ const app = express();
 // This handles CORS headers manually to guarantee they are present even on errors
 app.use((req, res, next) => {
     const origin = req.headers.origin;
-    // Allow any origin during debugging, or restrict to your domains
-    res.header('Access-Control-Allow-Origin', origin || '*');
+    const allowedOrigins = [
+        'https://katalyx.vercel.app',
+        'https://katalyx-zvt8.vercel.app',
+        'http://localhost:5173',
+        'http://localhost:5000'
+    ];
+
+    // Check if the origin is allowed
+    if (allowedOrigins.includes(origin) || !origin) {
+        res.header('Access-Control-Allow-Origin', origin || '*');
+    }
+
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -28,7 +38,19 @@ app.use((req, res, next) => {
 
 // 2. STANDARD CORS MIDDLEWARE (Backup)
 app.use(cors({
-    origin: true,
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'https://katalyx.vercel.app',
+            'https://katalyx-zvt8.vercel.app',
+            'http://localhost:5173',
+            'http://localhost:5000'
+        ];
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 
