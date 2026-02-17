@@ -26,6 +26,7 @@ process.on('uncaughtException', (err) => {
 // 1. FORCEFUL CORS HANDLER (MUST BE FIRST)
 // This handles CORS headers manually to guarantee they are present even on errors
 app.use((req, res, next) => {
+    const origin = req.headers.origin;
     // Check if the origin is allowed (localhost or any .vercel.app domain)
     const isAllowed = !origin ||
         origin.includes('localhost') ||
@@ -138,6 +139,11 @@ if (process.env.NODE_ENV !== 'production') {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }
+
+// Basic root route for verification
+app.get('/api', (req, res) => {
+    res.json({ message: 'Katalyx API is running' });
+});
 
 // Export for Vercel
 module.exports = app;
