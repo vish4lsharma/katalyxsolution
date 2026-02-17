@@ -29,8 +29,7 @@ app.use((req, res, next) => {
     const origin = req.headers.origin;
     // Check if the origin is allowed (localhost or any .vercel.app domain)
     const isAllowed = !origin ||
-        origin.includes('localhost') ||
-        origin.endsWith('.vercel.app');
+        (typeof origin === 'string' && (origin.includes('localhost') || origin.endsWith('.vercel.app')));
 
     if (isAllowed) {
         res.header('Access-Control-Allow-Origin', origin || '*');
@@ -141,8 +140,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Basic root route for verification
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Katalyx Backend Server is running',
+        environment: process.env.NODE_ENV,
+        endpoints: ['/api/health', '/api/auth', '/api/jobs']
+    });
+});
+
 app.get('/api', (req, res) => {
-    res.json({ message: 'Katalyx API is running' });
+    res.json({ message: 'Katalyx API Root' });
 });
 
 // Export for Vercel
