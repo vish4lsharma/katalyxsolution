@@ -9,6 +9,20 @@ dotenv.config();
 
 const app = express();
 
+// Log basic info on startup
+console.log('Server process started');
+console.log('Environment:', process.env.NODE_ENV);
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+});
+
 // 1. FORCEFUL CORS HANDLER (MUST BE FIRST)
 // This handles CORS headers manually to guarantee they are present even on errors
 app.use((req, res, next) => {
@@ -70,7 +84,8 @@ const connectDB = async () => {
 
     if (!process.env.MONGO_URI) {
         console.error('SERVER_CRASH: MONGO_URI is missing');
-        throw new Error('Database configuration missing');
+        // Don't throw a terminal error during boot, just log and handle in middleware
+        return;
     }
 
     // Options for high reliability on Vercel

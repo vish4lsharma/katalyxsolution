@@ -7,12 +7,22 @@ const Candidate = require('../models/Candidate');
 const Application = require('../models/Application');
 const auth = require('../middleware/auth');
 
-const client = new OAuth2Client(process.env.VITE_GOOGLE_CLIENT_ID);
+const getGoogleClient = () => {
+    if (!process.env.VITE_GOOGLE_CLIENT_ID) {
+        console.warn('VITE_GOOGLE_CLIENT_ID is missing');
+        return null;
+    }
+    return new OAuth2Client(process.env.VITE_GOOGLE_CLIENT_ID);
+};
 
 // Google Login Candidate
 router.post('/google-login', async (req, res) => {
     const { tokenId } = req.body;
     try {
+        const client = getGoogleClient();
+        if (!client) {
+            return res.status(500).json({ msg: 'Google OAuth not configured' });
+        }
         const ticket = await client.verifyIdToken({
             idToken: tokenId,
             audience: process.env.VITE_GOOGLE_CLIENT_ID,
