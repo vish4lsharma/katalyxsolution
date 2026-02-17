@@ -1,12 +1,17 @@
 import axios from 'axios';
 
-// Get the API URL from environment variables or use a safe local fallback
-let baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Get the API URL from environment variables or use a smart fallback
+const getBaseURL = () => {
+    if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL;
+    if (import.meta.env.DEV) return 'http://localhost:5000/api';
+    return '/api';
+};
+
+let baseURL = getBaseURL();
 
 // Robust check: Ensure the baseURL ends with /api to match backend routes
-// This prevents errors if the user forgets to add /api in the Vercel dashboard
 const cleanBaseURL = baseURL.trim().replace(/\/$/, '');
-const finalBaseURL = cleanBaseURL.includes('/api') ? cleanBaseURL : `${cleanBaseURL}/api`;
+const finalBaseURL = cleanBaseURL.includes('/api') || cleanBaseURL === '' ? cleanBaseURL : `${cleanBaseURL}/api`;
 
 const api = axios.create({
     baseURL: finalBaseURL,
