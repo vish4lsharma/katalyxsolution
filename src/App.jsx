@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
@@ -33,36 +34,38 @@ const ScrollToTop = () => {
 
 const App = () => {
     return (
-        <Router>
-            <div className="flex flex-col min-h-screen bg-[#0f0f1a] text-white">
-                <ScrollToTop />
-                <Navbar />
-                <main className="flex-grow">
-                    <AnimatePresence mode='wait'>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/about" element={<About />} />
-                            <Route path="/services" element={<Services />} />
-                            <Route path="/products" element={<Projects />} />
-                            <Route path="/products/:id" element={<ProjectDetail />} />
-                            <Route path="/careers" element={<Careers />} />
-                            <Route path="/blog" element={<Blog />} />
-                            <Route path="/blog/:id" element={<BlogDetail />} />
-                            <Route path="/contact" element={<Contact />} />
-                            <Route path="/get-started" element={<GetStarted />} />
-                            <Route path="/privacy" element={<Privacy />} />
-                            <Route path="/terms" element={<Terms />} />
-                            <Route path="/admin/login" element={<AdminLogin />} />
-                            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                            <Route path="/candidate/login" element={<CandidateAuth />} />
-                            <Route path="/candidate/dashboard" element={<CandidateDashboard />} />
-                            <Route path="*" element={<NotFound />} />
-                        </Routes>
-                    </AnimatePresence>
-                </main>
-                <Footer />
-            </div>
-        </Router>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+            <Router>
+                <div className="flex flex-col min-h-screen bg-[#0f0f1a] text-white">
+                    <ScrollToTop />
+                    <Navbar />
+                    <main className="flex-grow">
+                        <AnimatePresence mode='wait'>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/about" element={<About />} />
+                                <Route path="/services" element={<Services />} />
+                                <Route path="/products" element={<Projects />} />
+                                <Route path="/products/:id" element={<ProjectDetail />} />
+                                <Route path="/careers" element={<Careers />} />
+                                <Route path="/blog" element={<Blog />} />
+                                <Route path="/blog/:id" element={<BlogDetail />} />
+                                <Route path="/contact" element={<Contact />} />
+                                <Route path="/get-started" element={<GetStarted />} />
+                                <Route path="/privacy" element={<Privacy />} />
+                                <Route path="/terms" element={<Terms />} />
+                                <Route path="/admin/login" element={<AdminLogin />} />
+                                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                                <Route path="/candidate/login" element={<CandidateAuth />} />
+                                <Route path="/candidate/dashboard" element={<CandidateDashboard />} />
+                                <Route path="*" element={<NotFound />} />
+                            </Routes>
+                        </AnimatePresence>
+                    </main>
+                    <Footer />
+                </div>
+            </Router>
+        </GoogleOAuthProvider>
     );
 };
 

@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, Phone, ArrowRight, Loader2 } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
 import api from '../utils/api';
 
 const CandidateAuth = () => {
@@ -22,10 +23,26 @@ const CandidateAuth = () => {
             const endpoint = isLogin ? '/candidate/login' : '/candidate/register';
             const res = await api.post(endpoint, formData);
             localStorage.setItem('token', res.data.token);
-            localStorage.setItem('user', JSON.stringify(res.data.user)); // Store user info including role
+            localStorage.setItem('user', JSON.stringify(res.data.user));
             navigate('/candidate/dashboard');
         } catch (err) {
             alert(err.response?.data?.msg || 'Authentication failed');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleSuccess = async (credentialResponse) => {
+        setLoading(true);
+        try {
+            const res = await api.post('/candidate/google-login', {
+                tokenId: credentialResponse.credential
+            });
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            navigate('/candidate/dashboard');
+        } catch (err) {
+            alert(err.response?.data?.msg || 'Google Authentication failed');
         } finally {
             setLoading(false);
         }
@@ -47,6 +64,21 @@ const CandidateAuth = () => {
                     </div>
 
                     <div className="p-8">
+                        <div className="mb-6 flex justify-center">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => alert('Google Login Failed')}
+                                theme="filled_blue"
+                                text="continue_with"
+                                shape="circle"
+                            />
+                        </div>
+
+                        <div className="relative mb-6">
+                            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-700"></div></div>
+                            <div className="relative flex justify-center text-sm"><span className="px-2 bg-[#1a1a2e] text-gray-400">Or continue with email</span></div>
+                        </div>
+
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {!isLogin && (
                                 <>

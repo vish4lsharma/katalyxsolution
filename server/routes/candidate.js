@@ -2,9 +2,45 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { OAuth2Client } = require('google-auth-library');
 const Candidate = require('../models/Candidate');
 const Application = require('../models/Application');
 const auth = require('../middleware/auth');
+
+const client = new OAuth2Client(process.env.VITE_GOOGLE_CLIENT_ID);
+
+// Google Login Candidate
+router.post('/google-login', async (req, res) => {
+    const { tokenId } = req.body;
+    try {
+        const ticket = await client.verifyIdToken({
+            idToken: tokenId,
+            audience: process.env.VITE_GOOGLE_CLIENT_ID,
+        });
+        const { name, email, picture, sub } = ticket.getPayload();
+
+        let candidate = await Candidate.findOne({ email });
+
+        if (!candidate) {
+            candidate = new Candidate({
+                name,
+                email,
+                password: await bcrypt.hash(sub + Math.random(), 10),
+                phone: 'Not provided'
+            });
+            await candidate.save();
+        }
+
+        const payload = { user: { id: candidate.id, role: 'candidate' } };
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '5d' }, (err, token) => {
+            if (err) throw err;
+            res.json({ token, user: { id: candidate.id, name: candidate.name, email: candidate.email, role: 'candidate', picture } });
+        });
+    } catch (err) {
+        console.error('Google Login Error:', err.message);
+        res.status(500).json({ msg: 'Google Authentication failed' });
+    }
+});
 
 // Register Candidate
 router.post('/register', async (req, res) => {
@@ -53,41 +89,16 @@ router.post('/login', async (req, res) => {
 // Get Candidate Profile & Applications
 router.get('/dashboard', auth, async (req, res) => {
     try {
-        console.log('=== Dashboard Request ===');
-        console.log('Full req.user:', JSON.stringify(req.user, null, 2));
-
-        // The auth middleware sets req.user to the decoded token
-        // The token payload has { user: { id, role } }
         const userId = req.user.user?.id || req.user.id;
+        if (!userId) return res.status(400).json({ message: 'Invalid user data in token' });
 
-        console.log('Extracted userId:', userId);
-
-        if (!userId) {
-            console.log('ERROR: No userId found in token');
-            return res.status(400).json({ message: 'Invalid user data in token' });
-        }
-
-        console.log('Searching for candidate with ID:', userId);
         const candidate = await Candidate.findById(userId).select('-password');
+        if (!candidate) return res.status(404).json({ message: 'Candidate not found' });
 
-        console.log('Candidate found:', candidate ? 'Yes' : 'No');
-
-        if (!candidate) {
-            console.log('ERROR: Candidate not found in database');
-            return res.status(404).json({ message: 'Candidate not found' });
-        }
-
-        console.log('Searching for applications with email:', candidate.email);
-        // Find applications linked to this candidate
         const applications = await Application.find({ email: candidate.email }).populate('jobId');
-
-        console.log('Applications found:', applications.length);
-
         res.json({ candidate, applications });
     } catch (err) {
-        console.error('=== Dashboard Error ===');
-        console.error('Error message:', err.message);
-        console.error('Error stack:', err.stack);
+        console.error('Dashboard Error:', err.message);
         res.status(500).json({ message: 'Server Error', error: err.message });
     }
 });
