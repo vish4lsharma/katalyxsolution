@@ -186,7 +186,7 @@ const Home = () => {
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
                             { name: 'Camu ERP', desc: 'Comprehensive Campus Management', img: camuImg, id: 'camu-erp' },
-                            { name: 'ClinicX24', desc: 'Next-Gen Medical ERP', img: clinicImg, id: 'clinicx24' },
+                            { name: 'HealthcareX24.com', desc: 'Next-Gen Medical ERP', img: clinicImg, id: 'healthcarex24' },
                             { name: 'Abhiroom', desc: 'Smart Accommodation Solutions', img: abhiroomImg, id: 'abhiroom' },
                         ].map((project, i) => (
                             <motion.div

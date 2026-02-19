@@ -44,8 +44,8 @@ export const projectsData = {
             }
         ]
     },
-    'clinicx24': {
-        title: 'ClinicX24',
+    'healthcarex24': {
+        title: 'HealthcareX24.com',
         tagline: 'Next-Gen Medical ERP',
         description: 'An advanced healthcare management system designed for clinics, hospitals, and diagnostic centers to enhance patient care and operational efficiency.',
         features: [

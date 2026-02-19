@@ -16,7 +16,7 @@ const ProjectDetail = () => {
 
     const projectImages = {
         'camu-erp': camuImg,
-        'clinicx24': clinicImg,
+        'healthcarex24': clinicImg,
         'abhiroom': abhiroomImg
     };
 

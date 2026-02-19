@@ -24,8 +24,8 @@ const Projects = () => {
             image: camuImg
         },
         {
-            id: 'clinicx24',
-            title: 'ClinicX24',
+            id: 'healthcarex24',
+            title: 'HealthcareX24.com',
             tagline: 'Next-Gen Medical ERP',
             features: [
                 'Doctor Workbench: E-Prescriptions, Patient History',

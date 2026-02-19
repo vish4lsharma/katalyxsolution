@@ -67,7 +67,7 @@ const About = () => {
                         <div className="md:hidden mt-12 space-y-8 text-left max-w-sm mx-auto">
                             {[
                                 { year: '2025', text: 'Inception: Founded by Vishal Sharma & Yash Gupta.' },
-                                { year: 'Q4 2025', text: 'Product Launch: Camu ERP & ClinicX24 launched.' },
+                                { year: 'Q4 2025', text: 'Product Launch: Camu ERP & HealthcareX24.com launched.' },
                                 { year: '2026', text: 'Scale: Global Innovation Partnership status.' }
                             ].map((milestone, i) => (
                                 <div key={i} className="flex gap-4 items-start">

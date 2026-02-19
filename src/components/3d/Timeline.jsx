@@ -56,7 +56,7 @@ const TimelineScene = () => {
             />
 
             <Milestone position={points[0]} year="2025" text="Founded by Vishal Sharma & Yash Gupta" />
-            <Milestone position={points[1]} year="Q4 2025" text="Launched Camu ERP & ClinicX24" />
+            <Milestone position={points[1]} year="Q4 2025" text="Launched Camu ERP & HealthcareX24.com" />
             <Milestone position={points[2]} year="2026" text="Global Innovation Partnership" />
 
             <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} />
