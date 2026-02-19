@@ -35,9 +35,7 @@ const AdminLogin = () => {
                 <div className="absolute inset-0 bg-black/20 z-0" />
                 <div className="max-w-md w-full bg-[#1a1a2e] rounded-2xl shadow-2xl p-8 border border-gray-700 relative z-10">
                     <div className="flex justify-center mb-8">
-                        <div className="p-3 bg-blue-500/10 rounded-xl border border-blue-500/20">
-                            <Logo className="w-12 h-12 text-blue-500" />
-                        </div>
+                        <Logo className="h-16 w-auto" />
                     </div>
                     <h2 className="text-2xl font-bold text-center text-white mb-8">Admin Portal</h2>
 

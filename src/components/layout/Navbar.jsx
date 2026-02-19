@@ -57,7 +57,7 @@ const Navbar = () => {
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <Link to="/" className="z-50 group">
-                    <Logo className="w-10 h-10" textClassName="text-xl" />
+                    <Logo className="h-12 w-auto" />
                 </Link>
 
                 {/* Desktop Menu */}

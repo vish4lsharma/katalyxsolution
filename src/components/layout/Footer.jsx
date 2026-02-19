@@ -11,7 +11,7 @@ const Footer = () => {
                     {/* Brand */}
                     <div className="space-y-4">
                         <Link to="/" className="inline-block">
-                            <Logo className="w-10 h-10" textClassName="text-xl" />
+                            <Logo className="h-14 w-auto" />
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed">
                             Pioneering the future of digital transformation with AI-driven analytics, cloud solutions, and strategic consulting.
