@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, ArrowRight, Mail, MapPin } from 'lucide-react';
+import { Linkedin, ArrowRight, Mail, MapPin } from 'lucide-react';
 import api from '../../utils/api';
 import Logo from './Logo';
 
@@ -17,11 +17,15 @@ const Footer = () => {
                             Pioneering the future of digital transformation with AI-driven analytics, cloud solutions, and strategic consulting.
                         </p>
                         <div className="flex gap-4">
-                            {[Facebook, Twitter, Linkedin, Instagram].map((Icon, i) => (
-                                <a key={i} href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                                    <Icon size={20} />
-                                </a>
-                            ))}
+                            <a
+                                href="https://www.linkedin.com/company/katalyx-solutions/about/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
+                                aria-label="Katalyx Solutions on LinkedIn"
+                            >
+                                <Linkedin size={20} />
+                            </a>
                         </div>
                         <div className="space-y-2 pt-2">
                             <a href="mailto:support@katalyxsolutions.com" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">

@@ -36,13 +36,23 @@ const Home = () => {
                         className="z-10 order-2 md:order-1"
                     >
                         <motion.span
-                            className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-6 border border-blue-500/30"
+                            className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-4 border border-blue-500/30 tracking-widest uppercase"
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.2 }}
                         >
-                            Startup Innovation Partner
+                            KATALYX Solutions
                         </motion.span>
+
+                        <motion.p
+                            className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                        >
+                            Build Faster.{' '}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Scale Smarter.</span>
+                        </motion.p>
 
                         {/* Heading Section */}
                         <div className="mb-8 relative z-20">
