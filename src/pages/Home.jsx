@@ -436,7 +436,7 @@ const Home = () => {
                                     Katalyx Solutions is an emerging AI and software development company focused on building intelligent digital products, automation systems, and scalable platforms.
                                 </p>
                                 <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
-                                    We help startups and businesses transform ideas into high-performance technology solutions.
+                                    We help startups and businesses transform ideas into high-performance technology solutions. Founded by engineers building AI-driven software and scalable digital platforms for modern businesses.
                                 </p>
                                 <div className="mt-8">
                                     <Link to="/about">
@@ -459,8 +459,9 @@ const Home = () => {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Intelligent</span></h2>
+                        <p className="text-gray-400 text-sm mb-2">Let’s discuss your project, idea, or automation needs.</p>
                         <p className="text-gray-300 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</p>
-                        <a href="mailto:support@katalyxsolutions.com">
+                        <a href="mailto:info@katalyxsolutions.com">
                             <EnergyButton variant="primary">Contact Us <Mail size={18} /></EnergyButton>
                         </a>
                     </motion.div>

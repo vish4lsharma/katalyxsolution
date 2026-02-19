@@ -28,8 +28,8 @@ const Footer = () => {
                             </a>
                         </div>
                         <div className="space-y-2 pt-2">
-                            <a href="mailto:support@katalyxsolutions.com" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                                <Mail size={15} /> support@katalyxsolutions.com
+                            <a href="mailto:info@katalyxsolutions.com" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                                <Mail size={15} /> info@katalyxsolutions.com
                             </a>
                             <p className="flex items-center gap-2 text-gray-500 text-sm">
                                 <MapPin size={15} /> India

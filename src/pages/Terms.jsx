@@ -107,7 +107,7 @@ const Terms = () => (
                         <section>
                             <h2 className="text-2xl font-bold text-white mb-4">10. Contact Us</h2>
                             <p>
-                                If you have any questions about these Terms, please contact us at <a href="mailto:support@katalyxsolutions.com" className="text-blue-400 hover:text-blue-300 transition-colors">support@katalyxsolutions.com</a>.
+                                If you have any questions about these Terms, please contact us at <a href="mailto:info@katalyxsolutions.com" className="text-blue-400 hover:text-blue-300 transition-colors">info@katalyxsolutions.com</a>.
                             </p>
                         </section>
                     </div>

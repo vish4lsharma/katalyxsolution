@@ -65,7 +65,7 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-white">Email Us</h3>
-                                        <p className="text-gray-400">support@katalyxsolutions.com</p>
+                                        <p className="text-gray-400">info@katalyxsolutions.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
