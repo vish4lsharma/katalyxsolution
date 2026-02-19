@@ -98,12 +98,6 @@ const About = () => {
                                 role: 'Co-Founder',
                                 initials: 'YG',
                                 bio: 'Passionate about product innovation and market strategy, ensuring our solutions solve real-world problems effectively.'
-                            },
-                            {
-                                name: 'Anmol Babu',
-                                role: 'CTO',
-                                initials: 'AB',
-                                bio: 'Tech architect with a mastery of cloud infrastructure and AI, leading our engineering teams to build scalable future-ready systems.'
                             }
                         ].map((member, i) => (
                             <motion.div
