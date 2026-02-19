@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram, ArrowRight, Mail, MapPin } from 'lucide-react';
 import api from '../../utils/api';
 import Logo from './Logo';
 
@@ -22,6 +22,14 @@ const Footer = () => {
                                     <Icon size={20} />
                                 </a>
                             ))}
+                        </div>
+                        <div className="space-y-2 pt-2">
+                            <a href="mailto:support@katalyxsolutions.com" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                                <Mail size={15} /> support@katalyxsolutions.com
+                            </a>
+                            <p className="flex items-center gap-2 text-gray-500 text-sm">
+                                <MapPin size={15} /> India
+                            </p>
                         </div>
                     </div>
 
@@ -78,7 +86,10 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-                    <p>© {new Date().getFullYear()} Katalyx Solutions. All rights reserved.</p>
+                    <div className="flex flex-col items-center md:items-start gap-1">
+                        <p>© {new Date().getFullYear()} Katalyx Solutions. All rights reserved.</p>
+                        <p className="text-gray-600">Katalyx Solutions — LLP registration in process, India.</p>
+                    </div>
                     <div className="flex gap-6">
                         <Link to="/admin/login" className="hover:text-gray-300">Admin</Link>
                         <Link to="/privacy" className="hover:text-gray-300">Privacy Policy</Link>

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Zap, Shield, BarChart3, Users, Code, Globe as GlobeIcon, Cpu, ChevronRight, Calendar, BookOpen } from 'lucide-react';
+import { ArrowRight, Zap, Shield, BarChart3, Users, Code, Globe as GlobeIcon, Cpu, ChevronRight, Calendar, BookOpen, Brain, Briefcase, Settings, Lightbulb, Mail, MapPin } from 'lucide-react';
 import Globe from '../components/3d/Globe';
 import EnergyButton from '../components/effects/EnergyButton';
 import Typewriter from '../components/ui/Typewriter';
@@ -69,6 +69,14 @@ const Home = () => {
                                 transition={{ delay: 1.5 }}
                             >
                                 We are a passionate team of innovators dedicated to crafting scalable, high-performance digital solutions for modern enterprises.
+                            </motion.p>
+                            <motion.p
+                                className="text-base text-blue-300/80 leading-relaxed max-w-lg mt-3 font-medium border-l-2 border-blue-500/40 pl-3"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1.9 }}
+                            >
+                                Katalyx Solutions builds AI-powered software, automation systems, and scalable digital platforms for startups and businesses.
                             </motion.p>
                         </div>
 
@@ -326,6 +334,126 @@ const Home = () => {
                             View all posts <ArrowRight size={16} />
                         </Link>
                     </div>
+                </div>
+            </section>
+
+            {/* ── Services Section ── */}
+            <section className="py-24 bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] relative border-t border-gray-800">
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="text-center mb-16">
+                        <motion.span
+                            className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-4 border border-blue-500/30"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                        >
+                            What We Do
+                        </motion.span>
+                        <h2 className="text-4xl font-bold text-white mb-4">Our <span className="text-blue-500">Services</span></h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto">End-to-end intelligent solutions to help your business grow faster in the digital era.</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            {
+                                icon: Brain,
+                                title: 'AI Solutions',
+                                desc: 'Custom AI apps, chatbots, automation pipelines, and LLM integrations tailored to your business needs.',
+                                color: 'blue'
+                            },
+                            {
+                                icon: Code,
+                                title: 'Web & SaaS Development',
+                                desc: 'Full-stack web apps, SaaS dashboards, and scalable platforms built with modern tech stacks.',
+                                color: 'cyan'
+                            },
+                            {
+                                icon: Settings,
+                                title: 'Business Automation',
+                                desc: 'Workflow automation, third-party integrations, and internal tools to streamline your operations.',
+                                color: 'purple'
+                            },
+                            {
+                                icon: Lightbulb,
+                                title: 'Tech Consulting',
+                                desc: 'Architecture reviews, scaling strategies, and MVP development guidance for startups and teams.',
+                                color: 'indigo'
+                            },
+                        ].map((svc, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 hover:border-blue-500/40 rounded-2xl p-6 flex flex-col gap-4 hover:bg-gray-800/60 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-blue-500/10"
+                            >
+                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${svc.color}-500/10 border border-${svc.color}-500/20 text-${svc.color}-400`}>
+                                    <svc.icon size={24} />
+                                </div>
+                                <h3 className="text-lg font-bold text-white">{svc.title}</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed flex-1">{svc.desc}</p>
+                                <Link to="/services" className="text-blue-400 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all mt-auto">
+                                    Learn more <ChevronRight size={14} />
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── About Katalyx Section ── */}
+            <section className="py-24 bg-[#0f0f1a] relative border-t border-gray-800">
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="max-w-4xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-gradient-to-br from-gray-900 to-gray-800/60 border border-gray-700 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-blue-500/5 rounded-3xl" />
+                            <div className="relative z-10">
+                                <motion.span
+                                    className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-6 border border-blue-500/30"
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                >
+                                    Who We Are
+                                </motion.span>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">About <span className="text-blue-500">Katalyx</span></h2>
+                                <p className="text-gray-300 text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
+                                    Katalyx Solutions is an emerging AI and software development company focused on building intelligent digital products, automation systems, and scalable platforms.
+                                </p>
+                                <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
+                                    We help startups and businesses transform ideas into high-performance technology solutions.
+                                </p>
+                                <div className="mt-8">
+                                    <Link to="/about">
+                                        <EnergyButton variant="secondary">Our Story <ArrowRight size={18} /></EnergyButton>
+                                    </Link>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── CTA Section ── */}
+            <section className="py-24 bg-gradient-to-r from-blue-900/50 via-[#1a1a2e] to-indigo-900/50 relative border-t border-gray-800">
+                <div className="absolute inset-0 bg-black/30" />
+                <div className="container mx-auto px-6 relative z-10 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Intelligent</span></h2>
+                        <p className="text-gray-300 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</p>
+                        <a href="mailto:support@katalyxsolutions.com">
+                            <EnergyButton variant="primary">Contact Us <Mail size={18} /></EnergyButton>
+                        </a>
+                    </motion.div>
                 </div>
             </section>
         </>
