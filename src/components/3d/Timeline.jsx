@@ -55,7 +55,7 @@ const TimelineScene = () => {
                 opacity={0.5}
             />
 
-            <Milestone position={points[0]} year="2025" text="Founded by Vishal Sharma" />
+            <Milestone position={points[0]} year="2025" text="Katalyx Solutions Founded" />
             <Milestone position={points[1]} year="Q4 2025" text="Launched Camu ERP & HealthcareX24.com" />
             <Milestone position={points[2]} year="2026" text="Global Innovation Partnership" />
 

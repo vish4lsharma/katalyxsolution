@@ -19,7 +19,7 @@ const Blog = () => {
             date: 'Oct 12, 2023',
             category: 'Artificial Intelligence',
             image: aiBlog,
-            author: 'Vishal Sharma'
+            author: 'Katalyx Team'
         },
         {
             id: 'cloud-security-best-practices',
@@ -28,7 +28,7 @@ const Blog = () => {
             date: 'Sep 28, 2023',
             category: 'Cybersecurity',
             image: cloudBlog,
-            author: 'Anmol Babu'
+            author: 'Katalyx Team'
         },
         {
             id: 'digital-transformation-roadmap',
@@ -37,7 +37,7 @@ const Blog = () => {
             date: 'Sep 15, 2023',
             category: 'Strategy',
             image: strategyBlog,
-            author: 'Vishal Sharma'
+            author: 'Katalyx Team'
         }
     ];
 

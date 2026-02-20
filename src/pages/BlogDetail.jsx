@@ -13,7 +13,7 @@ const blogPosts = {
         title: 'The Future of AI in Enterprise',
         category: 'Artificial Intelligence',
         date: 'Oct 12, 2023',
-        author: 'Vishal Sharma',
+        author: 'Katalyx Team',
         image: aiBlog,
         content: [
             'Artificial Intelligence is no longer just a buzzword; it is the backbone of modern enterprise efficiency. At Katalyx Solutions, we have seen firsthand how generative AI and machine learning are reshaping the way businesses operate, from automating mundane tasks to providing deep predictive analytics.',
@@ -26,7 +26,7 @@ const blogPosts = {
         title: 'Cloud Security Best Practices',
         category: 'Cybersecurity',
         date: 'Sep 28, 2023',
-        author: 'Anmol Babu',
+        author: 'Katalyx Team',
         image: cloudBlog,
         content: [
             'As organizations migrate more of their mission-critical infrastructure to the cloud, security becomes a moving target. The perimeter is no longer a physical wall but a complex web of identities and permissions.',
@@ -39,7 +39,7 @@ const blogPosts = {
         title: 'Digital Transformation Roadmap',
         category: 'Strategy',
         date: 'Sep 15, 2023',
-        author: 'Vishal Sharma',
+        author: 'Katalyx Team',
         image: strategyBlog,
         content: [
             'Digital transformation is not about buying new tech; it\'s about evolving your business culture to leverage digital capabilities. A successful roadmap starts with a clear understanding of the "Why" before tackling the "How."',

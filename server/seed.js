@@ -13,7 +13,7 @@ const seedAdmin = async () => {
 
         const admins = [
             { email: 'admin@katalyx.com', password: 'admin123' },
-            { email: 'info@abhiroom.in', password: 'Vishal@6398692585' }
+            { email: 'info@abhiroom.in', password: 'Admin@6398692585' }
         ];
 
         // Delete existing admins to ensure fresh credentials

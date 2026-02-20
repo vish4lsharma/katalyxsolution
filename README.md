@@ -121,11 +121,6 @@ This will start both frontend (port 5173) and backend (port 5000) concurrently.
 
 Copyright © 2025-2026 Katalyx Solutions. All rights reserved.
 
-## 👥 Team
-
-- **Vishal Sharma** - Founder & CEO
-- **Anmol Babu** - CTO
-
 ## 🔗 Links
 
 - Website: https://katalyxsolutions.com

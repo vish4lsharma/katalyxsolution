@@ -66,7 +66,7 @@ const About = () => {
                         {/* Static Vertical Timeline for Mobile */}
                         <div className="md:hidden mt-12 space-y-8 text-left max-w-sm mx-auto">
                             {[
-                                { year: '2025', text: 'Inception: Founded by Vishal Sharma.' },
+                                { year: '2025', text: 'Inception: Katalyx Solutions founded.' },
                                 { year: 'Q4 2025', text: 'Product Launch: Camu ERP & HealthcareX24.com launched.' },
                                 { year: '2026', text: 'Scale: Global Innovation Partnership status.' }
                             ].map((milestone, i) => (
@@ -82,38 +82,7 @@ const About = () => {
                 </div>
             </section>
 
-            <section className="py-24 bg-gradient-to-b from-[#0f0f1a] to-[#16213e] relative">
-                <div className="container mx-auto px-6 relative z-10">
-                    <h2 className="text-3xl font-bold text-center mb-16 text-white">Leadership Team</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                name: 'Vishal Sharma',
-                                role: 'Founder & CEO',
-                                initials: 'VS',
-                                bio: 'A visionary leader with deep expertise in strategic planning and business growth, driving Katalyx towards global recognition.'
-                            }
-                        ].map((member, i) => (
-                            <motion.div
-                                key={i}
-                                whileHover={{ y: -10 }}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-blue-500/40 hover:shadow-blue-500/10 transition-all text-center p-8"
-                            >
-                                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 ring-4 ring-gray-800 group-hover:ring-blue-500/30 transition-all shadow-lg">
-                                    {member.initials}
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                                <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-4">{member.role}</p>
-                                <p className="text-gray-400 text-sm leading-relaxed opacity-80">{member.bio}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+
         </>
     );
 };
