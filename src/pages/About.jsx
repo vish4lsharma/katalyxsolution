@@ -66,7 +66,7 @@ const About = () => {
                         {/* Static Vertical Timeline for Mobile */}
                         <div className="md:hidden mt-12 space-y-8 text-left max-w-sm mx-auto">
                             {[
-                                { year: '2025', text: 'Inception: Founded by Vishal Sharma & Yash Gupta.' },
+                                { year: '2025', text: 'Inception: Founded by Vishal Sharma.' },
                                 { year: 'Q4 2025', text: 'Product Launch: Camu ERP & HealthcareX24.com launched.' },
                                 { year: '2026', text: 'Scale: Global Innovation Partnership status.' }
                             ].map((milestone, i) => (
@@ -89,15 +89,9 @@ const About = () => {
                         {[
                             {
                                 name: 'Vishal Sharma',
-                                role: 'Co-Founder & CEO',
+                                role: 'Founder & CEO',
                                 initials: 'VS',
                                 bio: 'A visionary leader with deep expertise in strategic planning and business growth, driving Katalyx towards global recognition.'
-                            },
-                            {
-                                name: 'Yash Gupta',
-                                role: 'Co-Founder',
-                                initials: 'YG',
-                                bio: 'Passionate about product innovation and market strategy, ensuring our solutions solve real-world problems effectively.'
                             }
                         ].map((member, i) => (
                             <motion.div

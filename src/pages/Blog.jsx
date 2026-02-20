@@ -37,7 +37,7 @@ const Blog = () => {
             date: 'Sep 15, 2023',
             category: 'Strategy',
             image: strategyBlog,
-            author: 'Yash Gupta'
+            author: 'Vishal Sharma'
         }
     ];
 

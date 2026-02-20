@@ -123,8 +123,7 @@ Copyright © 2025-2026 Katalyx Solutions. All rights reserved.
 
 ## 👥 Team
 
-- **Vishal Sharma** - Co-Founder & CEO
-- **Yash Gupta** - Co-Founder
+- **Vishal Sharma** - Founder & CEO
 - **Anmol Babu** - CTO
 
 ## 🔗 Links

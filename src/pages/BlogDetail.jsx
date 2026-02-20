@@ -39,7 +39,7 @@ const blogPosts = {
         title: 'Digital Transformation Roadmap',
         category: 'Strategy',
         date: 'Sep 15, 2023',
-        author: 'Yash Gupta',
+        author: 'Vishal Sharma',
         image: strategyBlog,
         content: [
             'Digital transformation is not about buying new tech; it\'s about evolving your business culture to leverage digital capabilities. A successful roadmap starts with a clear understanding of the "Why" before tackling the "How."',
