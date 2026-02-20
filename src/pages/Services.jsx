@@ -40,8 +40,38 @@ const Services = () => {
     return (
         <>
             <Helmet>
-                <title>Services - Katalyx Solutions</title>
+                <title>Services – AI, Cloud, ERP & Web Development | Katalyx Solutions India</title>
+                <meta name="description" content="Katalyx Solutions offers AI & Machine Learning, Cloud Infrastructure, ERP development, Web & SaaS Development, Mobile App Development and Tech Consulting services in India." />
+                <meta name="keywords" content="AI services India, cloud infrastructure, ERP development services, SaaS development, mobile app development India, tech consulting, Katalyx services" />
+                <link rel="canonical" href="https://katalyxsolutions.com/services" />
+                <meta property="og:title" content="Services – AI, Cloud, ERP & Web Development | Katalyx Solutions" />
+                <meta property="og:description" content="End-to-end technology services including AI, cloud, ERP and SaaS development from Katalyx Solutions India." />
+                <meta property="og:url" content="https://katalyxsolutions.com/services" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta name="twitter:title" content="Katalyx Solutions – AI, Cloud & ERP Services India" />
+                <meta name="twitter:description" content="Full-stack AI, cloud and ERP solutions for modern enterprises." />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Service",
+                    "serviceType": "Software Development & AI Solutions",
+                    "provider": { "@type": "Organization", "name": "Katalyx Solutions", "url": "https://katalyxsolutions.com" },
+                    "areaServed": "IN",
+                    "hasOfferCatalog": {
+                        "@type": "OfferCatalog",
+                        "name": "Katalyx Services",
+                        "itemListElement": [
+                            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & Machine Learning" } },
+                            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Infrastructure" } },
+                            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ERP Development" } },
+                            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web & SaaS Development" } },
+                            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development" } },
+                            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tech Consulting" } }
+                        ]
+                    },
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://katalyxsolutions.com/services" }] }
+                })}</script>
             </Helmet>
+
 
             {/* Hero Section */}
             <section className="bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] text-white py-32 relative overflow-hidden text-center">

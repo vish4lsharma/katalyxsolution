@@ -8,8 +8,26 @@ const About = () => {
     return (
         <>
             <Helmet>
-                <title>About Us - Katalyx Solutions</title>
+                <title>About Katalyx Solutions – AI Software Company India | Our Story & Mission</title>
+                <meta name="description" content="Learn about Katalyx Solutions – an India-based AI software startup on a mission to build intelligent ERPs, SaaS platforms and digital transformation solutions for modern businesses." />
+                <meta name="keywords" content="about Katalyx Solutions, AI company India, software startup India, Katalyx team, digital transformation company" />
+                <link rel="canonical" href="https://katalyxsolutions.com/about" />
+                <meta property="og:title" content="About Katalyx Solutions – Our Story & Mission" />
+                <meta property="og:description" content="Katalyx Solutions is an India-based AI software startup building intelligent ERPs and SaaS platforms for startups and enterprises worldwide." />
+                <meta property="og:url" content="https://katalyxsolutions.com/about" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta name="twitter:title" content="About Katalyx Solutions – AI Software Company India" />
+                <meta name="twitter:description" content="Meet the team behind AI-powered ERPs and SaaS platforms at Katalyx Solutions." />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "AboutPage",
+                    "name": "About Katalyx Solutions",
+                    "url": "https://katalyxsolutions.com/about",
+                    "description": "Katalyx Solutions is an emerging AI and software company building intelligent ERPs, SaaS platforms, and cloud solutions.",
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://katalyxsolutions.com/about" }] }
+                })}</script>
             </Helmet>
+
 
             <section className="bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] py-32 border-b border-gray-800 text-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 z-0" />

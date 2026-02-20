@@ -25,8 +25,7 @@ process.on('uncaughtException', (err) => {
 
 // 1. STANDARD CORS MIDDLEWARE
 const allowedOrigins = [
-    "https://katalyxsolutions.com",
-    "https://www.katalyxsolutions.com"
+    "https://katalyxsolutions.com"
 ];
 
 app.use(cors({

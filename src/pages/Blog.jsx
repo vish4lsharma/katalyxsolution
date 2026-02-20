@@ -50,8 +50,28 @@ const Blog = () => {
     return (
         <>
             <Helmet>
-                <title>Blog - Katalyx Insights</title>
+                <title>Blog – AI, Cloud & Digital Transformation Insights | Katalyx Solutions</title>
+                <meta name="description" content="Read Katalyx Solutions' latest insights on AI in enterprise, cloud security best practices, digital transformation strategy and more from our technology experts." />
+                <meta name="keywords" content="AI blog India, technology insights, digital transformation blog, cloud security, ERP software blog, Katalyx blog, AI enterprise" />
+                <link rel="canonical" href="https://katalyxsolutions.com/blog" />
+                <meta property="og:title" content="Blog – AI, Cloud & Digital Transformation Insights | Katalyx Solutions" />
+                <meta property="og:description" content="Explore articles on AI, cloud security and digital transformation from Katalyx Solutions' technology experts." />
+                <meta property="og:url" content="https://katalyxsolutions.com/blog" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:title" content="Katalyx Blog – AI & Digital Transformation Insights" />
+                <meta name="twitter:description" content="Technology trends, AI insights and cloud strategy from Katalyx Solutions." />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Blog",
+                    "name": "Katalyx Solutions Blog",
+                    "url": "https://katalyxsolutions.com/blog",
+                    "description": "Latest insights on AI, cloud and digital transformation from Katalyx Solutions.",
+                    "publisher": { "@type": "Organization", "name": "Katalyx Solutions", "url": "https://katalyxsolutions.com" },
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://katalyxsolutions.com/blog" }] }
+                })}</script>
             </Helmet>
+
 
             <section className="py-24 bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] min-h-screen relative">
                 <div className="absolute inset-0 bg-black/20 z-0" />

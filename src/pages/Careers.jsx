@@ -69,7 +69,27 @@ const Careers = () => {
 
     return (
         <>
-            <Helmet><title>Careers - Join Katalyx</title></Helmet>
+            <Helmet>
+                <title>Careers at Katalyx Solutions – Join Our AI & Software Team India</title>
+                <meta name="description" content="Explore career opportunities at Katalyx Solutions. We're hiring software engineers, AI specialists, and digital product managers in India. Build the future of enterprise software with us." />
+                <meta name="keywords" content="jobs at Katalyx Solutions, software engineer jobs India, AI jobs India, tech career India, Katalyx careers, ERP developer jobs" />
+                <link rel="canonical" href="https://katalyxsolutions.com/careers" />
+                <meta property="og:title" content="Careers at Katalyx Solutions – Join Our AI & Software Team" />
+                <meta property="og:description" content="Exciting career opportunities in AI, cloud, and ERP development at Katalyx Solutions India." />
+                <meta property="og:url" content="https://katalyxsolutions.com/careers" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta name="twitter:title" content="Katalyx Careers – Software & AI Jobs India" />
+                <meta name="twitter:description" content="Join Katalyx Solutions – build next-gen AI ERPs and SaaS platforms." />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "WebPage",
+                    "name": "Careers at Katalyx Solutions",
+                    "url": "https://katalyxsolutions.com/careers",
+                    "description": "Explore career opportunities at Katalyx Solutions in AI, software and cloud engineering.",
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://katalyxsolutions.com/careers" }] }
+                })}</script>
+            </Helmet>
+
 
             {/* Hero */}
             <section className="bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] text-white py-32 text-center relative overflow-hidden">

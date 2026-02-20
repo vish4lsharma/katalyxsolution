@@ -19,9 +19,29 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <title>Katalyx Solutions - Transforming Ideas into Innovation</title>
-                <meta name="description" content="Katalyx Solutions is a dynamic startup delivering next-gen AI, cloud, and digital transformation solutions." />
+                <title>Katalyx Solutions – AI Software, ERP & Digital Transformation Company India</title>
+                <meta name="description" content="Katalyx Solutions builds AI-powered ERPs, SaaS platforms, campus management software, healthcare systems, and digital transformation solutions for businesses in India and worldwide." />
+                <meta name="keywords" content="Katalyx Solutions, AI software India, ERP development India, SaaS company India, digital transformation India, campus ERP, healthcare ERP, cloud solutions India, Camu ERP, HealthcareX24" />
+                <link rel="canonical" href="https://katalyxsolutions.com/" />
+                <meta property="og:title" content="Katalyx Solutions – AI Software, ERP & Digital Transformation" />
+                <meta property="og:description" content="We build AI-powered ERPs, SaaS platforms and cloud solutions for startups and enterprises. Get a free consultation today." />
+                <meta property="og:url" content="https://katalyxsolutions.com/" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta name="twitter:title" content="Katalyx Solutions – AI Software & ERP Company India" />
+                <meta name="twitter:description" content="Next-gen AI ERPs, SaaS platforms and digital transformation solutions." />
+                <meta name="twitter:image" content="https://katalyxsolutions.com/og-image.png" />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "WebPage",
+                    "name": "Katalyx Solutions – Home",
+                    "url": "https://katalyxsolutions.com/",
+                    "description": "Katalyx Solutions builds AI-powered ERPs, SaaS platforms and digital transformation solutions for startups and enterprises in India.",
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }] },
+                    "publisher": { "@type": "Organization", "name": "Katalyx Solutions", "url": "https://katalyxsolutions.com" }
+                })}</script>
             </Helmet>
+
 
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0f0f1a] pt-20">

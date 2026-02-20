@@ -30,7 +30,7 @@ const Privacy = () => (
                                 Welcome to Katalyx Solutions ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice or our practices with regard to your personal information, please contact us at info@katalyxsolutions.com.
                             </p>
                             <p className="mt-4">
-                                This Privacy Policy applies to all information collected through our website (such as https://www.katalyxsolutions.com), our SaaS products ("Services"), and any related services, sales, marketing, or events.
+                                This Privacy Policy applies to all information collected through our website (such as https://katalyxsolutions.com), our SaaS products ("Services"), and any related services, sales, marketing, or events.
                             </p>
                         </section>
 

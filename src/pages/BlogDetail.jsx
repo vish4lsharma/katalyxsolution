@@ -68,9 +68,37 @@ const BlogDetail = () => {
     return (
         <>
             <Helmet>
-                <title>{post.title} - Katalyx Blog</title>
+                <title>{post.title} | Katalyx Solutions Blog</title>
                 <meta name="description" content={post.content[0].substring(0, 160)} />
+                <meta name="keywords" content={`${post.category}, ${post.title}, Katalyx blog, technology insights, AI enterprise`} />
+                <link rel="canonical" href={`https://katalyxsolutions.com/blog/${id}`} />
+                <meta property="og:title" content={`${post.title} | Katalyx Solutions`} />
+                <meta property="og:description" content={post.content[0].substring(0, 160)} />
+                <meta property="og:url" content={`https://katalyxsolutions.com/blog/${id}`} />
+                <meta property="og:type" content="article" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta property="article:published_time" content={post.date} />
+                <meta property="article:author" content="Katalyx Solutions" />
+                <meta property="article:section" content={post.category} />
+                <meta name="twitter:title" content={`${post.title} | Katalyx Blog`} />
+                <meta name="twitter:description" content={post.content[0].substring(0, 160)} />
+                <meta name="twitter:image" content="https://katalyxsolutions.com/og-image.png" />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": post.title,
+                    "description": post.content[0].substring(0, 200),
+                    "author": { "@type": "Organization", "name": "Katalyx Solutions", "url": "https://katalyxsolutions.com" },
+                    "publisher": { "@type": "Organization", "name": "Katalyx Solutions", "logo": { "@type": "ImageObject", "url": "https://katalyxsolutions.com/favicon.svg" } },
+                    "datePublished": post.date,
+                    "dateModified": post.date,
+                    "url": `https://katalyxsolutions.com/blog/${id}`,
+                    "image": "https://katalyxsolutions.com/og-image.png",
+                    "articleSection": post.category,
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://katalyxsolutions.com/blog" }, { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://katalyxsolutions.com/blog/${id}` }] }
+                })}</script>
             </Helmet>
+
 
             <article className="pt-32 pb-24 bg-[#0f0f1a] min-h-screen">
                 <div className="container mx-auto px-6 max-w-4xl">
