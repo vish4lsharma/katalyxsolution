@@ -1,17 +1,19 @@
 import React from 'react';
-import katalyxLogo from '../../assets/images/katalyx-logo.png';
+// Use logo from public directory
 
-const Logo = ({ className = "w-10 h-10", textClassName = "text-xl", showText = false }) => {
+const Logo = ({ className = "w-32 h-32", textClassName = "text-xl", showText = false }) => {
     return (
         <div className="flex items-center gap-3 group">
             <div className={`relative flex items-center justify-center group-hover:scale-105 transition-transform duration-300`}>
                 {/* Subtle Glow */}
-                <div className="absolute inset-0 bg-blue-600/10 rounded-xl blur-lg group-hover:bg-blue-600/25 transition-all duration-500" />
+                <div className="absolute inset-0 bg-white/60 rounded-xl blur-xl group-hover:bg-navyblue/80 transition-all duration-500" />
+                {/* Extra white glow for logo */}
+                <div className="absolute inset-0 bg-white opacity-30 rounded-xl blur-2xl pointer-events-none" />
                 {/* Logo Image */}
                 <img
-                    src={katalyxLogo}
+                    src="/KATALYX_LOGO.png"
                     alt="Katalyx Solutions Logo"
-                    className={`${className} object-contain relative drop-shadow-lg`}
+                    className={`${className} object-contain relative drop-shadow-[0_0_30px_white]`}
                 />
             </div>
 

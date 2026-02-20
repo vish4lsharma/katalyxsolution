@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Zap, Shield, BarChart3, Users, Code, Globe as GlobeIcon, Cpu, ChevronRight, Calendar, BookOpen, Brain, Briefcase, Settings, Lightbulb, Mail, MapPin } from 'lucide-react';
 import Globe from '../components/3d/Globe';
 import EnergyButton from '../components/effects/EnergyButton';
-import Typewriter from '../components/ui/Typewriter';
+import StatsSection from '../components/StatsSection';
+// Inline infinite-loop typewriter for the hero (keeps markup local and predictable)
+function LoopTypewriter({ text = '', speed = 70, pause = 1200, className = '' }) {
+    const [pos, setPos] = useState(0);
+    const [deleting, setDeleting] = useState(false);
+
+    useEffect(() => {
+        let t;
+        if (!deleting) {
+            if (pos < text.length) t = setTimeout(() => setPos(p => p + 1), speed);
+            else t = setTimeout(() => setDeleting(true), pause);
+        } else {
+            if (pos > 0) t = setTimeout(() => setPos(p => p - 1), Math.max(20, Math.floor(speed / 2)));
+            else t = setTimeout(() => setDeleting(false), 200);
+        }
+        return () => clearTimeout(t);
+    }, [pos, deleting, text, speed, pause]);
+
+    return (
+        <span className={className}>
+            {text.slice(0, pos)}
+            <span className="inline-block ml-1 w-1 h-6 align-middle bg-current animate-pulse" />
+        </span>
+    );
+}
 import Counter from '../components/ui/Counter';
 
 import camuImg from '../assets/images/camu.jpg';
@@ -57,23 +81,21 @@ const Home = () => {
                         {/* Heading Section */}
                         <div className="mb-8 relative z-20">
                             <motion.h1
-                                className="text-4xl md:text-7xl font-bold leading-tight text-white mb-6"
+                                className="text-6xl md:text-7xl font-bold leading-[1.02] text-white mb-4"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                             >
-                                <span className="block text-gray-400 text-3xl md:text-5xl mb-2">We build</span>
-                                <div className="min-h-[1.5em] md:min-h-[1.2em]">
-                                    <Typewriter
-                                        text="Future-Ready Digital Solutions"
-                                        speed={50}
-                                        delay={0.5}
-                                        className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"
-                                    />
+                                <span className="block text-gray-400 text-4xl md:text-6xl mb-0">We build</span>
+                                <div className="min-h-[1.2em] md:min-h-[1.0em]">
+                                    <span className="block text-gray-400 text-5xl md:text-6xl">Future-Ready</span>
+                                    <div className="mt-0">
+                                        <LoopTypewriter text="Digital Solutions" speed={65} pause={1400} className="text-blue-400 text-5xl md:text-6xl font-bold" />
+                                    </div>
                                 </div>
                             </motion.h1>
 
                             <motion.p
-                                className="text-xl text-gray-300 leading-relaxed max-w-lg mt-4"
+                                className="text-lg text-gray-300 leading-7 max-w-lg mt-4"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.5 }}
@@ -81,7 +103,7 @@ const Home = () => {
                                 We are a passionate team of innovators dedicated to crafting scalable, high-performance digital solutions for modern enterprises.
                             </motion.p>
                             <motion.p
-                                className="text-base text-blue-300/80 leading-relaxed max-w-lg mt-3 font-medium border-l-2 border-blue-500/40 pl-3"
+                                className="text-sm text-blue-300/80 leading-6 max-w-lg mt-3 font-medium border-l-2 border-blue-500/40 pl-3"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.9 }}
@@ -119,34 +141,8 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Creating Value Section (Stats Replacement) */}
-            <section className="py-16 bg-[#0f0f1a] relative border-b border-gray-800">
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        {[
-                            { label: 'Innovative Products', value: '3+', icon: Code },
-                            { label: 'Client Satisfaction', value: '100%', icon: Users },
-                            { label: 'Uptime Guarantee', value: '99.9%', icon: Shield },
-                            { label: 'Growth Rate', value: 'Rapid', icon: BarChart3 },
-                        ].map((stat, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 hover:border-blue-500/30 transition-all group"
-                            >
-                                <stat.icon className="w-8 h-8 mx-auto text-blue-400 mb-4 group-hover:scale-110 transition-transform" />
-                                <h3 className="text-3xl font-bold text-white mb-1">
-                                    <Counter value={stat.value} />
-                                </h3>
-                                <p className="text-gray-400 font-medium text-sm">{stat.label}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            {/* Stats Section */}
+            <StatsSection />
 
             {/* About Us Preview */}
             <section className="py-24 bg-[#0f0f1a] relative overflow-hidden">
