@@ -7,11 +7,7 @@ const getBaseURL = () => {
     return '/api';
 };
 
-let baseURL = getBaseURL();
-
-// Robust check: Ensure the baseURL ends with /api to match backend routes
-const cleanBaseURL = baseURL.trim().replace(/\/$/, '');
-const finalBaseURL = cleanBaseURL.includes('/api') || cleanBaseURL === '' ? cleanBaseURL : `${cleanBaseURL}/api`;
+const finalBaseURL = getBaseURL();
 
 const api = axios.create({
     baseURL: finalBaseURL,
