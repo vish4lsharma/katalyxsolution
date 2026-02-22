@@ -7,6 +7,7 @@ import { Briefcase, User, Calendar, LogOut } from 'lucide-react';
 const CandidateDashboard = () => {
     const [profile, setProfile] = useState(null);
     const [applications, setApplications] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,8 +24,10 @@ const CandidateDashboard = () => {
                 const res = await api.get('/candidate/dashboard');
                 setProfile(res.data.candidate);
                 setApplications(res.data.applications);
+                setTimeout(() => setIsLoading(false), 2000);
             } catch (err) {
                 console.error(err);
+                setIsLoading(false);
                 if (err.response?.status === 401) {
                     localStorage.removeItem('token');
                     localStorage.removeItem('user');
@@ -42,7 +45,17 @@ const CandidateDashboard = () => {
         navigate('/candidate/login');
     };
 
-    if (!profile) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    if (isLoading || !profile) {
+        return (
+            <div className="min-h-screen bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/20 z-0" />
+                <div className="flex flex-col items-center gap-4 relative z-10">
+                    <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
+                    <p className="text-blue-400 font-medium animate-pulse">Loading dashboard...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <>
