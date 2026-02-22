@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,8 @@ const Blog = () => {
             date: 'Oct 12, 2023',
             category: 'Artificial Intelligence',
             image: aiBlog,
-            author: 'Vishal Sharma'
+            author: 'Vishal Sharma',
+            tags: ['AI', 'Enterprise', 'Strategy']
         },
         {
             id: 'cloud-security-best-practices',
@@ -28,7 +29,8 @@ const Blog = () => {
             date: 'Sep 28, 2023',
             category: 'Cybersecurity',
             image: cloudBlog,
-            author: 'Anmol Babu'
+            author: 'Anmol Babu',
+            tags: ['Cloud', 'Security', 'Best Practices']
         },
         {
             id: 'digital-transformation-roadmap',
@@ -37,15 +39,25 @@ const Blog = () => {
             date: 'Sep 15, 2023',
             category: 'Strategy',
             image: strategyBlog,
-            author: 'Yash Gupta'
+            author: 'Yash Gupta',
+            tags: ['Transformation', 'Strategy', 'Legacy']
         }
     ];
 
-    const filteredPosts = posts.filter(post =>
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const [selectedTag, setSelectedTag] = useState('All');
+
+    const allTags = useMemo(() => {
+        const set = new Set();
+        posts.forEach(p => (p.tags || []).forEach(t => set.add(t)));
+        return ['All', ...Array.from(set)];
+    }, [posts]);
+
+    const filteredPosts = posts.filter(post => {
+        const q = searchQuery.trim().toLowerCase();
+        const matchesSearch = !q || post.title.toLowerCase().includes(q) || post.category.toLowerCase().includes(q) || post.excerpt.toLowerCase().includes(q) || (post.tags || []).some(t => t.toLowerCase().includes(q));
+        const matchesTag = selectedTag === 'All' || (post.tags || []).includes(selectedTag);
+        return matchesSearch && matchesTag;
+    });
 
     return (
         <>
@@ -82,6 +94,19 @@ const Blog = () => {
                             />
                             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
                         </motion.div>
+
+                        {/* Tag filters */}
+                        <div className="mt-6 flex flex-wrap gap-2 justify-center">
+                            {allTags.map((tag) => (
+                                <button
+                                    key={tag}
+                                    onClick={() => setSelectedTag(tag)}
+                                    className={`px-3 py-1 rounded-full text-sm font-medium transition ${selectedTag === tag ? 'bg-blue-500 text-white' : 'bg-white/5 text-gray-300 hover:bg-white/8'}`}
+                                >
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     {filteredPosts.length > 0 ? (
@@ -121,6 +146,11 @@ const Blog = () => {
                                                 {post.excerpt}
                                             </p>
                                             <div className="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                                <div className="flex items-center gap-2 flex-wrap">
+                                                    {(post.tags || []).map((t) => (
+                                                        <span key={t} className="text-xs px-2 py-1 rounded-md bg-white/5 text-gray-300">{t}</span>
+                                                    ))}
+                                                </div>
                                                 <span className="text-blue-400 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
                                                     Read Article <ArrowRight size={16} />
                                                 </span>

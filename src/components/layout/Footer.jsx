@@ -5,8 +5,9 @@ import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="bg-[#0f0f1a] border-t border-gray-800 text-white py-16">
-            <div className="container mx-auto px-6">
+        <footer className="bg-[#0f0f1a] border-t border-gray-800 text-white py-16 relative overflow-hidden">
+            
+            <div className="container mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     {/* Brand */}
                     <div className="space-y-4">
@@ -89,10 +90,10 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
                     <div className="flex flex-col items-center md:items-start gap-1">
-                        <p>© {new Date().getFullYear()} Katalyx Solutions. All rights reserved.</p>
-                        <p className="text-gray-600">Katalyx Solutions — LLP registration in process, India.</p>
+                        <p>© {new Date().getFullYear()} <span className="font-semibold uppercase text-sky-400">KATALYX</span>. All rights reserved.</p>
+                        <p className="text-gray-600">KATALYX — LLP registration in process, India.</p>
                     </div>
                     <div className="flex gap-6">
                         <Link to="/admin/login" className="hover:text-gray-300">Admin</Link>

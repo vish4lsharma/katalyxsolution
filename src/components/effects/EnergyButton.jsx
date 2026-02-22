@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import './EnergyButton.css';
+import './EnergyButton.v2.css';
 
 const EnergyButton = ({ children, onClick, className = '', variant = 'primary' }) => {
     return (

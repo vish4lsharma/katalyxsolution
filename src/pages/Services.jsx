@@ -37,6 +37,9 @@ const Services = () => {
         },
     ];
 
+    // unified card background (keeps all cards visually consistent)
+    const cardBg = 'bg-gradient-to-br from-[#0f1724] to-[#071022]';
+
     return (
         <>
             <Helmet>
@@ -72,19 +75,19 @@ const Services = () => {
                     <div className="grid md:grid-cols-3 gap-8">
                         {services.map((service, index) => (
                             <motion.div
-                                key={index}
+                                key={service.title}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
+                                transition={{ delay: index * 0.08 }}
                                 viewport={{ once: true }}
                                 whileHover={{ y: -10 }}
-                                className="bg-[#16213e] p-8 rounded-2xl shadow-lg border border-gray-700 hover:border-blue-500/50 hover:shadow-blue-500/20 transition-all group backdrop-blur-sm"
+                                className={`${cardBg} p-8 rounded-2xl shadow-lg transition-all group backdrop-blur-sm hover:scale-[1.01] hover:shadow-xl`}
                             >
-                                <div className="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform border border-blue-500/20">
+                                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform" style={{ background: 'rgba(255,255,255,0.02)' }}>
                                     <service.icon size={28} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">{service.title}</h3>
-                                <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{service.desc}</p>
+                                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">{service.title}</h3>
+                                <p className="text-gray-300 leading-relaxed transition-colors">{service.desc}</p>
                             </motion.div>
                         ))}
                     </div>

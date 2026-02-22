@@ -51,11 +51,12 @@ const Navbar = () => {
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
             className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-                ? 'bg-[#0f0f1a]/90 backdrop-blur-lg border-b border-white/10 py-4 shadow-2xl'
-                : 'bg-transparent py-6'
+                ? 'bg-white/6 backdrop-blur-lg py-3 shadow-md'
+                : 'bg-white/4 backdrop-blur-md py-4'
                 }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
+                <div className="absolute inset-x-4 top-2 bottom-2 rounded-3xl pointer-events-none" />
                 <Link to="/" className="z-50 group">
                     <Logo className="h-12 w-auto" />
                 </Link>

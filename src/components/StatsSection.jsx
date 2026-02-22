@@ -4,40 +4,41 @@ import { motion } from 'framer-motion';
 import { Code, Users, Shield, BarChart3 } from 'lucide-react';
 
 const stats = [
-    { value: '3+', suffix: '', label: 'Innovative Products', prefix: '', isText: true },
-    { value: '100%', suffix: '', label: 'Client Satisfaction', prefix: '', isText: true },
-    { value: '99.9%', suffix: '', label: 'Uptime Guarantee', prefix: '', isText: true },
-    { value: '2X', suffix: '', label: 'Revenue Growth', prefix: '', isText: true },
+    { target: 3, suffix: '+', label: 'Innovative Products', decimals: 0 },
+    { target: 100, suffix: '%', label: 'Client Satisfaction', decimals: 0 },
+    { target: 99.9, suffix: '%', label: 'Uptime Guarantee', decimals: 1 },
+    { target: 2, suffix: 'X', label: 'Revenue Growth', decimals: 0 },
 ];
 
 const statIcons = [Code, Users, Shield, BarChart3];
 
-const AnimatedNumber = ({ value, prefix, suffix }) => {
+const AnimatedNumber = ({ value = 0, prefix = '', suffix = '', decimals = 0 }) => {
     const [count, setCount] = useState(0);
     const ref = useRef(null);
     const [hasAnimated, setHasAnimated] = useState(false);
 
     useEffect(() => {
+        const target = Number(value) || 0;
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting && !hasAnimated) {
                     setHasAnimated(true);
-                    const duration = 2000;
+                    const duration = 1500;
                     const steps = 60;
-                    const increment = value / steps;
+                    const increment = target / steps;
                     let current = 0;
                     const timer = setInterval(() => {
                         current += increment;
-                        if (current >= value) {
-                            setCount(value);
+                        if (current >= target) {
+                            setCount(target);
                             clearInterval(timer);
                         } else {
-                            setCount(Math.floor(current));
+                            setCount(current);
                         }
-                    }, duration / steps);
+                    }, Math.max(8, Math.floor(duration / steps)));
                 }
             },
-            { threshold: 0.5 }
+            { threshold: 0.4 }
         );
 
         if (ref.current) {
@@ -48,10 +49,11 @@ const AnimatedNumber = ({ value, prefix, suffix }) => {
     }, [value, hasAnimated]);
 
     const formatNumber = (num) => {
-        if (num >= 1000) {
-            return num.toLocaleString();
+        const opts = { minimumFractionDigits: decimals, maximumFractionDigits: decimals };
+        if (decimals === 0) {
+            return Math.round(num).toLocaleString();
         }
-        return num;
+        return Number(num).toLocaleString(undefined, opts);
     };
 
     return (
@@ -85,7 +87,7 @@ const StatsSection = () => {
                                 href='/blog#case-studies'
                                 className='inline-flex items-center px-8 py-4 bg-white text-gray-900 rounded-xl font-bold hover:opacity-95 transition-all duration-300 shadow-xl'
                             >
-                                See Case Studies
+                                See Blogs
                                 <svg className='ml-2 w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 8l4 4m0 0l-4 4m4-4H3' />
                                 </svg>
@@ -111,13 +113,9 @@ const StatsSection = () => {
                                                 return Icon ? <Icon className='w-6 h-6 mb-4 text-sky-400' /> : null;
                                             })()}
 
-                                            <div className='text-5xl lg:text-6xl font-extrabold text-white mb-3 tracking-tight transition-all'>
-                                                {stat.isText ? (
-                                                    <span>{stat.prefix}{stat.value}{stat.suffix}</span>
-                                                ) : (
-                                                    <AnimatedNumber value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-                                                )}
-                                            </div>
+                                                <div className='text-5xl lg:text-6xl font-extrabold text-white mb-3 tracking-tight transition-all'>
+                                                    <AnimatedNumber value={stat.target} suffix={stat.suffix} decimals={stat.decimals} />
+                                                </div>
                                         </div>
 
                                         <p className={`text-sky-400 font-semibold text-xs sm:text-sm tracking-widest uppercase`}>{stat.label}</p>

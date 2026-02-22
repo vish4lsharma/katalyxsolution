@@ -10,15 +10,21 @@ const Contact = () => {
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
+    const services = ['AI & ML', 'Cloud', 'Cybersecurity', 'Web & SaaS', 'Mobile', 'Consulting'];
+
     const formik = useFormik({
         initialValues: {
             name: '',
             email: '',
+            subject: '',
+            service: services[0],
             message: '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required('Required'),
             email: Yup.string().email('Invalid email address').required('Required'),
+            subject: Yup.string().max(120, 'Too long').required('Required'),
+            service: Yup.string().required('Required'),
             message: Yup.string().required('Required'),
         }),
         onSubmit: async (values, { resetForm }) => {
@@ -27,7 +33,7 @@ const Contact = () => {
                 await api.post('/contact', values);
                 setSubmitted(true);
                 resetForm();
-                setTimeout(() => setSubmitted(false), 5000);
+                setTimeout(() => setSubmitted(false), 6000);
             } catch (err) {
                 alert('Failed to send message.');
             } finally {
@@ -44,6 +50,7 @@ const Contact = () => {
 
             <section className="py-24 bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] min-h-screen flex items-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 z-0" />
+                <div className="absolute -right-32 -top-32 w-80 h-80 rounded-full bg-gradient-to-br from-sky-500/10 to-purple-500/8 blur-3xl opacity-80 pointer-events-none" />
                 <div className="container mx-auto px-6 relative z-10 pt-20">
                     <div className="grid md:grid-cols-2 gap-16 bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-3xl p-8 md:p-16 shadow-2xl border border-gray-700">
                         <div>
@@ -118,34 +125,68 @@ const Contact = () => {
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
                                         onSubmit={formik.handleSubmit}
-                                        className="space-y-6"
+                                        className="space-y-4"
                                     >
-                                        <div>
-                                            <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
-                                            <input
-                                                id="name"
-                                                type="text"
-                                                {...formik.getFieldProps('name')}
-                                                className="w-full px-4 py-4 rounded-xl bg-gray-900/50 border border-gray-700 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                                placeholder="John Doe"
-                                            />
-                                            {formik.touched.name && formik.errors.name ? (
-                                                <div className="text-red-400 text-sm mt-1">{formik.errors.name}</div>
-                                            ) : null}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+                                                <input
+                                                    id="name"
+                                                    type="text"
+                                                    {...formik.getFieldProps('name')}
+                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
+                                                    placeholder="John Doe"
+                                                />
+                                                {formik.touched.name && formik.errors.name ? (
+                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.name}</div>
+                                                ) : null}
+                                            </div>
+
+                                            <div>
+                                                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                                                <input
+                                                    id="email"
+                                                    type="email"
+                                                    {...formik.getFieldProps('email')}
+                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
+                                                    placeholder="john@example.com"
+                                                />
+                                                {formik.touched.email && formik.errors.email ? (
+                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.email}</div>
+                                                ) : null}
+                                            </div>
                                         </div>
 
-                                        <div>
-                                            <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
-                                            <input
-                                                id="email"
-                                                type="email"
-                                                {...formik.getFieldProps('email')}
-                                                className="w-full px-4 py-4 rounded-xl bg-gray-900/50 border border-gray-700 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                                placeholder="john@example.com"
-                                            />
-                                            {formik.touched.email && formik.errors.email ? (
-                                                <div className="text-red-400 text-sm mt-1">{formik.errors.email}</div>
-                                            ) : null}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-2">Subject</label>
+                                                <input
+                                                    id="subject"
+                                                    type="text"
+                                                    {...formik.getFieldProps('subject')}
+                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
+                                                    placeholder="Project inquiry, pricing, etc."
+                                                />
+                                                {formik.touched.subject && formik.errors.subject ? (
+                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.subject}</div>
+                                                ) : null}
+                                            </div>
+
+                                            <div>
+                                                <label htmlFor="service" className="block text-sm font-medium text-gray-400 mb-2">Service</label>
+                                                <select
+                                                    id="service"
+                                                    {...formik.getFieldProps('service')}
+                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
+                                                >
+                                                    {services.map((s) => (
+                                                        <option key={s} value={s}>{s}</option>
+                                                    ))}
+                                                </select>
+                                                {formik.touched.service && formik.errors.service ? (
+                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.service}</div>
+                                                ) : null}
+                                            </div>
                                         </div>
 
                                         <div>
@@ -154,7 +195,7 @@ const Contact = () => {
                                                 id="message"
                                                 rows="5"
                                                 {...formik.getFieldProps('message')}
-                                                className="w-full px-4 py-4 rounded-xl bg-gray-900/50 border border-gray-700 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
                                                 placeholder="Tell us about your project or requirements..."
                                             />
                                             {formik.touched.message && formik.errors.message ? (
@@ -163,11 +204,11 @@ const Contact = () => {
                                         </div>
 
                                         <motion.button
-                                            whileHover={{ scale: 1.01 }}
+                                            whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.99 }}
                                             disabled={submitting}
                                             type="submit"
-                                            className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-3 shadow-xl shadow-blue-600/20 disabled:opacity-50"
+                                            className="w-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white py-4 rounded-2xl font-bold hover:brightness-105 transition-all flex items-center justify-center gap-3 shadow-lg disabled:opacity-50"
                                         >
                                             {submitting ? (
                                                 <>
