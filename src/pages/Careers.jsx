@@ -11,6 +11,7 @@ const Careers = () => {
     const [selectedJob, setSelectedJob] = useState(null);
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', resumeLink: '' });
     const [submitting, setSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,21 +24,12 @@ const Careers = () => {
             setJobs(res.data);
         } catch (err) {
             console.error(err);
+        } finally {
+            setTimeout(() => setIsLoading(false), 2000);
         }
     };
 
     const handleApplyClick = (job) => {
-        const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-
-        if (!token || user.role !== 'candidate') {
-            // Not logged in or not a candidate, redirect to login
-            alert('Please login as a candidate to apply for jobs');
-            navigate('/candidate/login');
-            return;
-        }
-
-        // User is logged in, show application modal
         setSelectedJob(job);
     };
 
@@ -129,7 +121,12 @@ const Careers = () => {
                 <div className="absolute inset-0 bg-gradient-to-b from-[#16213e] to-[#0f0f1a]" />
                 <div className="container mx-auto px-6 relative z-10">
                     <h2 className="text-3xl font-bold mb-12 text-white">Open Positions</h2>
-                    {jobs.length === 0 ? (
+                    {isLoading ? (
+                        <div className="flex flex-col items-center justify-center py-20 bg-gray-900/50 rounded-3xl border border-gray-800 backdrop-blur-sm">
+                            <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mb-4" />
+                            <p className="text-blue-400 font-medium animate-pulse">Loading positions...</p>
+                        </div>
+                    ) : jobs.length === 0 ? (
                         <div className="text-center py-20 bg-gray-900/50 rounded-3xl border border-gray-800 backdrop-blur-sm">
                             <Briefcase size={48} className="mx-auto text-gray-700 mb-4" />
                             <p className="text-xl text-gray-400">No open positions currently. Check back soon!</p>
