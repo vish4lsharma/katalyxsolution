@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 import api from '../utils/api';
 
@@ -40,7 +40,7 @@ const Contact = () => {
         <>
             <Helmet>
                 <title>Contact Katalyx Solutions – Get a Free Consultation | India AI Software Company</title>
-                <meta name="description" content="Contact Katalyx Solutions for a free project consultation. Reach us by email at info@katalyxsolutions.com or call +91 63986 92585. We build AI software, ERPs and SaaS platforms." />
+                <meta name="description" content="Contact Katalyx Solutions for a free project consultation. Reach us by email at info@katalyxsolutions.com. We build AI software, ERPs and SaaS platforms." />
                 <meta name="keywords" content="contact Katalyx Solutions, hire AI software company India, ERP development consultation, software development inquiry India" />
                 <link rel="canonical" href="https://katalyxsolutions.com/contact" />
                 <meta property="og:title" content="Contact Katalyx Solutions – Free Consultation" />
@@ -86,15 +86,7 @@ const Contact = () => {
                                         <p className="text-gray-400">info@katalyxsolutions.com</p>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 flex-shrink-0 border border-purple-500/20">
-                                        <Phone size={20} />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-white">Call Us</h3>
-                                        <p className="text-gray-400">+91 63986 92585</p>
-                                    </div>
-                                </div>
+
                                 <div className="flex items-start gap-4">
                                     <div className="w-12 h-12 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-cyan-400 flex-shrink-0 border border-cyan-500/20">
                                         <MapPin size={20} />
