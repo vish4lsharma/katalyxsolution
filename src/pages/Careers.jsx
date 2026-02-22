@@ -25,7 +25,7 @@ const Careers = () => {
         } catch (err) {
             console.error(err);
         } finally {
-            setTimeout(() => setIsLoading(false), 2000);
+            setIsLoading(false);
         }
     };
 
