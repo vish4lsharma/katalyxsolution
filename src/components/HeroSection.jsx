@@ -167,19 +167,19 @@ export default function HeroSection() {
 
                     <motion.p className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
                         Build Faster.{' '}
-                        <span className="gradient-text-base gradient-intelligent">Scale Smarter.</span>
+                        <span className="gradient-text-base gradient-measurable-growth">Scale Smarter.</span>
                     </motion.p>
 
                     <div className="mb-8 relative z-20">
                         <motion.h1 className="text-5xl md:text-6xl font-bold leading-[1.02] text-white mb-4">
                             <span className="block text-gray-400 text-3xl md:text-4xl mb-0">We build</span>
                             <div className="min-h-[1.2em] md:min-h-[1.0em]">
-                                    <span className="block text-4xl md:text-5xl font-bold gradient-text-base gradient-future-ready-tech">Future-Ready</span>
+                                    <span className="block text-4xl md:text-5xl font-bold gradient-text-base gradient-measurable-growth">Future-Ready</span>
                                     <div className="mt-0">
                                         <Typewriter
                                             text="Digital Solutions"
                                             speed={65}
-                                            className="text-4xl md:text-5xl font-bold gradient-text-base gradient-digital-solutions"
+                                            className="text-4xl md:text-5xl font-bold gradient-text-base gradient-measurable-growth"
                                         />
                                     </div>
                                 </div>
