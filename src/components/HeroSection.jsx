@@ -1,44 +1,163 @@
-import React, { useState, useEffect, lazy, Suspense, memo } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Lightbulb, BrainCircuit, BarChart3, Workflow, TrendingUp } from 'lucide-react';
 import EnergyButton from './effects/EnergyButton';
+import Typewriter from './ui/Typewriter';
 
-const Globe = lazy(() => import('./3d/Globe'));
+const STAGE_GLOWS = {
+    vision: 'rgba(20, 37, 66, 0.34)',
+    intelligence: 'rgba(22, 42, 74, 0.36)',
+    insights: 'rgba(18, 35, 62, 0.34)',
+    workflow: 'rgba(16, 31, 56, 0.34)',
+    growth: 'rgba(23, 44, 78, 0.34)',
+};
 
-const LoopTypewriter = memo(function LoopTypewriter({ text = '', speed = 65, pause = 1200, className = '' }) {
-    const [pos, setPos] = useState(0);
-    const [deleting, setDeleting] = useState(false);
-    useEffect(() => {
-        let t = 0;
-        if (!deleting) {
-            if (pos < text.length) t = window.setTimeout(() => setPos(p => p + 1), speed);
-            else t = window.setTimeout(() => setDeleting(true), pause);
-        } else {
-            if (pos > 0) t = window.setTimeout(() => setPos(p => p - 1), Math.max(20, Math.floor(speed / 2)));
-            else t = window.setTimeout(() => setDeleting(false), 200);
-        }
-        return () => clearTimeout(t);
-    }, [pos, deleting, text, speed, pause]);
+const WAVE_PATH = 'M0 14 C8 3 18 25 28 14 C38 3 48 25 58 14 C68 3 78 25 88 14 C93 8 97 10 100 14';
 
-    return (
-        <span className={className} aria-hidden={false}>
-            {text.slice(0, pos)}
-            <span className="inline-block ml-1 w-1 h-6 align-middle bg-current animate-pulse" />
-        </span>
-    );
-});
+const NETWORK_POINTS = [
+    { x: 8, y: 18 },
+    { x: 20, y: 12 },
+    { x: 34, y: 20 },
+    { x: 49, y: 11 },
+    { x: 64, y: 18 },
+    { x: 78, y: 12 },
+    { x: 92, y: 19 },
+];
+
+const JOURNEY_STAGES = [
+    {
+        id: 'vision',
+        title: 'Vision',
+        subtitle: 'Idea to Connected Intent',
+        narrative: 'A simple business idea expands into connected opportunity nodes and clear direction.',
+        outcome: 'Aligned business vision',
+        meaning: 'From abstract ideas to mapped priorities your team can commit to.',
+        signal: 'Core goals and value mapped',
+        theme: 'vision',
+        icon: Lightbulb,
+    },
+    {
+        id: 'intelligence',
+        title: 'Intelligence',
+        subtitle: 'Glowing AI Core',
+        narrative: 'Connected logic converges into an AI core that powers intelligent automation.',
+        outcome: 'AI-powered decision engine',
+        meaning: 'Knowledge and patterns become a live engine that learns from every process.',
+        signal: 'Neural workflows activated',
+        theme: 'intelligence',
+        icon: BrainCircuit,
+    },
+    {
+        id: 'insights',
+        title: 'Insights',
+        subtitle: 'Real-Time Dashboards',
+        narrative: 'The AI core streams live metrics into dynamic dashboards for instant clarity.',
+        outcome: 'Actionable business insights',
+        meaning: 'Leaders stop guessing because operations and risk are visible in real time.',
+        signal: 'Real-time data pipelines flowing',
+        theme: 'insights',
+        icon: BarChart3,
+    },
+    {
+        id: 'workflow',
+        title: 'Workflow',
+        subtitle: 'Automation Pipelines',
+        narrative: 'Dashboards evolve into automated pipelines that execute repeatable business flow.',
+        outcome: 'Faster, reliable operations',
+        meaning: 'Manual bottlenecks are replaced with dependable, auditable automation chains.',
+        signal: 'Automation chains orchestrated',
+        theme: 'workflow',
+        icon: Workflow,
+    },
+    {
+        id: 'growth',
+        title: 'Growth',
+        subtitle: 'Connected Enterprise Expansion',
+        narrative: 'Pipelines scale into growth trajectories across connected business platforms.',
+        outcome: 'Scalable business growth',
+        meaning: 'Every automated loop compounds into stronger revenue, retention, and expansion.',
+        signal: 'Enterprise network expansion live',
+        theme: 'growth',
+        icon: TrendingUp,
+    },
+];
+
+const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    left: 4 + ((i * 5.5) % 92),
+    duration: 5.8 + (i % 5) * 0.8,
+    delay: (i % 6) * 0.45,
+    size: 1.5 + (i % 3) * 1.1,
+    drift: (i % 2 ? -1 : 1) * (12 + (i % 4) * 5),
+}));
 
 export default function HeroSection() {
     const shouldReduce = useReducedMotion();
+    const [activeStage, setActiveStage] = useState(0);
+    const [typedMeaning, setTypedMeaning] = useState('');
+    const parallaxX = useMotionValue(0);
+    const parallaxY = useMotionValue(0);
+    const smoothX = useSpring(parallaxX, { stiffness: 52, damping: 22, mass: 0.8 });
+    const smoothY = useSpring(parallaxY, { stiffness: 52, damping: 22, mass: 0.8 });
+    const farX = useTransform(smoothX, (v) => v * -0.22);
+    const farY = useTransform(smoothY, (v) => v * -0.22);
+
+    useEffect(() => {
+        if (shouldReduce) return undefined;
+
+        const interval = window.setInterval(() => {
+            setActiveStage((prev) => (prev + 1) % JOURNEY_STAGES.length);
+        }, 3400);
+
+        return () => window.clearInterval(interval);
+    }, [shouldReduce]);
 
     const fadeIn = shouldReduce
         ? {}
         : { initial: { opacity: 0, y: 10 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.7 } };
 
+    const currentStage = JOURNEY_STAGES[activeStage];
+    const CurrentIcon = currentStage.icon;
+    const nextStage = JOURNEY_STAGES[(activeStage + 1) % JOURNEY_STAGES.length];
+
+    useEffect(() => {
+        if (shouldReduce) {
+            setTypedMeaning(currentStage.meaning);
+            return undefined;
+        }
+
+        let index = 0;
+        setTypedMeaning('');
+        const typing = window.setInterval(() => {
+            index += 1;
+            setTypedMeaning(currentStage.meaning.slice(0, index));
+            if (index >= currentStage.meaning.length) {
+                window.clearInterval(typing);
+            }
+        }, 24);
+
+        return () => window.clearInterval(typing);
+    }, [activeStage, shouldReduce, currentStage.meaning]);
+
+    const handleParallaxMove = (event) => {
+        if (shouldReduce) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        parallaxX.set(x * 7);
+        parallaxY.set(y * 5.5);
+    };
+
+    const handleParallaxLeave = () => {
+        parallaxX.set(0);
+        parallaxY.set(0);
+    };
+
     return (
-        <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#0f0f1a] pt-20">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#0f0f1a] to-[#0f0f1a] opacity-80" />
+        <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#081321] pt-20">
+            <div className="absolute inset-0 bg-[#081321]/90" />
+            <div className="absolute inset-0 bg-[#0f1d36]/45" />
 
             <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
                 <motion.div {...fadeIn} className="z-10 order-2 md:order-1">
@@ -48,18 +167,22 @@ export default function HeroSection() {
 
                     <motion.p className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
                         Build Faster.{' '}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Scale Smarter.</span>
+                        <span className="gradient-text-base gradient-intelligent">Scale Smarter.</span>
                     </motion.p>
 
                     <div className="mb-8 relative z-20">
                         <motion.h1 className="text-5xl md:text-6xl font-bold leading-[1.02] text-white mb-4">
                             <span className="block text-gray-400 text-3xl md:text-4xl mb-0">We build</span>
                             <div className="min-h-[1.2em] md:min-h-[1.0em]">
-                                <span className="block text-gray-400 text-4xl md:text-5xl">Future-Ready</span>
-                                <div className="mt-0">
-                                    <LoopTypewriter text="Digital Solutions" speed={65} pause={1400} className="text-blue-400 text-4xl md:text-5xl font-bold" />
+                                    <span className="block text-4xl md:text-5xl font-bold gradient-text-base gradient-future-ready-tech">Future-Ready</span>
+                                    <div className="mt-0">
+                                        <Typewriter
+                                            text="Digital Solutions"
+                                            speed={65}
+                                            className="text-4xl md:text-5xl font-bold gradient-text-base gradient-digital-solutions"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
                         </motion.h1>
 
                         <motion.p className="text-lg text-gray-300 leading-7 max-w-lg mt-4">
@@ -82,12 +205,204 @@ export default function HeroSection() {
                     </motion.div>
                 </motion.div>
 
-                <div className="order-1 md:order-2 h-[260px] md:h-[560px] w-full relative flex items-center justify-center">
-                    <div className="w-full h-full relative">
-                        <div className="absolute inset-0 bg-blue-500/10 rounded-full filter blur-3xl opacity-30" />
-                        <Suspense fallback={<div className="w-48 h-48 rounded-full bg-blue-500/10 animate-pulse" aria-hidden />}>
-                            <Globe />
-                        </Suspense>
+                <div className="order-1 md:order-2 h-[340px] md:h-[560px] w-full relative flex items-center justify-center">
+                    <div
+                        className="w-full h-full relative rounded-3xl overflow-hidden bg-[#081321]"
+                        onMouseMove={handleParallaxMove}
+                        onMouseLeave={handleParallaxLeave}
+                    >
+                        <motion.div
+                            className="absolute inset-0"
+                            animate={shouldReduce ? { opacity: 0.52 } : { opacity: [0.45, 0.62, 0.45] }}
+                            transition={shouldReduce ? { duration: 0 } : { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                            style={{ backgroundColor: '#0f1d36' }}
+                        />
+                        <div className="absolute inset-0 bg-black/12" />
+                        <motion.div
+                            className="absolute inset-0"
+                            animate={{ opacity: [0.24, 0.45, 0.24] }}
+                            transition={{ duration: 4.4, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                            style={{ background: STAGE_GLOWS[currentStage.theme] }}
+                        />
+
+                        {!shouldReduce && (
+                            <svg className="absolute inset-0 w-full h-full opacity-55" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+                                {NETWORK_POINTS.map((point, index) => (
+                                    <motion.circle
+                                        key={`network-node-${index}`}
+                                        cx={point.x}
+                                        cy={point.y}
+                                        r="0.7"
+                                        fill="rgba(165,243,252,0.8)"
+                                        animate={{ scale: [1, 1.6, 1], opacity: [0.2, 0.9, 0.2] }}
+                                        transition={{ duration: 2.6, delay: index * 0.14, repeat: Number.POSITIVE_INFINITY }}
+                                    />
+                                ))}
+                            </svg>
+                        )}
+
+                        {PARTICLES.map((particle) => (
+                            <motion.span
+                                key={particle.id}
+                                className="absolute bottom-0 rounded-full bg-cyan-100/55"
+                                style={{
+                                    left: `${particle.left}%`,
+                                    width: `${particle.size}px`,
+                                    height: `${particle.size}px`,
+                                }}
+                                animate={shouldReduce ? { opacity: 0.3 } : { y: [0, -320], x: [0, particle.drift], opacity: [0, 0.42, 0] }}
+                                transition={
+                                    shouldReduce
+                                        ? { duration: 0 }
+                                        : {
+                                              duration: particle.duration,
+                                              delay: particle.delay,
+                                              repeat: Number.POSITIVE_INFINITY,
+                                              ease: 'linear',
+                                          }
+                                }
+                            />
+                        ))}
+
+
+                        <motion.div className="absolute left-[7%] right-[7%] bottom-[8%] md:bottom-[9%] z-20 [perspective:1400px]" style={{ x: farX, y: farY }}>
+                            <motion.div
+                                className="absolute inset-0 rounded-2xl bg-cyan-300/12 blur-xl"
+                                animate={shouldReduce ? { opacity: 0.5 } : { opacity: [0.35, 0.8, 0.35] }}
+                                transition={{ duration: 3.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                                aria-hidden
+                            />
+
+                            <motion.div
+                                className="absolute inset-0 rounded-2xl border border-white/10 bg-slate-900/25 backdrop-blur-sm"
+                                animate={shouldReduce ? { y: 8, rotateX: 0, rotateY: 0 } : { y: 9, rotateX: 7, rotateY: -4 }}
+                                transition={{ duration: 0.85, ease: 'easeInOut' }}
+                                style={{ transformStyle: 'preserve-3d' }}
+                                aria-hidden
+                            />
+                            <motion.div
+                                className="absolute inset-0 rounded-2xl border border-white/15 bg-slate-900/35 backdrop-blur-sm"
+                                animate={shouldReduce ? { y: 4, rotateX: 0, rotateY: 0 } : { y: 4, rotateX: 4, rotateY: -2 }}
+                                transition={{ duration: 0.85, ease: 'easeInOut' }}
+                                style={{ transformStyle: 'preserve-3d' }}
+                                aria-hidden
+                            />
+
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={`step-card-${currentStage.id}`}
+                                    className="relative rounded-2xl border border-cyan-100/25 bg-slate-900/55 backdrop-blur-md p-4 md:p-5 overflow-hidden"
+                                    initial={shouldReduce ? { opacity: 1 } : { opacity: 0, rotateY: -16, rotateX: 6, z: -30 }}
+                                    animate={shouldReduce ? { opacity: 1 } : { opacity: 1, rotateY: 0, rotateX: 0, z: 0 }}
+                                    exit={shouldReduce ? { opacity: 0 } : { opacity: 0, rotateY: 14, rotateX: -4, z: -35 }}
+                                    transition={{ duration: 0.72, ease: 'easeInOut' }}
+                                    style={{ transformStyle: 'preserve-3d' }}
+                                >
+                                    <motion.div
+                                        className="absolute -inset-2 rounded-3xl bg-cyan-300/20 blur-2xl"
+                                        animate={shouldReduce ? { opacity: 0.4 } : { opacity: [0.35, 0.75, 0.35] }}
+                                        transition={{ duration: 3.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                                        aria-hidden
+                                    />
+
+                                    <div className="relative flex items-center gap-3 mb-3">
+                                        <motion.div
+                                            className="w-10 h-10 rounded-xl border border-cyan-100/30 bg-cyan-400/10 flex items-center justify-center relative"
+                                            animate={shouldReduce ? { opacity: 1 } : { scale: [1, 1.09, 1], opacity: [0.8, 1, 0.8] }}
+                                            transition={{ duration: 2.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                                        >
+                                            <CurrentIcon className="w-5 h-5 text-cyan-100 relative z-10" />
+                                            {!shouldReduce && [0, 1, 2, 3].map((orbit) => (
+                                                <motion.span
+                                                    key={`orbit-${orbit}`}
+                                                    className="absolute inset-0"
+                                                    animate={{ rotate: 360 }}
+                                                    transition={{ duration: 2.2 + orbit * 0.8, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+                                                >
+                                                    <span
+                                                        className="absolute left-1/2 top-1/2 w-1.5 h-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.95)]"
+                                                        style={{ transform: `translate(-50%, -50%) rotate(${orbit * 90}deg) translateY(-22px)` }}
+                                                    />
+                                                </motion.span>
+                                            ))}
+                                        </motion.div>
+                                        <div>
+                                            <p className="text-[10px] tracking-[0.14em] uppercase text-cyan-300/80">Step {activeStage + 1} of {JOURNEY_STAGES.length}</p>
+                                            <p className="text-sm md:text-base text-white font-semibold">{currentStage.title}</p>
+                                        </div>
+                                    </div>
+
+                                    <motion.p
+                                        key={`narrative-${currentStage.id}`}
+                                        className="text-xs md:text-sm text-slate-200/90 leading-relaxed mb-3"
+                                        initial={shouldReduce ? { opacity: 1 } : { opacity: 0, y: 8 }}
+                                        animate={shouldReduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                                    >
+                                        {currentStage.narrative}
+                                    </motion.p>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                                        <motion.div className="rounded-lg border border-white/10 bg-slate-900/45 px-2.5 py-2" initial={shouldReduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.08 }}>
+                                            <p className="text-[10px] uppercase tracking-[0.1em] text-cyan-200/75">Now Building</p>
+                                            <p className="text-xs text-white/90 mt-0.5">{currentStage.signal}</p>
+                                        </motion.div>
+                                        <motion.div className="rounded-lg border border-white/10 bg-slate-900/45 px-2.5 py-2" initial={shouldReduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.14 }}>
+                                            <p className="text-[10px] uppercase tracking-[0.1em] text-cyan-200/75">Business Impact</p>
+                                            <p className="text-xs text-white/90 mt-0.5">{currentStage.outcome}</p>
+                                        </motion.div>
+                                    </div>
+
+                                    <motion.p
+                                        className="text-[10px] md:text-xs text-slate-200/90 leading-relaxed mb-3 border border-white/10 rounded-lg px-2.5 py-2 bg-slate-900/35 min-h-[44px]"
+                                        initial={shouldReduce ? false : { opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.4, delay: 0.18 }}
+                                    >
+                                        Why it matters: <span className="text-cyan-100">{typedMeaning}</span>
+                                        {!shouldReduce && typedMeaning.length < currentStage.meaning.length && <span className="inline-block ml-0.5 w-[1px] h-[11px] bg-cyan-100 animate-pulse align-middle" />}
+                                    </motion.p>
+
+                                    <p className="text-[10px] md:text-xs text-slate-300/85 mb-2">
+                                        Next: <span className="text-cyan-200/90">{nextStage.subtitle}</span>
+                                    </p>
+
+                                    <div className="relative h-6 mb-2 overflow-hidden rounded-md bg-slate-900/35 border border-white/10">
+                                        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden>
+                                            <path d={WAVE_PATH} stroke="rgba(148,223,255,0.2)" strokeWidth="1.1" fill="none" />
+                                            <motion.path
+                                                d={WAVE_PATH}
+                                                stroke="rgba(103,232,249,0.85)"
+                                                strokeWidth="1.4"
+                                                fill="none"
+                                                strokeDasharray="4 3"
+                                                animate={shouldReduce ? { strokeDashoffset: 0 } : { strokeDashoffset: [-18, 0] }}
+                                                transition={shouldReduce ? { duration: 0 } : { duration: 2.2, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+                                            />
+                                        </svg>
+                                        {!shouldReduce && [0, 1, 2, 3].map((particle) => (
+                                            <motion.span
+                                                key={`wave-particle-${particle}`}
+                                                className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.95)]"
+                                                animate={{ left: ['2%', '98%'], y: [0, -5, 0, 5, 0], opacity: [0, 1, 1, 0] }}
+                                                transition={{ duration: 2.8, delay: particle * 0.45, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                                            />
+                                        ))}
+                                    </div>
+
+                                    <div className="grid grid-cols-5 gap-1.5">
+                                        {JOURNEY_STAGES.map((stage, index) => (
+                                            <div
+                                                key={`${stage.id}-bar`}
+                                                className={`h-7 rounded-md border text-[9px] md:text-[10px] flex items-center justify-center px-1 ${index === activeStage ? 'border-cyan-100/45 text-cyan-100 bg-cyan-400/12 shadow-[0_0_14px_rgba(34,211,238,0.2)]' : 'border-white/10 text-slate-300/70 bg-slate-900/30'}`}
+                                            >
+                                                {stage.title}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
+                        </motion.div>
                     </div>
                 </div>
             </div>

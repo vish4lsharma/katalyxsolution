@@ -34,7 +34,7 @@ const Typewriter = ({ text, className = '', speed = 50, delay = 0 }) => {
             animate={{ opacity: 1 }}
         >
             {displayedText}
-            <span className="animate-pulse text-blue-500 ml-1 font-light inline-block transform translate-y-1">|</span>
+            <span className="animate-pulse text-current ml-1 font-light inline-block transform translate-y-1">|</span>
         </motion.span>
     );
 };

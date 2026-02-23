@@ -31,43 +31,67 @@ const Home = () => {
             <StatsSection />
 
             {/* About Us Preview */}
-            <section className="py-24 bg-[#0f0f1a] relative overflow-hidden">
+            <section className="py-24 bg-[#081321] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[#081321]/90" />
+                <div className="absolute inset-0 bg-[#0f1d36]/45" />
+
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="flex flex-col md:flex-row gap-16 items-center">
+                    <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
                         <motion.div
-                            className="flex-1"
-                            initial={{ opacity: 0, x: -50 }}
+                            className="max-w-2xl"
+                            initial={{ opacity: 0, x: -40 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
+                            transition={{ duration: 0.7, ease: 'easeOut' }}
                         >
-                            <h2 className="text-4xl font-bold text-white mb-6">Driven by <span className="text-blue-500">Passion</span> & Technology</h2>
-                            <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                                At Katalyx Solutions, we are more than just a software company; we are your strategic partners in digital evolution. As a dynamic startup, we bring agility, fresh perspectives, and cutting-edge expertise to every project.
+                            <span className="inline-flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase rounded-full px-3 py-1 border border-cyan-300/30 bg-cyan-400/10 text-cyan-100 mb-4">
+                                Digital Evolution Engine
+                            </span>
+                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                                Driven by <span className="text-slate-100">Passion, Precision</span> and <span className="gradient-text-base gradient-future-ready-tech">Future-Ready Technology</span>
+                            </h2>
+                            <p className="text-slate-200/90 text-lg leading-relaxed mb-5">
+                                Katalyx Solutions operates as a strategic innovation partner that helps businesses translate bold ideas into practical digital systems. Our startup agility, product thinking, and engineering depth let us move faster from concept to impact.
                             </p>
-                            <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                                Founded with a vision to simplify complexity, we specialize in building robust ERPs, intuitive web platforms, and AI-driven analytics that help businesses scale effortlessly.
+                            <p className="text-slate-300/90 text-lg leading-relaxed mb-8">
+                                We architect robust ERP ecosystems, intuitive web platforms, and AI-powered intelligence layers that simplify operational complexity, accelerate decisions, and unlock scalable growth.
                             </p>
-                            <Link to="/about" className="text-blue-400 font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                            <Link to="/about" className="inline-flex items-center gap-2 text-cyan-200 font-semibold border border-cyan-200/30 bg-cyan-300/10 rounded-full px-5 py-2.5 hover:bg-cyan-300/20 hover:gap-3 transition-all">
                                 Read Our Story <ArrowRight size={18} />
                             </Link>
                         </motion.div>
+
                         <motion.div
-                            className="flex-1 relative"
-                            initial={{ opacity: 0, x: 50 }}
+                            className="relative"
+                            initial={{ opacity: 0, x: 40 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
+                            transition={{ duration: 0.75, ease: 'easeOut' }}
                         >
-                            <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full" />
-                            <div className="relative bg-gradient-to-br from-[#1a1a2e] to-[#16213e] p-8 rounded-2xl border border-gray-700 hover:shadow-2xl hover:shadow-blue-500/10 transition-shadow">
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
-                                        <Cpu className="text-blue-400 mb-2" size={24} />
-                                        <h4 className="font-bold text-white">Modern Tech</h4>
-                                    </div>
-                                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
-                                        <GlobeIcon className="text-purple-400 mb-2" size={24} />
-                                        <h4 className="font-bold text-white">Global Vision</h4>
-                                    </div>
+                            <div className="absolute inset-0 blur-3xl bg-[#12233e]/70" />
+                            <div className="relative rounded-3xl border border-cyan-100/20 bg-slate-950/45 backdrop-blur-xl p-6 md:p-8 overflow-hidden">
+                                <div className="absolute inset-0 bg-black/10" />
+
+                                <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {[
+                                        { icon: Cpu, title: 'Modern Tech Stack', detail: 'Cloud-native architecture, AI tooling, and reliable engineering standards.', tone: 'text-cyan-200' },
+                                        { icon: GlobeIcon, title: 'Global Vision', detail: 'Products designed for scale across markets, teams, and platforms.', tone: 'text-teal-200' },
+                                        { icon: Brain, title: 'Applied Intelligence', detail: 'Data-to-decision pipelines that turn insights into business action.', tone: 'text-sky-200' },
+                                        { icon: Shield, title: 'Built for Trust', detail: 'Secure foundations, resilient delivery, and measurable outcomes.', tone: 'text-emerald-200' },
+                                    ].map((item, i) => (
+                                        <motion.div
+                                            key={item.title}
+                                            className="rounded-2xl border border-white/10 bg-slate-900/45 p-4"
+                                            initial={{ opacity: 0, y: 16 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.45, delay: i * 0.08 }}
+                                        >
+                                            <item.icon className={`${item.tone} mb-3`} size={22} />
+                                            <h4 className="font-semibold text-white mb-1.5">{item.title}</h4>
+                                            <p className="text-xs leading-relaxed text-slate-300/90">{item.detail}</p>
+                                        </motion.div>
+                                    ))}
                                 </div>
                             </div>
                         </motion.div>
@@ -76,11 +100,11 @@ const Home = () => {
             </section>
 
             {/* Featured Projects Section */}
-            <section className="py-24 bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] relative">
+            <section className="py-24 bg-gradient-to-br from-[#111b31] to-[#0b1224] relative">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">Featured <span className="text-blue-500">Work</span></h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">Real-world solutions we've engineered to solve complex business challenges.</p>
+                        <h2 className="text-4xl font-bold text-white mb-4">Featured <span className="gradient-text-base gradient-work">Work</span></h2>
+                        <p className="text-slate-300 max-w-2xl mx-auto">Real-world solutions we've engineered to solve complex business challenges.</p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
@@ -95,16 +119,16 @@ const Home = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.2 }}
-                                className="group relative overflow-hidden rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all bg-[#16213e]"
+                                className="group relative overflow-hidden rounded-2xl border border-slate-700 hover:border-cyan-300/40 transition-all bg-[#132038]"
                             >
                                 <div className="h-48 overflow-hidden bg-gray-900 relative">
-                                    <div className="absolute inset-0 bg-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
+                                    <div className="absolute inset-0 bg-cyan-400/20 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                                     <img src={project.img} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
                                 </div>
                                 <div className="p-6">
-                                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{project.name}</h3>
-                                    <p className="text-gray-400 text-sm mb-4">{project.desc}</p>
-                                    <Link to={`/products/${project.id}`} className="text-blue-400 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-200 transition-colors">{project.name}</h3>
+                                    <p className="text-slate-300 text-sm mb-4">{project.desc}</p>
+                                    <Link to={`/products/${project.id}`} className="text-cyan-200 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
                                         View Case Study <ChevronRight size={14} />
                                     </Link>
                                 </div>
@@ -120,29 +144,29 @@ const Home = () => {
             </section>
 
             {/* Core Solutions */}
-            <section className="py-24 bg-[#0f0f1a] relative">
+            <section className="py-24 bg-[#0b1327] relative">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">Our Expertise</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">Driving business value through integrated technology developed by our expert team.</p>
+                        <h2 className="text-4xl font-bold text-white mb-4">Our <span className="gradient-text-base gradient-expertise">Expertise</span></h2>
+                        <p className="text-slate-300 max-w-2xl mx-auto">Driving business value through integrated technology developed by our expert team.</p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
-                            { title: 'AI & Analytics', desc: 'Predictive modeling and automated workflows.', color: 'blue', icon: Zap },
-                            { title: 'Cloud Services', desc: 'Scalable infrastructure for growing startups.', color: 'cyan', icon: GlobeIcon },
-                            { title: 'Digital Consulting', desc: 'Strategic tech roadmaps for digital success.', color: 'indigo', icon: BarChart3 }
+                            { title: 'AI & Analytics', desc: 'Predictive modeling and automated workflows.', icon: Zap, tone: 'text-cyan-200' },
+                            { title: 'Cloud Services', desc: 'Scalable infrastructure for growing startups.', icon: GlobeIcon, tone: 'text-teal-200' },
+                            { title: 'Digital Consulting', desc: 'Strategic tech roadmaps for digital success.', icon: BarChart3, tone: 'text-sky-200' }
                         ].map((service, i) => (
                             <motion.div
                                 key={i}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-gray-900/50 p-8 rounded-2xl border border-gray-700 hover:border-blue-500/40 transition-all hover:bg-gray-800 hover:-translate-y-1 duration-300"
+                                className="bg-slate-900/50 p-8 rounded-2xl border border-slate-700 hover:border-cyan-300/40 transition-all hover:bg-slate-800/80 hover:-translate-y-1 duration-300"
                             >
-                                <service.icon className="w-10 h-10 text-blue-400 mb-6" />
+                                <service.icon className={`w-10 h-10 mb-6 ${service.tone}`} />
                                 <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
+                                <p className="text-slate-300 text-sm leading-relaxed">{service.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -150,14 +174,14 @@ const Home = () => {
             </section>
 
             {/* Recent Insights */}
-            <section className="py-24 bg-[#0f0f1a] relative border-t border-gray-800">
+            <section className="py-24 bg-[#0d162b] relative border-t border-slate-800">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="flex justify-between items-end mb-12">
                         <div>
-                            <h2 className="text-3xl font-bold text-white mb-2">Recent Insights</h2>
-                            <p className="text-gray-400">Trends and thoughts from our tech experts.</p>
+                            <h2 className="text-3xl font-bold text-white mb-2">Recent <span className="gradient-text-base gradient-insights">Insights</span></h2>
+                            <p className="text-slate-300">Trends and thoughts from our tech experts.</p>
                         </div>
-                        <Link to="/blog" className="hidden md:flex items-center gap-2 text-blue-400 hover:text-white transition-colors">
+                        <Link to="/blog" className="hidden md:flex items-center gap-2 text-cyan-200 hover:text-white transition-colors">
                             View all posts <ArrowRight size={16} />
                         </Link>
                     </div>
@@ -198,23 +222,23 @@ const Home = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all h-full flex flex-col group shadow-lg hover:shadow-blue-500/10"
+                                    className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-300/40 transition-all h-full flex flex-col group shadow-lg hover:shadow-cyan-400/10"
                                 >
                                     <div className="h-48 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-transparent transition-colors z-10" />
+                                        <div className="absolute inset-0 bg-cyan-900/20 group-hover:bg-transparent transition-colors z-10" />
                                         <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
                                         <div className="absolute top-4 left-4 z-20">
-                                            <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">{post.category}</span>
+                                            <span className="bg-cyan-500/90 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">{post.category}</span>
                                         </div>
                                     </div>
                                     <div className="p-6 flex-1 flex flex-col">
                                         <div className="flex items-center gap-3 mb-4">
                                             <span className="text-gray-500 text-xs flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors flex-1">{post.title}</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed mb-4">{post.excerpt}</p>
+                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors flex-1">{post.title}</h3>
+                                        <p className="text-slate-300 text-sm leading-relaxed mb-4">{post.excerpt}</p>
                                     </div>
-                                    <div className="px-6 py-4 border-t border-gray-800 flex items-center text-sm font-medium text-gray-400 group-hover:text-white transition-colors mt-auto">
+                                    <div className="px-6 py-4 border-t border-slate-800 flex items-center text-sm font-medium text-slate-300 group-hover:text-white transition-colors mt-auto">
                                         Read Article <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </motion.div>
@@ -222,7 +246,7 @@ const Home = () => {
                         ))}
                     </div>
                     <div className="mt-8 text-center md:hidden">
-                        <Link to="/blog" className="text-blue-400 hover:text-white inline-flex items-center gap-2">
+                        <Link to="/blog" className="text-cyan-200 hover:text-white inline-flex items-center gap-2">
                             View all posts <ArrowRight size={16} />
                         </Link>
                     </div>
@@ -230,19 +254,19 @@ const Home = () => {
             </section>
 
             {/* ── Services Section ── */}
-            <section className="py-24 bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] relative border-t border-gray-800">
+            <section className="py-24 bg-gradient-to-br from-[#0c162d] to-[#11223a] relative border-t border-slate-800">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
                         <motion.span
-                            className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-4 border border-blue-500/30"
+                            className="inline-block py-1 px-3 rounded-full bg-cyan-400/20 text-cyan-200 text-sm font-semibold mb-4 border border-cyan-300/30"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                         >
                             What We Do
                         </motion.span>
-                        <h2 className="text-4xl font-bold text-white mb-4">Our <span className="text-blue-500">Services</span></h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">End-to-end intelligent solutions to help your business grow faster in the digital era.</p>
+                        <h2 className="text-4xl font-bold text-white mb-4">Our <span className="gradient-text-base gradient-services">Services</span></h2>
+                        <p className="text-slate-300 max-w-2xl mx-auto">End-to-end intelligent solutions to help your business grow faster in the digital era.</p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
@@ -250,25 +274,29 @@ const Home = () => {
                                 icon: Brain,
                                 title: 'AI Solutions',
                                 desc: 'Custom AI apps, chatbots, automation pipelines, and LLM integrations tailored to your business needs.',
-                                color: 'blue'
+                                tone: 'text-cyan-200',
+                                card: 'bg-cyan-400/10 border-cyan-300/30'
                             },
                             {
                                 icon: Code,
                                 title: 'Web & SaaS Development',
                                 desc: 'Full-stack web apps, SaaS dashboards, and scalable platforms built with modern tech stacks.',
-                                color: 'cyan'
+                                tone: 'text-teal-200',
+                                card: 'bg-teal-400/10 border-teal-300/30'
                             },
                             {
                                 icon: Settings,
                                 title: 'Business Automation',
                                 desc: 'Workflow automation, third-party integrations, and internal tools to streamline your operations.',
-                                color: 'purple'
+                                tone: 'text-sky-200',
+                                card: 'bg-sky-400/10 border-sky-300/30'
                             },
                             {
                                 icon: Lightbulb,
                                 title: 'Tech Consulting',
                                 desc: 'Architecture reviews, scaling strategies, and MVP development guidance for startups and teams.',
-                                color: 'indigo'
+                                tone: 'text-emerald-200',
+                                card: 'bg-emerald-400/10 border-emerald-300/30'
                             },
                         ].map((svc, i) => (
                             <motion.div
@@ -277,14 +305,14 @@ const Home = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 hover:border-blue-500/40 rounded-2xl p-6 flex flex-col gap-4 hover:bg-gray-800/60 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-blue-500/10"
+                                className="bg-slate-900/60 backdrop-blur-sm border border-slate-700 hover:border-cyan-300/40 rounded-2xl p-6 flex flex-col gap-4 hover:bg-slate-800/60 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-cyan-400/10"
                             >
-                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${svc.color}-500/10 border border-${svc.color}-500/20 text-${svc.color}-400`}>
+                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center border ${svc.card} ${svc.tone}`}>
                                     <svc.icon size={24} />
                                 </div>
                                 <h3 className="text-lg font-bold text-white">{svc.title}</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed flex-1">{svc.desc}</p>
-                                <Link to="/services" className="text-blue-400 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all mt-auto">
+                                <p className="text-slate-300 text-sm leading-relaxed flex-1">{svc.desc}</p>
+                                <Link to="/services" className="text-cyan-200 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all mt-auto">
                                     Learn more <ChevronRight size={14} />
                                 </Link>
                             </motion.div>
@@ -294,30 +322,30 @@ const Home = () => {
             </section>
 
             {/* ── About Katalyx Section ── */}
-            <section className="py-24 bg-[#0f0f1a] relative border-t border-gray-800">
+            <section className="py-24 bg-[#0c1529] relative border-t border-slate-800">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="max-w-4xl mx-auto">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="bg-gradient-to-br from-gray-900 to-gray-800/60 border border-gray-700 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+                            className="bg-gradient-to-br from-slate-900 to-slate-800/60 border border-slate-700 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
                         >
-                            <div className="absolute inset-0 bg-blue-500/5 rounded-3xl" />
+                            <div className="absolute inset-0 bg-cyan-400/8 rounded-3xl" />
                             <div className="relative z-10">
                                 <motion.span
-                                    className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-6 border border-blue-500/30"
+                                    className="inline-block py-1 px-3 rounded-full bg-cyan-400/20 text-cyan-200 text-sm font-semibold mb-6 border border-cyan-300/30"
                                     initial={{ opacity: 0 }}
                                     whileInView={{ opacity: 1 }}
                                     viewport={{ once: true }}
                                 >
                                     Who We Are
                                 </motion.span>
-                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">About <span className="text-blue-500">Katalyx</span></h2>
-                                <p className="text-gray-300 text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">About <span className="gradient-text-base gradient-katalyx">Katalyx</span></h2>
+                                <p className="text-slate-200 text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
                                     Katalyx Solutions is an emerging AI and software development company focused on building intelligent digital products, automation systems, and scalable platforms.
                                 </p>
-                                <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
+                                <p className="text-slate-300 text-lg leading-relaxed max-w-3xl mx-auto">
                                     We help startups and businesses transform ideas into high-performance technology solutions. Founded by engineers building AI-driven software and scalable digital platforms for modern businesses.
                                 </p>
                                 <div className="mt-8">
@@ -332,7 +360,7 @@ const Home = () => {
             </section>
 
             {/* ── CTA Section ── */}
-            <section className="py-24 bg-gradient-to-r from-blue-900/50 via-[#1a1a2e] to-indigo-900/50 relative border-t border-gray-800">
+            <section className="py-24 bg-gradient-to-r from-cyan-900/35 via-[#111f37] to-teal-900/35 relative border-t border-slate-800">
                 <div className="absolute inset-0 bg-black/30" />
                 <div className="container mx-auto px-6 relative z-10 text-center">
                     <motion.div
@@ -340,9 +368,9 @@ const Home = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Intelligent</span></h2>
-                        <p className="text-gray-400 text-sm mb-2">Let’s discuss your project, idea, or automation needs.</p>
-                        <p className="text-gray-300 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</p>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something <span className="gradient-text-base gradient-intelligent">Intelligent</span></h2>
+                        <p className="text-slate-300 text-sm mb-2">Let’s discuss your project, idea, or automation needs.</p>
+                        <p className="text-slate-200 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</p>
                         <a href="mailto:info@katalyxsolutions.com">
                             <EnergyButton variant="primary">Contact Us <Mail size={18} /></EnergyButton>
                         </a>

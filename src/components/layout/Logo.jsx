@@ -5,15 +5,13 @@ const Logo = ({ className = "w-32 h-32", textClassName = "text-xl", showText = f
     return (
         <div className="flex items-center gap-3 group">
             <div className={`relative flex items-center justify-center group-hover:scale-105 transition-transform duration-300`}>
-                {/* Subtle Glow */}
-                <div className="absolute inset-0 bg-white/60 rounded-xl blur-xl group-hover:bg-navyblue/80 transition-all duration-500" />
-                {/* Extra white glow for logo */}
-                <div className="absolute inset-0 bg-white opacity-30 rounded-xl blur-2xl pointer-events-none" />
+                <div className="absolute -inset-1 rounded-xl bg-cyan-300/20 blur-xl transition-all duration-500 group-hover:bg-cyan-300/30" />
+                <div className="absolute -inset-2 rounded-xl bg-teal-300/10 blur-2xl pointer-events-none transition-all duration-500 group-hover:bg-teal-300/20" />
                 {/* Logo Image */}
                 <img
                     src="/KATALYX_LOGO.png"
                     alt="Katalyx Solutions Logo"
-                    className={`${className} object-contain relative drop-shadow-[0_0_30px_white]`}
+                    className={`${className} object-contain relative scale-[1.06] drop-shadow-[0_0_16px_rgba(34,211,238,0.38)]`}
                 />
             </div>
 

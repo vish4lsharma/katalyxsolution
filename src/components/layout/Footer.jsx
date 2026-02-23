@@ -22,14 +22,14 @@ const Footer = () => {
                                 href="https://www.linkedin.com/company/katalyx-solutions/about/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
+                                className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 transition-colors"
                                 aria-label="Katalyx Solutions on LinkedIn"
                             >
                                 <Linkedin size={20} />
                             </a>
                         </div>
                         <div className="space-y-2 pt-2">
-                            <a href="mailto:info@katalyxsolutions.com" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                            <a href="mailto:info@katalyxsolutions.com" className="flex items-center gap-2 text-gray-400 hover:text-cyan-300 transition-colors text-sm">
                                 <Mail size={15} /> info@katalyxsolutions.com
                             </a>
                             <p className="flex items-center gap-2 text-gray-500 text-sm">
@@ -77,12 +77,12 @@ const Footer = () => {
                                 name="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                                className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                                 required
                             />
                             <button
                                 type="submit"
-                                className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                                className="btn-gradient-navy rounded-lg px-4 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
                             >
                                 Subscribe <ArrowRight size={16} />
                             </button>

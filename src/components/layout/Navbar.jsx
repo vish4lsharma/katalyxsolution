@@ -58,7 +58,7 @@ const Navbar = () => {
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <div className="absolute inset-x-4 top-2 bottom-2 rounded-3xl pointer-events-none" />
                 <Link to="/" className="z-50 group">
-                    <Logo className="h-12 w-auto" />
+                    <Logo className="h-14 w-auto" />
                 </Link>
 
                 {/* Desktop Menu */}
@@ -70,7 +70,7 @@ const Navbar = () => {
                             className={({ isActive }) =>
                                 `text-sm font-medium transition-colors duration-300 ${isActive
                                     ? 'text-blue-400 font-semibold'
-                                    : (scrolled || isDarkHero) ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-blue-600'
+                                    : (scrolled || isDarkHero) ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-cyan-600'
                                 }`
                             }
                         >
@@ -80,10 +80,7 @@ const Navbar = () => {
 
                     <Link
                         to="/get-started"
-                        className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 shadow-lg ${scrolled || isDarkHero
-                            ? 'bg-white text-gray-900 hover:bg-gray-100 hover:shadow-white/20'
-                            : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-blue-600/30'
-                            }`}
+                        className="px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 shadow-lg btn-gradient-navy"
                     >
                         Get Started
                     </Link>
@@ -122,7 +119,7 @@ const Navbar = () => {
                             <Link
                                 to="/get-started"
                                 onClick={() => setIsOpen(false)}
-                                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg shadow-blue-600/30"
+                                className="btn-gradient-navy px-8 py-3 rounded-full text-lg font-bold"
                             >
                                 Get Started
                             </Link>

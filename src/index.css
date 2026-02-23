@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --primary: #007BFF;
-  --secondary: #333333;
-  --bg-light: #F8F9FA;
-  --bg-dark: #212529;
+  --primary: #1b2b4a;
+  --secondary: #0a1220;
+  --bg-light: #0f1a2e;
+  --bg-dark: #05070b;
+  --theme-black: #05070b;
+  --theme-navy: #081321;
+  --theme-navy-soft: #10213b;
+  --theme-text: #ffffff;
 }
 
 html {
@@ -15,9 +19,64 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  color: #e5e7eb;
-  background-color: #0f0f1a;
+  color: var(--theme-text);
+  background-color: var(--theme-black);
   overflow-x: hidden;
+}
+
+/* Global black/navy theme enforcement */
+.bg-gradient-to-r,
+.bg-gradient-to-l,
+.bg-gradient-to-t,
+.bg-gradient-to-b,
+.bg-gradient-to-br,
+.bg-gradient-to-bl,
+.bg-gradient-to-tr,
+.bg-gradient-to-tl {
+  background-image: none !important;
+  background-color: var(--theme-navy) !important;
+}
+
+[class*="bg-[linear-gradient"],
+[class*="bg-[radial-gradient"] {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+[class*="bg-cyan-"],
+[class*="bg-sky-"],
+[class*="bg-teal-"],
+[class*="bg-blue-"],
+[class*="bg-indigo-"],
+[class*="bg-purple-"] {
+  background-color: var(--theme-navy-soft) !important;
+  background-image: none !important;
+}
+
+[class*="border-cyan-"],
+[class*="border-sky-"],
+[class*="border-teal-"],
+[class*="border-blue-"],
+[class*="border-indigo-"],
+[class*="border-purple-"] {
+  border-color: rgba(151, 168, 199, 0.32) !important;
+}
+
+[class*="text-cyan-"],
+[class*="text-sky-"],
+[class*="text-teal-"],
+[class*="text-blue-"],
+[class*="text-indigo-"],
+[class*="text-purple-"] {
+  color: #ffffff !important;
+}
+
+[class*="text-gray-"],
+[class*="text-slate-"],
+[class*="text-zinc-"],
+[class*="text-neutral-"],
+[class*="text-stone-"] {
+  color: #ffffff !important;
 }
 
 .gradient-bg {
@@ -25,9 +84,54 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #007BFF, #00C6FF);
+  color: #ffffff;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: #ffffff;
+}
+
+/* Opt-in text gradients for accent words */
+.gradient-text-base {
+  color: transparent !important;
+  background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.gradient-intelligent {
+  background-image: linear-gradient(90deg, #BFDBFE 0%, #60A5FA 50%, #2563EB 100%) !important;
+}
+
+.gradient-katalyx {
+  background-image: linear-gradient(120deg, #DBEAFE 0%, #60A5FA 52%, #1D4ED8 100%) !important;
+}
+
+.gradient-services {
+  background-image: linear-gradient(95deg, #DBEAFE 0%, #93C5FD 48%, #3B82F6 100%) !important;
+}
+
+.gradient-insights {
+  background-image: linear-gradient(100deg, #DBEAFE 0%, #60A5FA 50%, #2563EB 100%) !important;
+}
+
+.gradient-expertise {
+  background-image: linear-gradient(100deg, #EFF6FF 0%, #93C5FD 42%, #3B82F6 100%) !important;
+}
+
+.gradient-work {
+  background-image: linear-gradient(90deg, #DBEAFE 0%, #60A5FA 52%, #1D4ED8 100%) !important;
+}
+
+.gradient-future-ready-tech {
+  background-image: linear-gradient(110deg, #EFF6FF 0%, #93C5FD 28%, #60A5FA 68%, #2563EB 100%) !important;
+}
+
+.gradient-measurable-growth {
+  background-image: linear-gradient(85deg, #DBEAFE 0%, #93C5FD 52%, #3B82F6 100%) !important;
+}
+
+.gradient-digital-solutions {
+  background-image: linear-gradient(90deg, #DBEAFE 0%, #60A5FA 50%, #1D4ED8 100%) !important;
 }
 
 @keyframes progress {
@@ -42,4 +146,14 @@ body {
 
 .animate-progress {
   animation: progress 1s ease-in-out;
+}
+
+.btn-gradient-navy {
+  background: linear-gradient(135deg, #1a2b4b 0%, #0f1d36 55%, #223a61 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(8, 19, 33, 0.45);
+}
+
+.btn-gradient-navy:hover {
+  background: linear-gradient(135deg, #223a61 0%, #142742 55%, #2a4a7b 100%);
 }
