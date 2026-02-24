@@ -36,7 +36,7 @@ const App = () => {
     return (
         <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
             <Router>
-                <div className="flex flex-col min-h-screen bg-[#0f0f1a] text-white">
+                <div className="flex flex-col min-h-screen bg-[#0b0e14] text-white">
                     <ScrollToTop />
                     <Navbar />
                     <main className="flex-grow">

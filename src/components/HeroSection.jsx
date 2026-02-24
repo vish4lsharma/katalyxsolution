@@ -5,25 +5,7 @@ import { ArrowRight, Lightbulb, BrainCircuit, BarChart3, Workflow, TrendingUp } 
 import EnergyButton from './effects/EnergyButton';
 import Typewriter from './ui/Typewriter';
 
-const STAGE_GLOWS = {
-    vision: 'rgba(20, 37, 66, 0.34)',
-    intelligence: 'rgba(22, 42, 74, 0.36)',
-    insights: 'rgba(18, 35, 62, 0.34)',
-    workflow: 'rgba(16, 31, 56, 0.34)',
-    growth: 'rgba(23, 44, 78, 0.34)',
-};
-
 const WAVE_PATH = 'M0 14 C8 3 18 25 28 14 C38 3 48 25 58 14 C68 3 78 25 88 14 C93 8 97 10 100 14';
-
-const NETWORK_POINTS = [
-    { x: 8, y: 18 },
-    { x: 20, y: 12 },
-    { x: 34, y: 20 },
-    { x: 49, y: 11 },
-    { x: 64, y: 18 },
-    { x: 78, y: 12 },
-    { x: 92, y: 19 },
-];
 
 const JOURNEY_STAGES = [
     {
@@ -82,15 +64,6 @@ const JOURNEY_STAGES = [
         icon: TrendingUp,
     },
 ];
-
-const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
-    id: i,
-    left: 4 + ((i * 5.5) % 92),
-    duration: 5.8 + (i % 5) * 0.8,
-    delay: (i % 6) * 0.45,
-    size: 1.5 + (i % 3) * 1.1,
-    drift: (i % 2 ? -1 : 1) * (12 + (i % 4) * 5),
-}));
 
 export default function HeroSection() {
     const shouldReduce = useReducedMotion();
@@ -155,40 +128,43 @@ export default function HeroSection() {
     };
 
     return (
-        <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#081321] pt-20">
-            <div className="absolute inset-0 bg-[#081321]/90" />
-            <div className="absolute inset-0 bg-[#0f1d36]/45" />
+        <section data-navbar-theme="dark" className="relative min-h-[76vh] md:min-h-[84vh] flex items-center overflow-hidden bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846] pt-8 pb-0 md:pt-10 md:pb-1">
+            <div className="absolute inset-0 bg-[#081321]/70" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(56,189,248,0.22),transparent_55%)]" />
 
-            <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div className="container mx-auto px-6 grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-center relative z-10">
                 <motion.div {...fadeIn} className="z-10 order-2 md:order-1">
                     <motion.span className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-4 border border-blue-500/30 tracking-widest uppercase">
                         KATALYX Solutions
                     </motion.span>
 
-                    <motion.p className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
+                    <motion.p className="text-base md:text-lg font-semibold text-white mb-4 md:mb-5 tracking-tight">
                         Build Faster.{' '}
-                        <span className="gradient-text-base gradient-measurable-growth">Scale Smarter.</span>
+                        <span className="text-sky-300">Scale Smarter.</span>
                     </motion.p>
 
                     <div className="mb-8 relative z-20">
-                        <motion.h1 className="text-5xl md:text-6xl font-bold leading-[1.02] text-white mb-4">
-                            <span className="block text-gray-400 text-3xl md:text-4xl mb-0">We build</span>
+                        <motion.h1 className="font-bold leading-[1.02] text-white mb-4">
+                            <div className="flex items-baseline gap-2 md:gap-3 whitespace-nowrap">
+                                <span className="text-slate-100 text-3xl md:text-4xl">We build</span>
+                                <span className="text-3xl md:text-4xl text-white">Future-Ready</span>
+                            </div>
                             <div className="min-h-[1.2em] md:min-h-[1.0em]">
-                                    <span className="block text-4xl md:text-5xl font-bold gradient-text-base gradient-measurable-growth">Future-Ready</span>
-                                    <div className="mt-0">
+                                    <div className="mt-3 md:mt-4">
                                         <Typewriter
                                             text="Digital Solutions"
                                             speed={65}
-                                            className="text-4xl md:text-5xl font-bold gradient-text-base gradient-measurable-growth"
+                                            restartDelay={1300}
+                                            className="text-5xl md:text-7xl font-bold text-sky-300 leading-[1.02]"
                                         />
                                     </div>
                                 </div>
                         </motion.h1>
 
-                        <motion.p className="text-lg text-gray-300 leading-7 max-w-lg mt-4">
-                            We are a passionate team of innovators dedicated to crafting scalable, high-performance digital solutions for modern enterprises.
+                        <motion.p className="text-lg text-white leading-7 max-w-lg mt-4">
+                            {/* We are a passionate team of innovators dedicated to crafting scalable, high-performance digital solutions for modern enterprises. */}
                         </motion.p>
-                        <motion.p className="text-sm text-blue-300/80 leading-6 max-w-lg mt-3 font-medium border-l-2 border-blue-500/40 pl-3">
+                        <motion.p className="text-sm text-white leading-6 max-w-lg mt-3 font-medium border-l-2 border-blue-500/40 pl-3">
                             Katalyx Solutions builds AI-powered software, automation systems, and scalable digital platforms for startups and businesses.
                         </motion.p>
                     </div>
@@ -205,93 +181,17 @@ export default function HeroSection() {
                     </motion.div>
                 </motion.div>
 
-                <div className="order-1 md:order-2 h-[340px] md:h-[560px] w-full relative flex items-center justify-center">
+                <div className="order-1 md:order-2 h-[340px] md:h-[560px] w-full relative flex items-center justify-center mt-4 mb-4 md:mt-6 md:mb-6">
                     <div
-                        className="w-full h-full relative rounded-3xl overflow-hidden bg-[#081321]"
+                        className="w-full h-full relative"
                         onMouseMove={handleParallaxMove}
                         onMouseLeave={handleParallaxLeave}
                     >
-                        <motion.div
-                            className="absolute inset-0"
-                            animate={shouldReduce ? { opacity: 0.52 } : { opacity: [0.45, 0.62, 0.45] }}
-                            transition={shouldReduce ? { duration: 0 } : { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-                            style={{ backgroundColor: '#0f1d36' }}
-                        />
-                        <div className="absolute inset-0 bg-black/12" />
-                        <motion.div
-                            className="absolute inset-0"
-                            animate={{ opacity: [0.24, 0.45, 0.24] }}
-                            transition={{ duration: 4.4, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-                            style={{ background: STAGE_GLOWS[currentStage.theme] }}
-                        />
-
-                        {!shouldReduce && (
-                            <svg className="absolute inset-0 w-full h-full opacity-55" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-                                {NETWORK_POINTS.map((point, index) => (
-                                    <motion.circle
-                                        key={`network-node-${index}`}
-                                        cx={point.x}
-                                        cy={point.y}
-                                        r="0.7"
-                                        fill="rgba(165,243,252,0.8)"
-                                        animate={{ scale: [1, 1.6, 1], opacity: [0.2, 0.9, 0.2] }}
-                                        transition={{ duration: 2.6, delay: index * 0.14, repeat: Number.POSITIVE_INFINITY }}
-                                    />
-                                ))}
-                            </svg>
-                        )}
-
-                        {PARTICLES.map((particle) => (
-                            <motion.span
-                                key={particle.id}
-                                className="absolute bottom-0 rounded-full bg-cyan-100/55"
-                                style={{
-                                    left: `${particle.left}%`,
-                                    width: `${particle.size}px`,
-                                    height: `${particle.size}px`,
-                                }}
-                                animate={shouldReduce ? { opacity: 0.3 } : { y: [0, -320], x: [0, particle.drift], opacity: [0, 0.42, 0] }}
-                                transition={
-                                    shouldReduce
-                                        ? { duration: 0 }
-                                        : {
-                                              duration: particle.duration,
-                                              delay: particle.delay,
-                                              repeat: Number.POSITIVE_INFINITY,
-                                              ease: 'linear',
-                                          }
-                                }
-                            />
-                        ))}
-
-
-                        <motion.div className="absolute left-[7%] right-[7%] bottom-[8%] md:bottom-[9%] z-20 [perspective:1400px]" style={{ x: farX, y: farY }}>
-                            <motion.div
-                                className="absolute inset-0 rounded-2xl bg-cyan-300/12 blur-xl"
-                                animate={shouldReduce ? { opacity: 0.5 } : { opacity: [0.35, 0.8, 0.35] }}
-                                transition={{ duration: 3.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-                                aria-hidden
-                            />
-
-                            <motion.div
-                                className="absolute inset-0 rounded-2xl border border-white/10 bg-slate-900/25 backdrop-blur-sm"
-                                animate={shouldReduce ? { y: 8, rotateX: 0, rotateY: 0 } : { y: 9, rotateX: 7, rotateY: -4 }}
-                                transition={{ duration: 0.85, ease: 'easeInOut' }}
-                                style={{ transformStyle: 'preserve-3d' }}
-                                aria-hidden
-                            />
-                            <motion.div
-                                className="absolute inset-0 rounded-2xl border border-white/15 bg-slate-900/35 backdrop-blur-sm"
-                                animate={shouldReduce ? { y: 4, rotateX: 0, rotateY: 0 } : { y: 4, rotateX: 4, rotateY: -2 }}
-                                transition={{ duration: 0.85, ease: 'easeInOut' }}
-                                style={{ transformStyle: 'preserve-3d' }}
-                                aria-hidden
-                            />
-
+                        <motion.div className="absolute left-[7%] right-[7%] bottom-[18%] md:bottom-[20%] z-20 [perspective:1400px]" style={{ x: farX, y: farY }}>
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={`step-card-${currentStage.id}`}
-                                    className="relative rounded-2xl border border-cyan-100/25 bg-slate-900/55 backdrop-blur-md p-4 md:p-5 overflow-hidden"
+                                    className="relative rounded-2xl border border-white/20 bg-[#0a1220]/90 shadow-[0_22px_60px_rgba(6,18,35,0.74)] backdrop-blur-md p-4 md:p-5 overflow-hidden"
                                     initial={shouldReduce ? { opacity: 1 } : { opacity: 0, rotateY: -16, rotateX: 6, z: -30 }}
                                     animate={shouldReduce ? { opacity: 1 } : { opacity: 1, rotateY: 0, rotateX: 0, z: 0 }}
                                     exit={shouldReduce ? { opacity: 0 } : { opacity: 0, rotateY: 14, rotateX: -4, z: -35 }}
@@ -299,19 +199,25 @@ export default function HeroSection() {
                                     style={{ transformStyle: 'preserve-3d' }}
                                 >
                                     <motion.div
-                                        className="absolute -inset-2 rounded-3xl bg-cyan-300/20 blur-2xl"
-                                        animate={shouldReduce ? { opacity: 0.4 } : { opacity: [0.35, 0.75, 0.35] }}
-                                        transition={{ duration: 3.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                                        className="absolute -inset-6 bg-[#1a3359]/25 blur-2xl pointer-events-none"
+                                        animate={shouldReduce ? { opacity: 0.32 } : { opacity: [0.2, 0.48, 0.2] }}
+                                        transition={{ duration: 3.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+                                        aria-hidden
+                                    />
+                                    <motion.div
+                                        className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)] pointer-events-none"
+                                        animate={shouldReduce ? { x: '0%' } : { x: ['-120%', '120%'] }}
+                                        transition={shouldReduce ? { duration: 0 } : { duration: 4.2, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
                                         aria-hidden
                                     />
 
                                     <div className="relative flex items-center gap-3 mb-3">
                                         <motion.div
-                                            className="w-10 h-10 rounded-xl border border-cyan-100/30 bg-cyan-400/10 flex items-center justify-center relative"
+                                            className="w-10 h-10 rounded-xl border border-white/25 bg-white/10 flex items-center justify-center relative"
                                             animate={shouldReduce ? { opacity: 1 } : { scale: [1, 1.09, 1], opacity: [0.8, 1, 0.8] }}
                                             transition={{ duration: 2.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
                                         >
-                                            <CurrentIcon className="w-5 h-5 text-cyan-100 relative z-10" />
+                                            <CurrentIcon className="w-5 h-5 text-white relative z-10" />
                                             {!shouldReduce && [0, 1, 2, 3].map((orbit) => (
                                                 <motion.span
                                                     key={`orbit-${orbit}`}
@@ -320,21 +226,21 @@ export default function HeroSection() {
                                                     transition={{ duration: 2.2 + orbit * 0.8, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
                                                 >
                                                     <span
-                                                        className="absolute left-1/2 top-1/2 w-1.5 h-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.95)]"
+                                                        className="absolute left-1/2 top-1/2 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]"
                                                         style={{ transform: `translate(-50%, -50%) rotate(${orbit * 90}deg) translateY(-22px)` }}
                                                     />
                                                 </motion.span>
                                             ))}
                                         </motion.div>
                                         <div>
-                                            <p className="text-[10px] tracking-[0.14em] uppercase text-cyan-300/80">Step {activeStage + 1} of {JOURNEY_STAGES.length}</p>
+                                            <p className="text-[10px] tracking-[0.14em] uppercase text-white/80">Step {activeStage + 1} of {JOURNEY_STAGES.length}</p>
                                             <p className="text-sm md:text-base text-white font-semibold">{currentStage.title}</p>
                                         </div>
                                     </div>
 
                                     <motion.p
                                         key={`narrative-${currentStage.id}`}
-                                        className="text-xs md:text-sm text-slate-200/90 leading-relaxed mb-3"
+                                        className="text-xs md:text-sm text-white/90 leading-relaxed mb-3"
                                         initial={shouldReduce ? { opacity: 1 } : { opacity: 0, y: 8 }}
                                         animate={shouldReduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
                                         transition={{ duration: 0.45, ease: 'easeOut' }}
@@ -343,36 +249,36 @@ export default function HeroSection() {
                                     </motion.p>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                                        <motion.div className="rounded-lg border border-white/10 bg-slate-900/45 px-2.5 py-2" initial={shouldReduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.08 }}>
-                                            <p className="text-[10px] uppercase tracking-[0.1em] text-cyan-200/75">Now Building</p>
-                                            <p className="text-xs text-white/90 mt-0.5">{currentStage.signal}</p>
+                                        <motion.div className="rounded-lg border border-white/12 bg-[#08101d]/88 px-2.5 py-2" initial={shouldReduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.08 }}>
+                                            <p className="text-[10px] uppercase tracking-[0.1em] text-white/65">Now Building</p>
+                                            <p className="text-xs text-white/95 mt-0.5">{currentStage.signal}</p>
                                         </motion.div>
-                                        <motion.div className="rounded-lg border border-white/10 bg-slate-900/45 px-2.5 py-2" initial={shouldReduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.14 }}>
-                                            <p className="text-[10px] uppercase tracking-[0.1em] text-cyan-200/75">Business Impact</p>
-                                            <p className="text-xs text-white/90 mt-0.5">{currentStage.outcome}</p>
+                                        <motion.div className="rounded-lg border border-white/12 bg-[#08101d]/88 px-2.5 py-2" initial={shouldReduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.14 }}>
+                                            <p className="text-[10px] uppercase tracking-[0.1em] text-white/65">Business Impact</p>
+                                            <p className="text-xs text-white/95 mt-0.5">{currentStage.outcome}</p>
                                         </motion.div>
                                     </div>
 
                                     <motion.p
-                                        className="text-[10px] md:text-xs text-slate-200/90 leading-relaxed mb-3 border border-white/10 rounded-lg px-2.5 py-2 bg-slate-900/35 min-h-[44px]"
+                                        className="text-[10px] md:text-xs text-white/88 leading-relaxed mb-3 border border-white/12 rounded-lg px-2.5 py-2 bg-[#08101d]/84 min-h-[44px]"
                                         initial={shouldReduce ? false : { opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.4, delay: 0.18 }}
                                     >
-                                        Why it matters: <span className="text-cyan-100">{typedMeaning}</span>
-                                        {!shouldReduce && typedMeaning.length < currentStage.meaning.length && <span className="inline-block ml-0.5 w-[1px] h-[11px] bg-cyan-100 animate-pulse align-middle" />}
+                                        Why it matters: <span className="text-white">{typedMeaning}</span>
+                                        {!shouldReduce && typedMeaning.length < currentStage.meaning.length && <span className="inline-block ml-0.5 w-[1px] h-[11px] bg-white animate-pulse align-middle" />}
                                     </motion.p>
 
-                                    <p className="text-[10px] md:text-xs text-slate-300/85 mb-2">
-                                        Next: <span className="text-cyan-200/90">{nextStage.subtitle}</span>
+                                    <p className="text-[10px] md:text-xs text-white/75 mb-2">
+                                        Next: <span className="text-white/90">{nextStage.subtitle}</span>
                                     </p>
 
-                                    <div className="relative h-6 mb-2 overflow-hidden rounded-md bg-slate-900/35 border border-white/10">
+                                    <div className="relative h-6 mb-2 overflow-hidden rounded-md bg-[#08101d] border border-white/12">
                                         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden>
-                                            <path d={WAVE_PATH} stroke="rgba(148,223,255,0.2)" strokeWidth="1.1" fill="none" />
+                                            <path d={WAVE_PATH} stroke="rgba(255,255,255,0.28)" strokeWidth="1.1" fill="none" />
                                             <motion.path
                                                 d={WAVE_PATH}
-                                                stroke="rgba(103,232,249,0.85)"
+                                                stroke="rgba(255,255,255,0.92)"
                                                 strokeWidth="1.4"
                                                 fill="none"
                                                 strokeDasharray="4 3"
@@ -383,7 +289,7 @@ export default function HeroSection() {
                                         {!shouldReduce && [0, 1, 2, 3].map((particle) => (
                                             <motion.span
                                                 key={`wave-particle-${particle}`}
-                                                className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-200 shadow-[0_0_10px_rgba(34,211,238,0.95)]"
+                                                className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]"
                                                 animate={{ left: ['2%', '98%'], y: [0, -5, 0, 5, 0], opacity: [0, 1, 1, 0] }}
                                                 transition={{ duration: 2.8, delay: particle * 0.45, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
                                             />
@@ -394,7 +300,7 @@ export default function HeroSection() {
                                         {JOURNEY_STAGES.map((stage, index) => (
                                             <div
                                                 key={`${stage.id}-bar`}
-                                                className={`h-7 rounded-md border text-[9px] md:text-[10px] flex items-center justify-center px-1 ${index === activeStage ? 'border-cyan-100/45 text-cyan-100 bg-cyan-400/12 shadow-[0_0_14px_rgba(34,211,238,0.2)]' : 'border-white/10 text-slate-300/70 bg-slate-900/30'}`}
+                                                className={`h-7 rounded-md border text-[9px] md:text-[10px] flex items-center justify-center px-1 ${index === activeStage ? 'border-white/35 text-white bg-white/12 shadow-[0_0_14px_rgba(255,255,255,0.18)]' : 'border-white/12 text-white/70 bg-white/5'}`}
                                             >
                                                 {stage.title}
                                             </div>

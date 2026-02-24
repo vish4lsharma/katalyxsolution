@@ -24,60 +24,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Global black/navy theme enforcement */
-.bg-gradient-to-r,
-.bg-gradient-to-l,
-.bg-gradient-to-t,
-.bg-gradient-to-b,
-.bg-gradient-to-br,
-.bg-gradient-to-bl,
-.bg-gradient-to-tr,
-.bg-gradient-to-tl {
-  background-image: none !important;
-  background-color: var(--theme-navy) !important;
-}
-
-[class*="bg-[linear-gradient"],
-[class*="bg-[radial-gradient"] {
-  background-image: none !important;
-  background-color: transparent !important;
-}
-
-[class*="bg-cyan-"],
-[class*="bg-sky-"],
-[class*="bg-teal-"],
-[class*="bg-blue-"],
-[class*="bg-indigo-"],
-[class*="bg-purple-"] {
-  background-color: var(--theme-navy-soft) !important;
-  background-image: none !important;
-}
-
-[class*="border-cyan-"],
-[class*="border-sky-"],
-[class*="border-teal-"],
-[class*="border-blue-"],
-[class*="border-indigo-"],
-[class*="border-purple-"] {
-  border-color: rgba(151, 168, 199, 0.32) !important;
-}
-
-[class*="text-cyan-"],
-[class*="text-sky-"],
-[class*="text-teal-"],
-[class*="text-blue-"],
-[class*="text-indigo-"],
-[class*="text-purple-"] {
-  color: #ffffff !important;
-}
-
-[class*="text-gray-"],
-[class*="text-slate-"],
-[class*="text-zinc-"],
-[class*="text-neutral-"],
-[class*="text-stone-"] {
-  color: #ffffff !important;
-}
+/* Let section-level palettes render naturally instead of global blue overrides */
 
 .gradient-bg {
   background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 100%);

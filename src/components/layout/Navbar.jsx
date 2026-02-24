@@ -7,6 +7,7 @@ import Logo from './Logo';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [navTheme, setNavTheme] = useState('dark');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -45,14 +46,51 @@ const Navbar = () => {
         location.pathname === '/admin/login' ||
         location.pathname === '/get-started';
 
+    useEffect(() => {
+        const updateNavbarTheme = () => {
+            const themedSections = Array.from(document.querySelectorAll('[data-navbar-theme]'));
+            if (themedSections.length === 0) {
+                setNavTheme(isDarkHero ? 'dark' : 'light');
+                return;
+            }
+
+            const probeY = 92;
+            let activeSection = themedSections.find((section) => {
+                const rect = section.getBoundingClientRect();
+                return rect.top <= probeY && rect.bottom > probeY;
+            });
+
+            if (!activeSection) {
+                const firstBelowProbe = themedSections.find((section) => section.getBoundingClientRect().top > probeY);
+                activeSection = firstBelowProbe || themedSections[themedSections.length - 1];
+            }
+
+            const nextTheme = activeSection?.getAttribute('data-navbar-theme') === 'light' ? 'light' : 'dark';
+            setNavTheme(nextTheme);
+        };
+
+        updateNavbarTheme();
+        window.addEventListener('scroll', updateNavbarTheme, { passive: true });
+        window.addEventListener('resize', updateNavbarTheme);
+
+        return () => {
+            window.removeEventListener('scroll', updateNavbarTheme);
+            window.removeEventListener('resize', updateNavbarTheme);
+        };
+    }, [location.pathname, isDarkHero]);
+
     return (
         <motion.nav
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-                ? 'bg-white/6 backdrop-blur-lg py-3 shadow-md'
-                : 'bg-white/4 backdrop-blur-md py-4'
+            className={`fixed w-full z-50 transition-all duration-300 ${navTheme === 'light'
+                ? (scrolled
+                    ? 'bg-white/88 backdrop-blur-lg py-3 border-b border-slate-200/80 shadow-[0_8px_24px_rgba(15,23,42,0.08)]'
+                    : 'bg-white/72 backdrop-blur-md py-4 border-b border-slate-200/70')
+                : (scrolled
+                    ? 'bg-[#081321]/74 backdrop-blur-lg py-3 border-b border-white/10 shadow-md'
+                    : 'bg-[#081321]/42 backdrop-blur-md py-4 border-b border-white/10')
                 }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
@@ -70,7 +108,7 @@ const Navbar = () => {
                             className={({ isActive }) =>
                                 `text-sm font-medium transition-colors duration-300 ${isActive
                                     ? 'text-blue-400 font-semibold'
-                                    : (scrolled || isDarkHero) ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-cyan-600'
+                                    : navTheme === 'light' ? 'text-slate-600 hover:text-sky-700' : 'text-gray-300 hover:text-white'
                                 }`
                             }
                         >
@@ -80,7 +118,10 @@ const Navbar = () => {
 
                     <Link
                         to="/get-started"
-                        className="px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 shadow-lg btn-gradient-navy"
+                        className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_10px_24px_rgba(8,20,38,0.24)] ${navTheme === 'light'
+                            ? 'bg-[#0b2342] text-white border border-[#0b2342] hover:bg-[#081c36]'
+                            : 'bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff]'
+                            }`}
                     >
                         Get Started
                     </Link>
@@ -89,7 +130,7 @@ const Navbar = () => {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`md:hidden p-2 z-50 transition-colors ${scrolled || isDarkHero ? 'text-white' : 'text-gray-900'}`}
+                    className={`md:hidden p-2 z-50 transition-colors ${navTheme === 'light' ? 'text-slate-900' : 'text-white'}`}
                 >
                     {isOpen ? <X /> : <Menu />}
                 </button>
@@ -119,7 +160,7 @@ const Navbar = () => {
                             <Link
                                 to="/get-started"
                                 onClick={() => setIsOpen(false)}
-                                className="btn-gradient-navy px-8 py-3 rounded-full text-lg font-bold"
+                                className="px-8 py-3 rounded-full text-lg font-bold bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff] transition-colors duration-200"
                             >
                                 Get Started
                             </Link>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Zap, Shield, BarChart3, Users, Code, Globe as GlobeIcon, Cpu, ChevronRight, Calendar, BookOpen, Brain, Briefcase, Settings, Lightbulb, Mail, MapPin } from 'lucide-react';
@@ -41,6 +41,10 @@ const staggerGroup = {
 };
 
 const Home = () => {
+    const { scrollY } = useScroll();
+    const overlapOffset = useTransform(scrollY, [0, 700], [240, 0]);
+    const smoothOverlapOffset = useSpring(overlapOffset, { stiffness: 70, damping: 20, mass: 0.7 });
+
     return (
         <>
             <Helmet>
@@ -48,16 +52,22 @@ const Home = () => {
                 <meta name="description" content="Katalyx Solutions is a dynamic startup delivering next-gen AI, cloud, and digital transformation solutions." />
             </Helmet>
 
-            {/* Hero Section */}
-            <HeroSection />
+            <div className="bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846]">
+                <div className="sticky top-0 z-0">
+                    {/* Hero Section */}
+                    <HeroSection />
+                </div>
 
-            {/* Stats Section */}
-            <StatsSection />
+                <motion.div
+                    className="relative z-20 bg-[#f8fbff] rounded-t-[32px] md:rounded-t-[40px] overflow-hidden"
+                    style={{ y: smoothOverlapOffset }}
+                >
+                {/* Stats Section */}
+                <StatsSection />
 
             {/* About Us Preview */}
-            <section className="py-24 bg-[#081321] relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#081321]/90" />
-                <div className="absolute inset-0 bg-[#0f1d36]/45" />
+            <motion.section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative overflow-hidden rounded-t-[28px] md:rounded-t-[36px]" initial={{ y: 56 }} whileInView={{ y: 0 }} viewport={{ once: false, amount: 0.2 }} transition={{ duration: 0.6, ease: 'easeOut' }}>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(59,130,246,0.08),transparent_48%),radial-gradient(circle_at_86%_74%,rgba(245,158,11,0.06),transparent_55%)]" />
 
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -68,21 +78,21 @@ const Home = () => {
                             whileInView="show"
                             viewport={{ once: true, amount: 0.25 }}
                         >
-                            <motion.span variants={fadeLeft} transition={{ duration: 0.55, ease: 'easeOut' }} className="inline-flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase rounded-full px-3 py-1 border border-cyan-300/30 bg-cyan-400/10 text-cyan-100 mb-4">
+                            <motion.span variants={fadeLeft} transition={{ duration: 0.55, ease: 'easeOut' }} className="inline-flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase rounded-full px-3 py-1 border border-cyan-200 bg-cyan-50 text-cyan-700 mb-4">
                                 Digital Evolution Engine
                             </motion.span>
-                            <motion.h2 variants={fadeLeft} transition={{ duration: 0.6, ease: 'easeOut' }} className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                                Driven by <span className="text-slate-100">Passion, Precision</span> and <span className="gradient-text-base gradient-future-ready-tech">Future-Ready Technology</span>
+                            <motion.h2 variants={fadeLeft} transition={{ duration: 0.6, ease: 'easeOut' }} className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                                Driven by <span className="text-slate-900">Passion, Precision</span> and <span className="text-sky-500">Future-Ready Technology</span>
                             </motion.h2>
-                            <motion.p variants={fadeLeft} transition={{ duration: 0.55, ease: 'easeOut' }} className="text-slate-200/90 text-lg leading-relaxed mb-5">
+                            <motion.p variants={fadeLeft} transition={{ duration: 0.55, ease: 'easeOut' }} className="text-slate-700 text-lg leading-relaxed mb-5">
                                 Katalyx Solutions operates as a strategic innovation partner that helps businesses translate bold ideas into practical digital systems. Our startup agility, product thinking, and engineering depth let us move faster from concept to impact.
                             </motion.p>
-                            <motion.p variants={fadeLeft} transition={{ duration: 0.55, ease: 'easeOut' }} className="text-slate-300/90 text-lg leading-relaxed mb-8">
+                            <motion.p variants={fadeLeft} transition={{ duration: 0.55, ease: 'easeOut' }} className="text-slate-600 text-lg leading-relaxed mb-8">
                                 We architect robust ERP ecosystems, intuitive web platforms, and AI-powered intelligence layers that simplify operational complexity, accelerate decisions, and unlock scalable growth.
                             </motion.p>
 
                             <motion.div variants={fadeLeft} transition={{ duration: 0.55, ease: 'easeOut' }}>
-                                <Link to="/about" className="inline-flex items-center gap-2 text-cyan-200 font-semibold border border-cyan-200/30 bg-cyan-300/10 rounded-full px-5 py-2.5 hover:bg-cyan-300/20 hover:gap-3 transition-all">
+                                <Link to="/about" className="inline-flex items-center gap-2 font-semibold rounded-full px-5 py-2.5 transition-all border border-[#0b2342] bg-[#0b2342] text-white hover:bg-[#081c36] hover:text-white hover:gap-3 hover:shadow-[0_10px_24px_rgba(8,20,38,0.24)]">
                                 Read Our Story <ArrowRight size={18} />
                                 </Link>
                             </motion.div>
@@ -96,9 +106,8 @@ const Home = () => {
                             viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.75, ease: 'easeOut' }}
                         >
-                            <div className="absolute inset-0 blur-3xl bg-[#12233e]/70" />
-                            <div className="relative rounded-3xl border border-cyan-100/20 bg-slate-950/45 backdrop-blur-xl p-6 md:p-8 overflow-hidden">
-                                <div className="absolute inset-0 bg-black/10" />
+                            <div className="absolute inset-0 blur-3xl bg-sky-200/60" />
+                            <div className="relative rounded-3xl border border-slate-200 bg-white/90 backdrop-blur-xl p-6 md:p-8 overflow-hidden shadow-[0_12px_36px_rgba(15,23,42,0.08)]">
 
                                 <motion.div
                                     className="relative mb-5 rounded-2xl border border-white/10 bg-[#0a1220]/88 px-3.5 py-3.5 overflow-hidden"
@@ -199,22 +208,22 @@ const Home = () => {
 
                                 <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {[
-                                        { icon: Cpu, title: 'Modern Tech Stack', detail: 'Cloud-native architecture, AI tooling, and reliable engineering standards.', tone: 'text-cyan-200' },
-                                        { icon: GlobeIcon, title: 'Global Vision', detail: 'Products designed for scale across markets, teams, and platforms.', tone: 'text-teal-200' },
-                                        { icon: Brain, title: 'Applied Intelligence', detail: 'Data-to-decision pipelines that turn insights into business action.', tone: 'text-sky-200' },
-                                        { icon: Shield, title: 'Built for Trust', detail: 'Secure foundations, resilient delivery, and measurable outcomes.', tone: 'text-emerald-200' },
+                                        { icon: Cpu, title: 'Modern Tech Stack', detail: 'Cloud-native architecture, AI tooling, and reliable engineering standards.', tone: 'text-cyan-600' },
+                                        { icon: GlobeIcon, title: 'Global Vision', detail: 'Products designed for scale across markets, teams, and platforms.', tone: 'text-blue-600' },
+                                        { icon: Brain, title: 'Applied Intelligence', detail: 'Data-to-decision pipelines that turn insights into business action.', tone: 'text-sky-600' },
+                                        { icon: Shield, title: 'Built for Trust', detail: 'Secure foundations, resilient delivery, and measurable outcomes.', tone: 'text-indigo-600' },
                                     ].map((item, i) => (
                                         <motion.div
                                             key={item.title}
-                                            className="rounded-2xl border border-white/10 bg-slate-900/45 p-4"
+                                            className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
                                             initial={{ opacity: 0, y: 16 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ duration: 0.45, delay: i * 0.08 }}
                                         >
                                             <item.icon className={`${item.tone} mb-3`} size={22} />
-                                            <h4 className="font-semibold text-white mb-1.5">{item.title}</h4>
-                                            <p className="text-xs leading-relaxed text-slate-300/90">{item.detail}</p>
+                                            <h4 className="font-semibold text-slate-900 mb-1.5">{item.title}</h4>
+                                            <p className="text-xs leading-relaxed text-slate-600">{item.detail}</p>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -222,19 +231,18 @@ const Home = () => {
                         </motion.div>
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* Featured Projects Section */}
-            <section className="py-24 bg-[#081321] relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#081321]/90" />
-                <div className="absolute inset-0 bg-[#0f1d36]/45" />
+            <section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(59,130,246,0.08),transparent_48%),radial-gradient(circle_at_86%_74%,rgba(245,158,11,0.06),transparent_55%)]" />
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
-                        <motion.span initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="inline-flex mb-4 rounded-full border border-[#8cb3e8]/30 bg-[#132744] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white/90">
+                        <motion.span initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="inline-flex mb-4 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-sky-700">
                             Product Showcase
                         </motion.span>
-                        <motion.h2 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55 }} className="text-4xl font-bold text-white mb-4">Featured <span className="gradient-text-base gradient-work">Work</span></motion.h2>
-                        <motion.p initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55, delay: 0.05 }} className="text-white/90 max-w-2xl mx-auto">Real-world solutions we've engineered to solve complex business challenges.</motion.p>
+                        <motion.h2 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55 }} className="text-4xl font-bold text-slate-900 mb-4">Featured <span className="text-sky-500">Work</span></motion.h2>
+                        <motion.p initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55, delay: 0.05 }} className="text-slate-600 max-w-2xl mx-auto">Real-world solutions we've engineered to solve complex business challenges.</motion.p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
@@ -249,11 +257,11 @@ const Home = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.16 }}
-                                className="group relative rounded-[26px] border border-[#8cb3e8]/20 bg-[#0d1b31]/92 backdrop-blur-xl overflow-hidden hover:border-[#b3ceff]/45 hover:-translate-y-1 transition-all duration-300"
+                                className="group relative rounded-[26px] border border-slate-200 bg-white backdrop-blur-xl overflow-hidden hover:border-sky-300 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_26px_rgba(15,23,42,0.07)]"
                             >
-                                <div className="absolute -inset-px rounded-[26px] bg-[#1d3760]/30 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
-                                <div className="relative h-48 overflow-hidden bg-black/35">
-                                    <div className="absolute inset-0 bg-[#0a1322]/35 z-10" />
+                                <div className="absolute -inset-px rounded-[26px] bg-sky-200/45 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
+                                <div className="relative h-48 overflow-hidden bg-slate-900/10">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/35 to-transparent z-10" />
                                     <motion.div className="absolute inset-0 z-20 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)]" animate={{ x: ['-120%', '120%'] }} transition={{ duration: 3.6, delay: i * 0.5, repeat: Infinity, ease: 'linear' }} />
                                     <img src={project.img} alt={project.name} className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 opacity-82 group-hover:opacity-100" />
                                     <span className="absolute top-4 left-4 z-30 rounded-full border border-white/15 bg-[#152a49]/90 px-3 py-1 text-[10px] tracking-[0.12em] uppercase text-white/90">
@@ -261,9 +269,9 @@ const Home = () => {
                                     </span>
                                 </div>
                                 <div className="relative p-6">
-                                    <h3 className="text-xl font-bold text-white mb-2">{project.name}</h3>
-                                    <p className="text-white/85 text-sm mb-4">{project.desc}</p>
-                                    <Link to={`/products/${project.id}`} className="inline-flex items-center gap-1 text-white font-semibold text-sm border border-white/20 rounded-full px-3 py-1.5 bg-[#162d50]/70 hover:bg-[#1f3f6e] hover:gap-2 transition-all">
+                                    <h3 className="text-xl font-bold text-slate-900 mb-2">{project.name}</h3>
+                                    <p className="text-slate-600 text-sm mb-4">{project.desc}</p>
+                                    <Link to={`/products/${project.id}`} className="inline-flex items-center gap-1 text-sky-700 font-semibold text-sm border border-sky-200 rounded-full px-3 py-1.5 bg-sky-50 hover:bg-sky-100 hover:gap-2 transition-all">
                                         View Case Study <ChevronRight size={14} />
                                     </Link>
                                 </div>
@@ -272,29 +280,28 @@ const Home = () => {
                     </div>
                     <motion.div className="text-center mt-12" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5 }}>
                         <Link to="/products">
-                            <EnergyButton variant="secondary">View All Projects</EnergyButton>
+                            <EnergyButton variant="primary">View All Projects</EnergyButton>
                         </Link>
                     </motion.div>
                 </div>
             </section>
 
             {/* Core Solutions */}
-            <section className="py-24 bg-[#0b1327] relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#0c1730]/60" />
+            <section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative overflow-hidden">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
-                        <motion.span initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="inline-flex mb-4 rounded-full border border-white/15 bg-[#132744]/85 px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white/90">
+                        <motion.span initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="inline-flex mb-4 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-sky-700">
                             Capability Grid
                         </motion.span>
-                        <motion.h2 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55 }} className="text-4xl font-bold text-white mb-4">Our <span className="gradient-text-base gradient-expertise">Expertise</span></motion.h2>
-                        <motion.p initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55, delay: 0.05 }} className="text-slate-300 max-w-2xl mx-auto">Driving business value through integrated technology developed by our expert team.</motion.p>
+                        <motion.h2 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55 }} className="text-4xl font-bold text-slate-900 mb-4">Our <span className="text-sky-500">Expertise</span></motion.h2>
+                        <motion.p initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55, delay: 0.05 }} className="text-slate-600 max-w-2xl mx-auto">Driving business value through integrated technology developed by our expert team.</motion.p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
-                            { title: 'AI & Analytics', desc: 'Predictive modeling and automated workflows.', icon: Zap, tone: 'text-cyan-200', tag: 'Neural Ops' },
-                            { title: 'Cloud Services', desc: 'Scalable infrastructure for growing startups.', icon: GlobeIcon, tone: 'text-teal-200', tag: 'Elastic Cloud' },
-                            { title: 'Digital Consulting', desc: 'Strategic tech roadmaps for digital success.', icon: BarChart3, tone: 'text-sky-200', tag: 'Strategy Engine' }
+                            { title: 'AI & Analytics', desc: 'Predictive modeling and automated workflows.', icon: Zap, tone: 'text-cyan-600', tag: 'Neural Ops' },
+                            { title: 'Cloud Services', desc: 'Scalable infrastructure for growing startups.', icon: GlobeIcon, tone: 'text-blue-600', tag: 'Elastic Cloud' },
+                            { title: 'Digital Consulting', desc: 'Strategic tech roadmaps for digital success.', icon: BarChart3, tone: 'text-sky-600', tag: 'Strategy Engine' }
                         ].map((service, i) => (
                             <motion.div
                                 key={i}
@@ -303,14 +310,14 @@ const Home = () => {
                                 viewport={{ once: true, amount: 0.25 }}
                                 transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
                                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                                className="relative bg-slate-900/55 p-8 rounded-2xl border border-slate-700 overflow-hidden"
+                                className="relative bg-white p-8 rounded-2xl border border-slate-200 overflow-hidden shadow-[0_10px_24px_rgba(15,23,42,0.06)]"
                             >
-                                <span className="relative inline-flex mb-4 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-white/80">{service.tag}</span>
+                                <span className="relative inline-flex mb-4 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-slate-700">{service.tag}</span>
                                 <service.icon className={`w-10 h-10 mb-6 ${service.tone}`} />
-                                <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
-                                <p className="text-slate-300 text-sm leading-relaxed">{service.desc}</p>
-                                <div className="mt-5 h-1.5 rounded-full bg-white/10 overflow-hidden">
-                                    <span className="block h-full bg-white/80" style={{ width: '72%' }} />
+                                <h3 className="text-xl font-bold mb-3 text-slate-900">{service.title}</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
+                                <div className="mt-5 h-1.5 rounded-full bg-slate-200 overflow-hidden">
+                                    <span className="block h-full bg-sky-500" style={{ width: '72%' }} />
                                 </div>
                             </motion.div>
                         ))}
@@ -319,15 +326,15 @@ const Home = () => {
             </section>
 
             {/* Recent Insights */}
-            <section className="py-24 bg-[#0d162b] relative border-t border-slate-800">
+            <section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative border-t border-slate-200">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="flex justify-between items-end mb-12">
                         <div>
-                            <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="text-3xl font-bold text-white mb-2">Recent <span className="gradient-text-base gradient-insights">Insights</span></motion.h2>
-                            <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, delay: 0.05 }} className="text-slate-300">Trends and thoughts from our tech experts.</motion.p>
+                            <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="text-3xl font-bold text-slate-900 mb-2">Recent <span className="text-sky-500">Insights</span></motion.h2>
+                            <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, delay: 0.05 }} className="text-slate-600">Trends and thoughts from our tech experts.</motion.p>
                         </div>
                         <motion.div initial={{ opacity: 0, x: 18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }}>
-                            <Link to="/blog" className="hidden md:flex items-center gap-2 text-cyan-200 hover:text-white transition-colors">
+                            <Link to="/blog" className="hidden md:flex items-center gap-2 text-sky-600 hover:text-sky-800 transition-colors">
                                 View all posts <ArrowRight size={16} />
                             </Link>
                         </motion.div>
@@ -369,10 +376,10 @@ const Home = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-300/40 transition-all h-full flex flex-col group shadow-lg hover:shadow-cyan-400/10"
+                                    className="bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-sky-300 transition-all h-full flex flex-col group shadow-[0_10px_24px_rgba(15,23,42,0.06)]"
                                 >
                                     <div className="h-48 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-cyan-900/20 group-hover:bg-transparent transition-colors z-10" />
+                                        <div className="absolute inset-0 bg-sky-900/10 group-hover:bg-transparent transition-colors z-10" />
                                         <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
                                         <div className="absolute top-4 left-4 z-20">
                                             <span className="bg-cyan-500/90 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">{post.category}</span>
@@ -380,12 +387,12 @@ const Home = () => {
                                     </div>
                                     <div className="p-6 flex-1 flex flex-col">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <span className="text-gray-500 text-xs flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
+                                            <span className="text-slate-500 text-xs flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors flex-1">{post.title}</h3>
-                                        <p className="text-slate-300 text-sm leading-relaxed mb-4">{post.excerpt}</p>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors flex-1">{post.title}</h3>
+                                        <p className="text-slate-600 text-sm leading-relaxed mb-4">{post.excerpt}</p>
                                     </div>
-                                    <div className="px-6 py-4 border-t border-slate-800 flex items-center text-sm font-medium text-slate-300 group-hover:text-white transition-colors mt-auto">
+                                    <div className="px-6 py-4 border-t border-slate-200 flex items-center text-sm font-medium text-slate-600 group-hover:text-sky-700 transition-colors mt-auto">
                                         Read Article <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </motion.div>
@@ -393,7 +400,7 @@ const Home = () => {
                         ))}
                     </div>
                     <div className="mt-8 text-center md:hidden">
-                        <Link to="/blog" className="text-cyan-200 hover:text-white inline-flex items-center gap-2">
+                        <Link to="/blog" className="text-sky-600 hover:text-sky-800 inline-flex items-center gap-2">
                             View all posts <ArrowRight size={16} />
                         </Link>
                     </div>
@@ -401,19 +408,19 @@ const Home = () => {
             </section>
 
             {/* ── Services Section ── */}
-            <section className="py-24 bg-gradient-to-br from-[#0c162d] to-[#11223a] relative border-t border-slate-800">
+            <section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative border-t border-slate-200">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
                         <motion.span
-                            className="inline-block py-1 px-3 rounded-full bg-cyan-400/20 text-cyan-200 text-sm font-semibold mb-4 border border-cyan-300/30"
+                            className="inline-block py-1 px-3 rounded-full bg-cyan-50 text-cyan-700 text-sm font-semibold mb-4 border border-cyan-200"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                         >
                             What We Do
                         </motion.span>
-                        <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="text-4xl font-bold text-white mb-4">Our <span className="gradient-text-base gradient-services">Services</span></motion.h2>
-                        <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, delay: 0.06 }} className="text-slate-300 max-w-2xl mx-auto">End-to-end intelligent solutions to help your business grow faster in the digital era.</motion.p>
+                        <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }} className="text-4xl font-bold text-slate-900 mb-4">Our <span className="text-sky-500">Services</span></motion.h2>
+                        <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, delay: 0.06 }} className="text-slate-600 max-w-2xl mx-auto">End-to-end intelligent solutions to help your business grow faster in the digital era.</motion.p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
@@ -421,29 +428,29 @@ const Home = () => {
                                 icon: Brain,
                                 title: 'AI Solutions',
                                 desc: 'Custom AI apps, chatbots, automation pipelines, and LLM integrations tailored to your business needs.',
-                                tone: 'text-cyan-200',
-                                card: 'bg-cyan-400/10 border-cyan-300/30'
+                                tone: 'text-cyan-700',
+                                card: 'bg-cyan-50 border-cyan-200'
                             },
                             {
                                 icon: Code,
                                 title: 'Web & SaaS Development',
                                 desc: 'Full-stack web apps, SaaS dashboards, and scalable platforms built with modern tech stacks.',
-                                tone: 'text-teal-200',
-                                card: 'bg-teal-400/10 border-teal-300/30'
+                                tone: 'text-blue-700',
+                                card: 'bg-blue-50 border-blue-200'
                             },
                             {
                                 icon: Settings,
                                 title: 'Business Automation',
                                 desc: 'Workflow automation, third-party integrations, and internal tools to streamline your operations.',
-                                tone: 'text-sky-200',
-                                card: 'bg-sky-400/10 border-sky-300/30'
+                                tone: 'text-sky-700',
+                                card: 'bg-sky-50 border-sky-200'
                             },
                             {
                                 icon: Lightbulb,
                                 title: 'Tech Consulting',
                                 desc: 'Architecture reviews, scaling strategies, and MVP development guidance for startups and teams.',
-                                tone: 'text-emerald-200',
-                                card: 'bg-emerald-400/10 border-emerald-300/30'
+                                tone: 'text-indigo-700',
+                                card: 'bg-indigo-50 border-indigo-200'
                             },
                         ].map((svc, i) => (
                             <motion.div
@@ -452,14 +459,14 @@ const Home = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="bg-slate-900/60 backdrop-blur-sm border border-slate-700 hover:border-cyan-300/40 rounded-2xl p-6 flex flex-col gap-4 hover:bg-slate-800/60 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-cyan-400/10"
+                                className="bg-white backdrop-blur-sm border border-slate-200 hover:border-sky-300 rounded-2xl p-6 flex flex-col gap-4 hover:bg-slate-50 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_24px_rgba(15,23,42,0.06)]"
                             >
                                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center border ${svc.card} ${svc.tone}`}>
                                     <svc.icon size={24} />
                                 </div>
-                                <h3 className="text-lg font-bold text-white">{svc.title}</h3>
-                                <p className="text-slate-300 text-sm leading-relaxed flex-1">{svc.desc}</p>
-                                <Link to="/services" className="text-cyan-200 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all mt-auto">
+                                <h3 className="text-lg font-bold text-slate-900">{svc.title}</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed flex-1">{svc.desc}</p>
+                                <Link to="/services" className="text-sky-600 text-sm font-semibold flex items-center gap-1 hover:text-sky-800 hover:gap-2 transition-all mt-auto">
                                     Learn more <ChevronRight size={14} />
                                 </Link>
                             </motion.div>
@@ -469,30 +476,30 @@ const Home = () => {
             </section>
 
             {/* ── About Katalyx Section ── */}
-            <section className="py-24 bg-[#0c1529] relative border-t border-slate-800">
+            <section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative border-t border-slate-200">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="max-w-4xl mx-auto">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="bg-gradient-to-br from-slate-900 to-slate-800/60 border border-slate-700 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+                            className="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden shadow-[0_14px_34px_rgba(15,23,42,0.08)]"
                         >
-                            <div className="absolute inset-0 bg-cyan-400/8 rounded-3xl" />
+                            <div className="absolute inset-0 bg-cyan-100/60 rounded-3xl" />
                             <div className="relative z-10">
                                 <motion.span
-                                    className="inline-block py-1 px-3 rounded-full bg-cyan-400/20 text-cyan-200 text-sm font-semibold mb-6 border border-cyan-300/30"
+                                    className="inline-block py-1 px-3 rounded-full bg-cyan-50 text-cyan-700 text-sm font-semibold mb-6 border border-cyan-200"
                                     initial={{ opacity: 0 }}
                                     whileInView={{ opacity: 1 }}
                                     viewport={{ once: true }}
                                 >
                                     Who We Are
                                 </motion.span>
-                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">About <span className="gradient-text-base gradient-katalyx">Katalyx</span></h2>
-                                <p className="text-slate-200 text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
+                                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">About <span className="text-sky-500">Katalyx</span></h2>
+                                <p className="text-slate-700 text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
                                     Katalyx Solutions is an emerging AI and software development company focused on building intelligent digital products, automation systems, and scalable platforms.
                                 </p>
-                                <p className="text-slate-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                                <p className="text-slate-600 text-lg leading-relaxed max-w-3xl mx-auto">
                                     We help startups and businesses transform ideas into high-performance technology solutions. Founded by engineers building AI-driven software and scalable digital platforms for modern businesses.
                                 </p>
                                 <div className="mt-8">
@@ -507,23 +514,25 @@ const Home = () => {
             </section>
 
             {/* ── CTA Section ── */}
-            <section className="py-24 bg-gradient-to-r from-cyan-900/35 via-[#111f37] to-teal-900/35 relative border-t border-slate-800">
-                <div className="absolute inset-0 bg-black/30" />
+            <section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative border-t border-slate-200">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.12),transparent_55%)]" />
                 <div className="container mx-auto px-6 relative z-10 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something <span className="gradient-text-base gradient-intelligent">Intelligent</span></h2>
-                        <p className="text-slate-300 text-sm mb-2">Let’s discuss your project, idea, or automation needs.</p>
-                        <p className="text-slate-200 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</p>
+                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Let's Build Something <span className="text-sky-500">Intelligent</span></h2>
+                        <p className="text-slate-600 text-sm mb-2">Let’s discuss your project, idea, or automation needs.</p>
+                        <p className="text-slate-700 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</p>
                         <a href="mailto:info@katalyxsolutions.com">
                             <EnergyButton variant="primary">Contact Us <Mail size={18} /></EnergyButton>
                         </a>
                     </motion.div>
                 </div>
             </section>
+                </motion.div>
+            </div>
         </>
     );
 };
