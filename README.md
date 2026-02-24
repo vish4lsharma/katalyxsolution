@@ -80,13 +80,13 @@ This will start both frontend (port 5173) and backend (port 5000) concurrently.
 ## 🌐 Deployment
 
 ### Frontend (Vercel)
-- **URL**: https://katalyx.vercel.app
+- **URL**: https://katalyxsolutions.com
 - **Framework**: Vite
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`
 
 ### Backend (Vercel)
-- **URL**: https://katalyx-zvt8.vercel.app
+- **URL**: https://katalyxsolutions.com/api
 - **Root Directory**: `server`
 - **Framework**: Other (Node.js)
 
@@ -121,13 +121,7 @@ This will start both frontend (port 5173) and backend (port 5000) concurrently.
 
 Copyright © 2025-2026 Katalyx Solutions. All rights reserved.
 
-## 👥 Team
-
-- **Vishal Sharma** - Co-Founder & CEO
-- **Yash Gupta** - Co-Founder
-- **Anmol Babu** - CTO
-
 ## 🔗 Links
 
-- Website: https://katalyx.vercel.app
+- Website: https://katalyxsolutions.com
 - GitHub: https://github.com/hrexe178/Katalyx

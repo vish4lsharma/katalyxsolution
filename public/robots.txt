@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /candidate/
+Disallow: /api/
+Crawl-delay: 1
 
-Sitemap: https://www.katalyxsolutions.com/sitemap.xml
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /candidate/
+Disallow: /api/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+Sitemap: https://katalyxsolutions.com/sitemap.xml

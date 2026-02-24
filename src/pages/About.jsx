@@ -8,8 +8,26 @@ const About = () => {
     return (
         <>
             <Helmet>
-                <title>About Us - Katalyx Solutions</title>
+                <title>About Katalyx Solutions – AI Software Company India | Our Story & Mission</title>
+                <meta name="description" content="Learn about Katalyx Solutions – an India-based AI software startup on a mission to build intelligent ERPs, SaaS platforms and digital transformation solutions for modern businesses." />
+                <meta name="keywords" content="about Katalyx Solutions, AI company India, software startup India, Katalyx team, digital transformation company" />
+                <link rel="canonical" href="https://katalyxsolutions.com/about" />
+                <meta property="og:title" content="About Katalyx Solutions – Our Story & Mission" />
+                <meta property="og:description" content="Katalyx Solutions is an India-based AI software startup building intelligent ERPs and SaaS platforms for startups and enterprises worldwide." />
+                <meta property="og:url" content="https://katalyxsolutions.com/about" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta name="twitter:title" content="About Katalyx Solutions – AI Software Company India" />
+                <meta name="twitter:description" content="Meet the team behind AI-powered ERPs and SaaS platforms at Katalyx Solutions." />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "AboutPage",
+                    "name": "About Katalyx Solutions",
+                    "url": "https://katalyxsolutions.com/about",
+                    "description": "Katalyx Solutions is an emerging AI and software company building intelligent ERPs, SaaS platforms, and cloud solutions.",
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://katalyxsolutions.com/about" }] }
+                })}</script>
             </Helmet>
+
 
             <section className="bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] py-32 border-b border-gray-800 text-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 z-0" />
@@ -66,7 +84,7 @@ const About = () => {
                         {/* Static Vertical Timeline for Mobile */}
                         <div className="md:hidden mt-12 space-y-8 text-left max-w-sm mx-auto">
                             {[
-                                { year: '2025', text: 'Inception: Founded by Vishal Sharma & Yash Gupta.' },
+                                { year: '2025', text: 'Inception: Katalyx Solutions founded.' },
                                 { year: 'Q4 2025', text: 'Product Launch: Camu ERP & HealthcareX24.com launched.' },
                                 { year: '2026', text: 'Scale: Global Innovation Partnership status.' }
                             ].map((milestone, i) => (
@@ -82,44 +100,7 @@ const About = () => {
                 </div>
             </section>
 
-            <section className="py-24 bg-gradient-to-b from-[#0f0f1a] to-[#16213e] relative">
-                <div className="container mx-auto px-6 relative z-10">
-                    <h2 className="text-3xl font-bold text-center mb-16 text-white">Leadership Team</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                name: 'Vishal Sharma',
-                                role: 'Co-Founder & CEO',
-                                initials: 'VS',
-                                bio: 'A visionary leader with deep expertise in strategic planning and business growth, driving Katalyx towards global recognition.'
-                            },
-                            {
-                                name: 'Yash Gupta',
-                                role: 'Co-Founder',
-                                initials: 'YG',
-                                bio: 'Passionate about product innovation and market strategy, ensuring our solutions solve real-world problems effectively.'
-                            }
-                        ].map((member, i) => (
-                            <motion.div
-                                key={i}
-                                whileHover={{ y: -10 }}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-blue-500/40 hover:shadow-blue-500/10 transition-all text-center p-8"
-                            >
-                                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 ring-4 ring-gray-800 group-hover:ring-blue-500/30 transition-all shadow-lg">
-                                    {member.initials}
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                                <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-4">{member.role}</p>
-                                <p className="text-gray-400 text-sm leading-relaxed opacity-80">{member.bio}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+
         </>
     );
 };

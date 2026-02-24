@@ -104,7 +104,7 @@ const CandidateDashboard = () => {
                                     applications.map(app => (
                                         <div key={app._id} className="bg-[#1a1a2e] p-6 rounded-xl shadow-lg border border-gray-700 flex justify-between items-center group hover:border-blue-500/30 transition-all">
                                             <div>
-                                                <h3 className="font-bold text-white text-lg group-hover:text-blue-300 transition-colors">{app.role || 'Job Application'}</h3>
+                                                <h3 className="font-bold text-white text-lg group-hover:text-blue-300 transition-colors">{app.jobId?.title || 'Job Application'}</h3>
                                                 <div className="flex gap-4 text-sm text-gray-500 mt-1">
                                                     <span className="flex items-center gap-1"><Calendar size={14} /> Applied: {new Date(app.appliedAt).toLocaleDateString()}</span>
                                                 </div>

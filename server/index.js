@@ -23,43 +23,25 @@ process.on('uncaughtException', (err) => {
     console.error('Uncaught Exception:', err);
 });
 
-// 1. FORCEFUL CORS HANDLER (MUST BE FIRST)
-// This handles CORS headers manually to guarantee they are present even on errors
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    // Check if the origin is allowed (localhost or any .vercel.app domain)
-    const isAllowed = !origin ||
-        (typeof origin === 'string' && (origin.includes('localhost') || origin.endsWith('.vercel.app')));
+// 1. STANDARD CORS MIDDLEWARE
+const allowedOrigins = [
+    "https://katalyxsolutions.com"
+];
 
-    if (isAllowed) {
-        res.header('Access-Control-Allow-Origin', origin || '*');
-    }
-
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
-    res.header('Access-Control-Allow-Credentials', 'true');
-
-    // Immediately respond to preflight requests with 200
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-    next();
-});
-
-// 2. STANDARD CORS MIDDLEWARE (Backup)
 app.use(cors({
     origin: function (origin, callback) {
-        const isAllowed = !origin ||
-            origin.includes('localhost') ||
-            origin.endsWith('.vercel.app');
-        if (isAllowed) {
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            callback(new Error("CORS not allowed"));
         }
     },
-    credentials: true
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+app.options("*", cors());
 
 // 3. BODY PARSERS
 app.use(express.json());

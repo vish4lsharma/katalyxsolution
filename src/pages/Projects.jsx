@@ -55,7 +55,31 @@ const Projects = () => {
 
     return (
         <>
-            <Helmet><title>Projects - Katalyx Solutions</title></Helmet>
+            <Helmet>
+                <title>Products – Camu ERP, HealthcareX24 & Abhiroom | Katalyx Solutions</title>
+                <meta name="description" content="Explore Katalyx Solutions' product suite: Camu Campus ERP, HealthcareX24 medical management system, and Abhiroom smart accommodation platform — built for modern India." />
+                <meta name="keywords" content="Camu ERP, campus management software India, HealthcareX24, healthcare management system, Abhiroom, accommodation management, Katalyx products, ERP software" />
+                <link rel="canonical" href="https://katalyxsolutions.com/products" />
+                <meta property="og:title" content="Products – Camu ERP, HealthcareX24 & Abhiroom | Katalyx Solutions" />
+                <meta property="og:description" content="Discover our AI-powered product suite: campus ERP, healthcare management, and smart accommodation platforms." />
+                <meta property="og:url" content="https://katalyxsolutions.com/products" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta name="twitter:title" content="Katalyx Products – ERP & AI-Powered Platforms" />
+                <meta name="twitter:description" content="Camu ERP, HealthcareX24 and Abhiroom – enterprise-grade software by Katalyx Solutions." />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "ItemList",
+                    "name": "Katalyx Solutions Products",
+                    "url": "https://katalyxsolutions.com/products",
+                    "itemListElement": [
+                        { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "Camu ERP", "applicationCategory": "BusinessApplication", "description": "Comprehensive Campus Management ERP with faculty, student and admin portals.", "url": "https://katalyxsolutions.com/products/camu-erp", "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" } } },
+                        { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "HealthcareX24", "applicationCategory": "MedicalApplication", "description": "Next-Gen Medical ERP for doctors, patients, labs and pharmacies.", "url": "https://katalyxsolutions.com/products/healthcarex24", "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" } } },
+                        { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "Abhiroom", "applicationCategory": "BusinessApplication", "description": "Smart accommodation solutions with real-time availability and tenant management.", "url": "https://katalyxsolutions.com/products/abhiroom", "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" } } }
+                    ],
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://katalyxsolutions.com/products" }] }
+                })}</script>
+            </Helmet>
+
 
             <section className="py-24 bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] min-h-screen relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 z-0" />

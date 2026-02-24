@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 import api from '../utils/api';
 
@@ -45,8 +45,26 @@ const Contact = () => {
     return (
         <>
             <Helmet>
-                <title>Contact Us - Katalyx Solutions</title>
+                <title>Contact Katalyx Solutions – Get a Free Consultation | India AI Software Company</title>
+                <meta name="description" content="Contact Katalyx Solutions for a free project consultation. Reach us by email at info@katalyxsolutions.com. We build AI software, ERPs and SaaS platforms." />
+                <meta name="keywords" content="contact Katalyx Solutions, hire AI software company India, ERP development consultation, software development inquiry India" />
+                <link rel="canonical" href="https://katalyxsolutions.com/contact" />
+                <meta property="og:title" content="Contact Katalyx Solutions – Free Consultation" />
+                <meta property="og:description" content="Reach out for a project consultation. We build AI ERPs, SaaS platforms and cloud solutions for businesses." />
+                <meta property="og:url" content="https://katalyxsolutions.com/contact" />
+                <meta property="og:image" content="https://katalyxsolutions.com/og-image.png" />
+                <meta name="twitter:title" content="Contact Katalyx Solutions – AI Software Company" />
+                <meta name="twitter:description" content="Get in touch with the Katalyx team for your next AI or ERP project." />
+                <script type="application/ld+json">{JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "ContactPage",
+                    "name": "Contact Katalyx Solutions",
+                    "url": "https://katalyxsolutions.com/contact",
+                    "description": "Contact Katalyx Solutions for AI software, ERP and SaaS development consultations.",
+                    "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://katalyxsolutions.com/contact" }] }
+                })}</script>
             </Helmet>
+
 
             <section className="py-24 bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] min-h-screen flex items-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 z-0" />
@@ -75,15 +93,7 @@ const Contact = () => {
                                         <p className="text-gray-400">info@katalyxsolutions.com</p>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 flex-shrink-0 border border-purple-500/20">
-                                        <Phone size={20} />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-white">Call Us</h3>
-                                        <p className="text-gray-400">+91 63986 92585</p>
-                                    </div>
-                                </div>
+
                                 <div className="flex items-start gap-4">
                                     <div className="w-12 h-12 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-cyan-400 flex-shrink-0 border border-cyan-500/20">
                                         <MapPin size={20} />
