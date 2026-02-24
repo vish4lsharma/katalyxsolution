@@ -92,7 +92,7 @@ const AnimatedNumber = ({ value = 0, prefix = '', suffix = '', decimals = 0 }) =
 
 const StatsSection = () => {
     return (
-        <section data-navbar-theme='light' className='pt-2 pb-20 sm:pt-4 sm:pb-28 lg:pt-6 lg:pb-36 bg-[#f8fbff] relative overflow-hidden rounded-t-[28px] md:rounded-t-[36px]'>
+        <section data-navbar-theme='light' className='pt-14 pb-20 sm:pt-16 sm:pb-28 lg:pt-20 lg:pb-36 bg-[#f8fbff] relative overflow-hidden rounded-t-[28px] md:rounded-t-[36px]'>
             <div className='absolute inset-0 bg-[#f8fbff]' />
 
             <div className='max-w-screen-2xl mx-auto px-6 lg:px-8 relative z-10'>

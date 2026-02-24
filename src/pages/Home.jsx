@@ -70,6 +70,45 @@ const textPopIn = {
     }),
 };
 
+const textSlideRight = {
+    hidden: { opacity: 0, x: 24, filter: 'blur(3px)' },
+    show: (delay = 0) => ({
+        opacity: 1,
+        x: 0,
+        filter: 'blur(0px)',
+        transition: { duration: 0.52, delay, ease: 'easeOut' },
+    }),
+};
+
+const textSlideDown = {
+    hidden: { opacity: 0, y: -18, filter: 'blur(2px)' },
+    show: (delay = 0) => ({
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        transition: { duration: 0.5, delay, ease: 'easeOut' },
+    }),
+};
+
+const textFadeZoom = {
+    hidden: { opacity: 0, scale: 1.04 },
+    show: (delay = 0) => ({
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.48, delay, ease: 'easeOut' },
+    }),
+};
+
+const textPopRotate = {
+    hidden: { opacity: 0, scale: 0.9, rotate: -2 },
+    show: (delay = 0) => ({
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        transition: { duration: 0.5, delay, ease: 'easeOut' },
+    }),
+};
+
 const Home = () => {
     const whoSectionRef = useRef(null);
     const { scrollY } = useScroll();
@@ -264,11 +303,11 @@ const Home = () => {
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="flex justify-between items-end mb-16">
                         <div>
-                            <motion.span initial="hidden" whileInView="show" custom={0.02} variants={textPopIn} viewport={{ once: true, amount: 0.4 }} className="inline-flex mb-4 rounded-full border border-sky-300 bg-transparent px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-sky-500">
+                            <motion.span initial="hidden" whileInView="show" custom={0.02} variants={textSlideRight} viewport={{ once: true, amount: 0.4 }} className="inline-flex mb-4 rounded-full border border-sky-300 bg-transparent px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-sky-500">
                                 Product Showcase
                             </motion.span>
-                            <motion.h2 initial="hidden" whileInView="show" custom={0.08} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-4xl font-bold text-slate-900 mb-4">Featured <span className="text-sky-500">Work</span></motion.h2>
-                            <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-slate-600 max-w-2xl">Real-world solutions we've engineered to solve complex business challenges.</motion.p>
+                            <motion.h2 initial="hidden" whileInView="show" custom={0.08} variants={textSlideDown} viewport={{ once: true, amount: 0.4 }} className="text-4xl font-bold text-slate-900 mb-4">Featured <span className="text-sky-500">Work</span></motion.h2>
+                            <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textFadeZoom} viewport={{ once: true, amount: 0.4 }} className="text-slate-600 max-w-2xl">Real-world solutions we've engineered to solve complex business challenges.</motion.p>
                         </div>
                         <motion.div initial={{ opacity: 0, x: 18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }}>
                             <Link to="/products" className="hidden md:inline-flex items-center px-7 py-3.5 rounded-xl font-bold transition-all duration-300 border border-sky-500 text-white bg-sky-400 hover:bg-sky-500 hover:text-white hover:shadow-[0_12px_28px_rgba(14,116,144,0.24)]">
@@ -323,11 +362,11 @@ const Home = () => {
             <section data-navbar-theme="light" className="py-24 bg-[#f8fbff] relative overflow-hidden rounded-t-[28px] md:rounded-t-[36px]">
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
-                        <motion.span initial="hidden" whileInView="show" custom={0.02} variants={textPopIn} viewport={{ once: true, amount: 0.4 }} className="inline-flex mb-4 rounded-full border border-sky-300 bg-transparent px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-sky-500">
+                        <motion.span initial="hidden" whileInView="show" custom={0.02} variants={textSlideIn} viewport={{ once: true, amount: 0.4 }} className="inline-flex mb-4 rounded-full border border-sky-300 bg-transparent px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-sky-500">
                             Capability Grid
                         </motion.span>
-                        <motion.h2 initial="hidden" whileInView="show" custom={0.08} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-4xl font-bold text-slate-900 mb-4">Our <span className="text-sky-500">Expertise</span></motion.h2>
-                        <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-slate-600 max-w-2xl mx-auto">Driving business value through integrated technology developed by our expert team.</motion.p>
+                        <motion.h2 initial="hidden" whileInView="show" custom={0.08} variants={textPopRotate} viewport={{ once: true, amount: 0.4 }} className="text-4xl font-bold text-slate-900 mb-4">Our <span className="text-sky-500">Expertise</span></motion.h2>
+                        <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textSlideRight} viewport={{ once: true, amount: 0.4 }} className="text-slate-600 max-w-2xl mx-auto">Driving business value through integrated technology developed by our expert team.</motion.p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
@@ -363,8 +402,8 @@ const Home = () => {
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="flex justify-between items-end mb-12">
                         <div>
-                            <motion.h2 initial="hidden" whileInView="show" custom={0.06} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-3xl font-bold text-slate-900 mb-2">Recent <span className="text-sky-500">Insights</span></motion.h2>
-                            <motion.p initial="hidden" whileInView="show" custom={0.12} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-slate-600">Trends and thoughts from our tech experts.</motion.p>
+                            <motion.h2 initial="hidden" whileInView="show" custom={0.06} variants={textSlideIn} viewport={{ once: true, amount: 0.4 }} className="text-3xl font-bold text-slate-900 mb-2">Recent <span className="text-sky-500">Insights</span></motion.h2>
+                            <motion.p initial="hidden" whileInView="show" custom={0.12} variants={textSlideDown} viewport={{ once: true, amount: 0.4 }} className="text-slate-600">Trends and thoughts from our tech experts.</motion.p>
                         </div>
                         <motion.div initial={{ opacity: 0, x: 18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5 }}>
                             <Link to="/blog" className="hidden md:inline-flex items-center px-7 py-3.5 rounded-xl font-bold transition-all duration-300 border border-sky-500 text-white bg-sky-400 hover:bg-sky-500 hover:text-white hover:shadow-[0_12px_28px_rgba(14,116,144,0.24)]">
@@ -450,13 +489,13 @@ const Home = () => {
                             initial="hidden"
                             whileInView="show"
                             custom={0.02}
-                            variants={textPopIn}
+                            variants={textFadeZoom}
                             viewport={{ once: true }}
                         >
                             What We Do
                         </motion.span>
-                        <motion.h2 initial="hidden" whileInView="show" custom={0.08} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-4xl font-bold text-slate-900 mb-4">Our <span className="text-sky-500">Services</span></motion.h2>
-                        <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textSlideUp} viewport={{ once: true, amount: 0.4 }} className="text-slate-600 max-w-2xl mx-auto">End-to-end intelligent solutions to help your business grow faster in the digital era.</motion.p>
+                        <motion.h2 initial="hidden" whileInView="show" custom={0.08} variants={textSlideRight} viewport={{ once: true, amount: 0.4 }} className="text-4xl font-bold text-slate-900 mb-4">Our <span className="text-sky-500">Services</span></motion.h2>
+                        <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textPopRotate} viewport={{ once: true, amount: 0.4 }} className="text-slate-600 max-w-2xl mx-auto">End-to-end intelligent solutions to help your business grow faster in the digital era.</motion.p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
@@ -530,24 +569,26 @@ const Home = () => {
                             <div className="relative z-10">
                                 <motion.span
                                     className="inline-block py-1 px-3 rounded-full bg-transparent text-sky-300 text-sm font-semibold mb-6 border border-sky-300/60"
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
+                                    initial="hidden"
+                                    whileInView="show"
+                                    custom={0.02}
+                                    variants={textSlideDown}
                                     viewport={{ once: true }}
                                 >
                                     Who We Are
                                 </motion.span>
-                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">About <span className="text-sky-300">Katalyx</span></h2>
-                                <p className="text-slate-100 text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
+                                <motion.h2 initial="hidden" whileInView="show" custom={0.08} variants={textSlideIn} viewport={{ once: true, amount: 0.4 }} className="text-3xl md:text-4xl font-bold text-white mb-6">About <span className="text-sky-300">Katalyx</span></motion.h2>
+                                <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textSlideRight} viewport={{ once: true, amount: 0.4 }} className="text-slate-100 text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
                                     Katalyx Solutions is an emerging AI and software development company focused on building intelligent digital products, automation systems, and scalable platforms.
-                                </p>
-                                <p className="text-slate-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                                </motion.p>
+                                <motion.p initial="hidden" whileInView="show" custom={0.2} variants={textSlideDown} viewport={{ once: true, amount: 0.4 }} className="text-slate-300 text-lg leading-relaxed max-w-3xl mx-auto">
                                     We help startups and businesses transform ideas into high-performance technology solutions. Founded by engineers building AI-driven software and scalable digital platforms for modern businesses.
-                                </p>
-                                <div className="mt-8">
+                                </motion.p>
+                                <motion.div initial="hidden" whileInView="show" custom={0.24} variants={textFadeZoom} viewport={{ once: true, amount: 0.4 }} className="mt-8">
                                     <Link to="/about">
                                         <EnergyButton variant="primary">Our Story <ArrowRight size={18} /></EnergyButton>
                                     </Link>
-                                </div>
+                                </motion.div>
                             </div>
                         </motion.div>
                     </div>
@@ -563,12 +604,12 @@ const Home = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something <span className="text-sky-300">Intelligent !</span></h2>
+                        <motion.h2 initial="hidden" whileInView="show" custom={0.06} variants={textPopRotate} viewport={{ once: true, amount: 0.4 }} className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something <span className="text-sky-300">Intelligent !</span></motion.h2>
                         {/* <p className="text-slate-300 text-sm mb-2">Let’s discuss your project, idea, or automation needs.</p> */}
-                        <p className="text-slate-200 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</p>
-                        <a href="mailto:info@katalyxsolutions.com">
+                        <motion.p initial="hidden" whileInView="show" custom={0.14} variants={textSlideIn} viewport={{ once: true, amount: 0.4 }} className="text-slate-200 text-lg max-w-xl mx-auto mb-10">Have a project in mind? We'd love to hear about it. Let's turn your vision into a working product.</motion.p>
+                        <motion.a initial="hidden" whileInView="show" custom={0.2} variants={textSlideRight} viewport={{ once: true, amount: 0.4 }} href="mailto:info@katalyxsolutions.com">
                             <EnergyButton variant="primary">Contact Us <Mail size={18} /></EnergyButton>
-                        </a>
+                        </motion.a>
                     </motion.div>
                 </div>
             </section>
