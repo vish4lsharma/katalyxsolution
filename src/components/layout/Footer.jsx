@@ -5,7 +5,7 @@ import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="bg-gradient-to-br from-[#11161f] via-[#14111d] to-[#0b1119] border-t border-white/10 text-white py-16 relative overflow-hidden">
+        <footer className="bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846] text-white py-16 relative overflow-hidden">
             
             <div className="container mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">

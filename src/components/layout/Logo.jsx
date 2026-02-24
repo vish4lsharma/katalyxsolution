@@ -5,8 +5,9 @@ const Logo = ({ className = "w-32 h-32", textClassName = "text-xl", showText = f
     return (
         <div className="flex items-center gap-3 group">
             <div className={`relative flex items-center justify-center group-hover:scale-105 transition-transform duration-300`}>
-                <div className="absolute -inset-1 rounded-xl bg-white/18 blur-xl transition-all duration-500 group-hover:bg-white/26" />
-                <div className="absolute -inset-2 rounded-xl bg-white/10 blur-2xl pointer-events-none transition-all duration-500 group-hover:bg-white/16" />
+                <div className="absolute -inset-1 rounded-xl bg-white/28 blur-xl transition-all duration-500 group-hover:bg-white/38" />
+                <div className="absolute -inset-2 rounded-xl bg-white/18 blur-2xl pointer-events-none transition-all duration-500 group-hover:bg-white/26" />
+                <div className="absolute -inset-3 rounded-2xl bg-white/10 blur-3xl pointer-events-none transition-all duration-500 group-hover:bg-white/16" />
                 {/* Logo Image */}
                 <img
                     src="/KATALYX_LOGO.png"

@@ -128,13 +128,13 @@ export default function HeroSection() {
     };
 
     return (
-        <section data-navbar-theme="dark" className="relative min-h-[76vh] md:min-h-[84vh] flex items-center overflow-hidden bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846] pt-8 pb-0 md:pt-10 md:pb-1">
+        <section data-navbar-theme="dark" className="relative min-h-[76vh] md:min-h-[84vh] flex items-center overflow-hidden bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846] pt-8 pb-14 md:pt-10 md:pb-20">
             <div className="absolute inset-0 bg-[#081321]/70" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(56,189,248,0.22),transparent_55%)]" />
 
             <div className="container mx-auto px-6 grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-center relative z-10">
                 <motion.div {...fadeIn} className="z-10 order-2 md:order-1">
-                    <motion.span className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 text-sm font-semibold mb-4 border border-blue-500/30 tracking-widest uppercase">
+                    <motion.span className="inline-block py-1 px-3 rounded-full bg-transparent text-sky-500 text-sm font-semibold mb-4 border border-sky-300 tracking-widest uppercase">
                         KATALYX Solutions
                     </motion.span>
 

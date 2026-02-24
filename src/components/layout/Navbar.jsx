@@ -54,16 +54,14 @@ const Navbar = () => {
                 return;
             }
 
-            const probeY = 92;
+            const probeY = window.scrollY + 92;
             let activeSection = themedSections.find((section) => {
-                const rect = section.getBoundingClientRect();
-                return rect.top <= probeY && rect.bottom > probeY;
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                return probeY >= top && probeY < bottom;
             });
 
-            if (!activeSection) {
-                const firstBelowProbe = themedSections.find((section) => section.getBoundingClientRect().top > probeY);
-                activeSection = firstBelowProbe || themedSections[themedSections.length - 1];
-            }
+            if (!activeSection) activeSection = themedSections[themedSections.length - 1];
 
             const nextTheme = activeSection?.getAttribute('data-navbar-theme') === 'light' ? 'light' : 'dark';
             setNavTheme(nextTheme);
@@ -107,8 +105,8 @@ const Navbar = () => {
                             to={link.to}
                             className={({ isActive }) =>
                                 `text-sm font-medium transition-colors duration-300 ${isActive
-                                    ? 'text-blue-400 font-semibold'
-                                    : navTheme === 'light' ? 'text-slate-600 hover:text-sky-700' : 'text-gray-300 hover:text-white'
+                                    ? (navTheme === 'light' ? 'text-black font-semibold' : 'text-blue-400 font-semibold')
+                                    : navTheme === 'light' ? 'text-black hover:text-black/75' : 'text-gray-300 hover:text-white'
                                 }`
                             }
                         >
@@ -119,7 +117,7 @@ const Navbar = () => {
                     <Link
                         to="/get-started"
                         className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_10px_24px_rgba(8,20,38,0.24)] ${navTheme === 'light'
-                            ? 'bg-[#0b2342] text-white border border-[#0b2342] hover:bg-[#081c36]'
+                            ? 'bg-black text-white border border-black hover:bg-black/90'
                             : 'bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff]'
                             }`}
                     >
