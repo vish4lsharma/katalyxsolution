@@ -42,19 +42,19 @@ const AboutUsBanner = () => {
             ref={sectionRef}
             id="about-banner-section"
             data-navbar-theme="dark"
-            className="relative w-full overflow-hidden bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846]"
+            className="relative w-full overflow-hidden bg-gradient-to-br from-[#040a14] via-[#07111f] to-[#0b1b2f]"
             style={{ height: '120vh' }}
         >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.16),transparent_55%)]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] h-[820px] bg-sky-300/10 rounded-full blur-[130px]" />
-            <div className="absolute -top-24 right-[-140px] w-[320px] h-[320px] bg-cyan-300/15 rounded-full blur-[110px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.1),transparent_55%)]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] h-[820px] bg-sky-300/6 rounded-full blur-[130px]" />
+            <div className="absolute -top-24 right-[-140px] w-[320px] h-[320px] bg-cyan-300/10 rounded-full blur-[110px]" />
 
             <div className="sticky top-16 h-screen flex items-center justify-center overflow-visible py-8 md:py-12 relative z-10">
                 <div className="mx-auto w-full max-w-screen-2xl px-6">
-                    <div className="relative mx-auto flex max-w-[1300px] items-center justify-center rounded-[16px] sm:rounded-[24px] md:rounded-[36px] border border-white/10 bg-gradient-to-br from-[#0b1b2f] via-[#102846] to-[#0b1b2f] px-4 sm:px-8 md:px-16 lg:px-24 py-12 sm:py-16 md:py-20 lg:py-24 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
+                    <div className="relative mx-auto flex max-w-[1300px] items-center justify-center rounded-[16px] sm:rounded-[24px] md:rounded-[36px] border border-white/10 bg-gradient-to-br from-[#060f1e] via-[#0a1628] to-[#060f1e] px-4 sm:px-8 md:px-16 lg:px-24 py-12 sm:py-16 md:py-20 lg:py-24 shadow-[0_24px_80px_rgba(0,0,0,0.55)]">
                         <p
-                            className="max-w-[950px] text-center text-[22px] sm:text-[32px] md:text-[42px] lg:text-[52px] xl:text-[60px] font-semibold leading-[1.1] tracking-tight"
-                            style={{ fontSize: 'clamp(1.375rem, 3vw + 0.5rem, 3.75rem)' }}
+                            className="max-w-[980px] text-center text-[22px] sm:text-[32px] md:text-[42px] lg:text-[52px] xl:text-[60px] font-bold leading-[1.04] tracking-tight"
+                            style={{ fontSize: 'clamp(1.375rem, 3vw + 0.48rem, 3.75rem)' }}
                         >
                             {chars.map((char, i) => {
                                 let color;
