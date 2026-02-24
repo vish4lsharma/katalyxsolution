@@ -32,33 +32,7 @@ const About = () => {
 
             <MissionValues />
 
-            <section className="py-24 bg-[#0f0f1a] relative">
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-white mb-4">About Timeline</h2>
-                        <p className="text-gray-400">From a small startup to a global innovation partner.</p>
-                        {/* Timeline component might need dark mode check, assuming it adapts or is transparent */}
-                        <div className="hidden md:block">
-                            <Timeline />
-                        </div>
-                        {/* Static Vertical Timeline for Mobile */}
-                        <div className="md:hidden mt-12 space-y-8 text-left max-w-sm mx-auto">
-                            {[
-                                { year: '2025', text: 'Inception: Katalyx Solutions founded.' },
-                                { year: 'Q4 2025', text: 'Product Launch: Camu ERP & HealthcareX24.com launched.' },
-                                { year: '2026', text: 'Scale: Global Innovation Partnership status.' }
-                            ].map((milestone, i) => (
-                                <div key={i} className="flex gap-4 items-start">
-                                    <div className="bg-blue-600 px-3 py-1 rounded text-white font-bold text-sm min-w-[70px] text-center">
-                                        {milestone.year}
-                                    </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed">{milestone.text}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Timeline />
 
 
         </>
