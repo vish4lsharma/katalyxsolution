@@ -737,76 +737,84 @@ const Careers = () => {
 
 
             {/* Hero */}
-            <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col">
+            <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col pb-32 md:pb-44">
                 <div className="absolute top-0 -right-[5%] w-[1200px] h-[1200px] bg-blue-50/30 rounded-full blur-[160px] pointer-events-none" style={{ transform: 'translateY(-50%)' }} />
                 <div className="absolute bottom-0 -left-[10%] w-[1000px] h-[1000px] bg-indigo-50/20 rounded-full blur-[140px] pointer-events-none" style={{ transform: 'translateY(50%)' }} />
 
-                <div className="relative z-10 flex flex-col items-center text-center pt-[100px] sm:pt-[120px] md:pt-[140px] px-4 sm:px-6">
+                <div className="relative z-10 flex flex-col items-center text-center pt-[114px] sm:pt-[134px] md:pt-[156px] px-4 sm:px-6">
                     <motion.h1
                         initial={{ opacity: 0, y: 28 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                        className="max-w-4xl text-[28px] sm:text-[36px] md:text-[42px] lg:text-[48px] font-bold text-gray-700 leading-[1.12] tracking-tight px-2"
-                        style={{ fontSize: 'clamp(1.75rem, 3.5vw + 0.5rem, 3rem)' }}
+                        className="max-w-4xl text-[24px] sm:text-[30px] md:text-[35px] lg:text-[40px] font-bold text-gray-700 leading-[1.12] tracking-tight px-2"
+                        style={{ fontSize: 'clamp(1.5rem, 2.6vw + 0.45rem, 2.5rem)' }}
                     >
-                        {['Hey', 'future', 'builder'].map((word, index) => (
-                            <motion.span
-                                key={`intro-${word}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.1 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                                className="inline-block mr-1 sm:mr-3 whitespace-nowrap"
-                            >
-                                {word}
-                            </motion.span>
-                        ))}{' '}
-                        <motion.img
-                            src={twoFingerSvg}
-                            alt="peace sign"
-                            initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
-                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                            className="inline-block w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[38px] md:h-[38px] lg:w-[44px] lg:h-[44px]"
-                        />{' '}
-                        {['Join', 'us', 'in', 'rebuilding', "India's", 'claims'].map((word, index) => (
-                            <motion.span
-                                key={`middle-${word}-${index}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.6 + index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                                className="inline-block mr-1 sm:mr-3 whitespace-nowrap"
-                            >
-                                {word}
-                            </motion.span>
-                        ))}{' '}
-                        {['infrastructure', 'from', 'Day', '1'].map((word, index) => (
-                            <motion.span
-                                key={`end-${word}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 1.1 + index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                                className="inline-block mr-1 sm:mr-3 whitespace-nowrap"
-                            >
-                                {word}
-                            </motion.span>
-                        ))}
+                        <span className="block">
+                            {['Hey', 'future', 'builder'].map((word, index) => (
+                                <motion.span
+                                    key={`intro-${word}`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.1 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                                    className="inline-block mr-1 sm:mr-3"
+                                >
+                                    {word}
+                                </motion.span>
+                            ))}
+                            <motion.img
+                                src={twoFingerSvg}
+                                alt="peace sign"
+                                initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                                transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                                className="inline-block align-middle w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] lg:w-[34px] lg:h-[34px]"
+                            />
+                        </span>
+
+                        <span className="block mt-1 md:mt-2">
+                            {['Join', 'us', 'in', 'rebuilding', "India's", 'claims'].map((word, index) => (
+                                <motion.span
+                                    key={`middle-${word}-${index}`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.6 + index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                                    className="inline-block mr-1 sm:mr-3"
+                                >
+                                    {word}
+                                </motion.span>
+                            ))}
+                        </span>
+
+                        <span className="block mt-1 md:mt-2">
+                            {['infrastructure', 'from', 'Day', '1'].map((word, index) => (
+                                <motion.span
+                                    key={`end-${word}`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 1.1 + index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                                    className="inline-block mr-1 sm:mr-3"
+                                >
+                                    {word}
+                                </motion.span>
+                            ))}
+                        </span>
                     </motion.h1>
 
                     <motion.div
                         initial={{ opacity: 0, y: 28 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.65, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10"
+                        className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-6 mb-32 md:mb-44"
                     >
                         <button
                             onClick={scrollToPositions}
-                            className="w-full sm:w-auto bg-gray-900 text-white text-sm font-semibold px-8 py-3.5 rounded-full hover:bg-gray-800 transition-colors duration-300 shadow-lg shadow-gray-900/20"
+                            className="w-full sm:w-auto bg-gradient-to-r from-sky-500 to-indigo-500 text-white text-sm sm:text-base font-semibold px-8 py-3.5 rounded-full hover:from-sky-600 hover:to-indigo-600 transition-all duration-300 shadow-lg shadow-sky-500/25"
                         >
                             See openings
                         </button>
                         <button
                             onClick={scrollToPerks}
-                            className="w-full sm:w-auto bg-white text-gray-900 text-sm font-semibold px-8 py-3.5 rounded-full border border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
+                            className="w-full sm:w-auto bg-white text-sky-700 text-sm sm:text-base font-semibold px-8 py-3.5 rounded-full border border-sky-200 hover:border-sky-300 hover:bg-sky-50 transition-all duration-300"
                         >
                             See Perks
                         </button>
@@ -815,13 +823,13 @@ const Careers = () => {
 
                 <RibbonDoodle />
 
-                <AvatarBubble image={abhiroomImg} greeting="Hello!" size={60} mobileSize={40} bubblePos="left" className="top-[75%] left-[8%] sm:top-[72%] sm:left-[12%] md:top-[70%] md:left-[18%]" delay={0.7} />
-                <AvatarBubble image={clinicImg} greeting={null} size={52} mobileSize={36} className="top-[82%] left-[1%] sm:top-[80%] sm:left-[2%] md:top-[78%] md:left-[4%]" delay={0.9} />
-                <AvatarBubble image={camuImg} greeting="Welcome aboard!" size={56} mobileSize={38} bubblePos="top" className="top-[80%] left-[28%] sm:top-[78%] sm:left-[32%] md:top-[76%] md:left-[34%]" delay={1.1} />
-                <AvatarBubble image={aiBlog} greeting="Nice to see you!" size={48} mobileSize={34} bubblePos="top" className="top-[88%] left-[42%] sm:top-[92%] sm:left-[44%] md:top-[90%] md:left-[46%]" delay={1.0} />
-                <AvatarBubble image={cloudBlog} greeting="Nice to meet you!" size={60} mobileSize={40} bubblePos="right" className="top-[75%] right-[28%] sm:top-[72%] sm:right-[34%] md:top-[70%] md:right-[37%]" delay={0.8} />
-                <AvatarBubble image={strategyBlog} greeting={null} size={52} mobileSize={36} bubblePos="top" className="top-[78%] right-[12%] sm:top-[76%] sm:right-[18%] md:top-[74%] md:right-[20%]" delay={1.2} />
-                <AvatarBubble image={katalyxLogo} greeting="Glad you're here!" size={46} mobileSize={32} bubblePos="top" className="top-[85%] right-[2%] sm:top-[84%] sm:right-[6%] md:top-[82%] md:right-[8%]" delay={1.3} />
+                <AvatarBubble image={abhiroomImg} greeting="Hello!" size={50} mobileSize={34} bubblePos="left" className="top-[75%] left-[8%] sm:top-[72%] sm:left-[12%] md:top-[70%] md:left-[18%]" delay={0.7} />
+                <AvatarBubble image={clinicImg} greeting={null} size={44} mobileSize={30} className="top-[82%] left-[1%] sm:top-[80%] sm:left-[2%] md:top-[78%] md:left-[4%]" delay={0.9} />
+                <AvatarBubble image={camuImg} greeting="Welcome aboard!" size={48} mobileSize={32} bubblePos="top" className="top-[80%] left-[28%] sm:top-[78%] sm:left-[32%] md:top-[76%] md:left-[34%]" delay={1.1} />
+                <AvatarBubble image={aiBlog} greeting="Nice to see you!" size={40} mobileSize={28} bubblePos="top" className="top-[88%] left-[42%] sm:top-[92%] sm:left-[44%] md:top-[90%] md:left-[46%]" delay={1.0} />
+                <AvatarBubble image={cloudBlog} greeting="Nice to meet you!" size={50} mobileSize={34} bubblePos="right" className="top-[75%] right-[28%] sm:top-[72%] sm:right-[34%] md:top-[70%] md:right-[37%]" delay={0.8} />
+                <AvatarBubble image={strategyBlog} greeting={null} size={44} mobileSize={30} bubblePos="top" className="top-[78%] right-[12%] sm:top-[76%] sm:right-[18%] md:top-[74%] md:right-[20%]" delay={1.2} />
+                <AvatarBubble image={katalyxLogo} greeting="Glad you're here!" size={38} mobileSize={26} bubblePos="top" className="top-[85%] right-[2%] sm:top-[84%] sm:right-[6%] md:top-[82%] md:right-[8%]" delay={1.3} />
             </section>
 
             <CareersBenefits />
