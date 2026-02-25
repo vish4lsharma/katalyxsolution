@@ -2,8 +2,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { Mail, Send, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../utils/api';
 
 const Contact = () => {
@@ -66,174 +67,222 @@ const Contact = () => {
             </Helmet>
 
 
-            <section className="py-24 bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] min-h-screen flex items-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 z-0" />
-                <div className="absolute -right-32 -top-32 w-80 h-80 rounded-full bg-gradient-to-br from-sky-500/10 to-purple-500/8 blur-3xl opacity-80 pointer-events-none" />
-                <div className="container mx-auto px-6 relative z-10 pt-20">
-                    <div className="grid md:grid-cols-2 gap-16 bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-3xl p-8 md:p-16 shadow-2xl border border-gray-700">
-                        <div>
-                            <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="text-4xl font-bold text-white mb-6"
-                            >
-                                Get in <span className="text-blue-500">Touch</span>
+            <section className="py-32 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0a0f1a] via-[#0b1220] to-[#0d1525]" />
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute -top-40 -right-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" />
+                    <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-sky-500/5 to-indigo-500/5 rounded-full blur-3xl" />
+                </div>
+                
+                <div className="container mx-auto px-6 relative">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 bg-slate-800/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-slate-700/50 mb-6"
+                    >
+                        <span className="w-1.5 h-1.5 bg-sky-400 rounded-full animate-pulse" />
+                        <span className="text-xs font-medium text-slate-300">Let's Connect</span>
+                    </motion.div>
+                    
+                    <div className="grid lg:grid-cols-2 gap-12 items-start">
+                        <div className="max-w-xl">
+                            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-3xl md:text-4xl font-bold leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                <span className="text-white">One Conversation Away From Your </span>
+                                <span className="text-sky-300">Next Breakthrough.</span>
                             </motion.h1>
-                            <p className="text-gray-300 mb-12">
-                                Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-                            </p>
 
-                            <div className="space-y-8">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400 flex-shrink-0 border border-blue-500/20">
-                                        <Mail size={20} />
+                            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mt-4 text-white/80 text-sm leading-relaxed max-w-md" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                Whether you're exploring ERP transformation, AI integration, or building a scalable digital platform — we're ready to architect it with you.
+                            </motion.p>
+
+                            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-3 text-slate-300 text-base font-medium" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                Let's turn your vision into execution.
+                            </motion.p>
+
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mt-8 flex flex-wrap gap-5">
+                                <Link to="#contact-form" className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-6 py-2.5 rounded-full shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 transition-all group text-sm font-medium" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                    <span>TALK TO US</span>
+                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                                <div className="flex items-center gap-2 text-slate-400">
+                                    <div className="flex -space-x-1.5">
+                                        <div className="w-7 h-7 rounded-full bg-slate-600 border-2 border-[#0b0e14]" />
+                                        <div className="w-7 h-7 rounded-full bg-slate-500 border-2 border-[#0b0e14]" />
+                                        <div className="w-7 h-7 rounded-full bg-slate-400 border-2 border-[#0b0e14]" />
+                                    </div>
+                                    <span className="text-xs font-medium">Join 500+ growth-focused teams building smarter systems.</span>
+                                </div>
+                            </motion.div>
+
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mt-8">
+                                <div className="flex items-center gap-2.5">
+                                    <div className="w-8 h-8 bg-sky-500/20 rounded-lg flex items-center justify-center text-sky-400">
+                                        <Mail size={14} />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-white">Email Us</h3>
-                                        <p className="text-gray-400">info@katalyxsolutions.com</p>
+                                        <p className="text-xs text-slate-500">Email us at</p>
+                                        <p className="text-sm font-semibold text-slate-200">info@katalyxsolutions.com</p>
                                     </div>
                                 </div>
-
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-cyan-400 flex-shrink-0 border border-cyan-500/20">
-                                        <MapPin size={20} />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-white">Visit Us</h3>
-                                        <p className="text-gray-400">India</p>
-                                    </div>
-                                </div>
-                            </div>
+                            </motion.div>
                         </div>
 
-                        <div className="relative">
-                            <AnimatePresence mode="wait">
-                                {submitted ? (
-                                    <motion.div
-                                        key="success"
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.9 }}
-                                        className="h-full flex flex-col items-center justify-center text-center p-8 bg-green-500/10 border border-green-500/20 rounded-2xl"
-                                    >
-                                        <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center text-green-500 mb-6">
-                                            <Send size={40} />
+                        <div id="contact-form">
+                            <motion.div 
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="bg-[#0d1525] rounded-2xl p-5 md:p-8 border border-slate-800/50"
+                            >
+                                <div className="space-y-5">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-sky-500/20 rounded-xl flex items-center justify-center text-sky-400 flex-shrink-0">
+                                            <Mail size={18} className="text-sky-400" />
                                         </div>
-                                        <h2 className="text-3xl font-bold text-white mb-2">Message Sent!</h2>
-                                        <p className="text-gray-400">Thank you for reaching out. We'll get back to you shortly.</p>
-                                        <button
-                                            onClick={() => setSubmitted(false)}
-                                            className="mt-8 text-blue-400 hover:text-blue-300 font-semibold"
-                                        >
-                                            Send another message
-                                        </button>
-                                    </motion.div>
-                                ) : (
-                                    <motion.form
-                                        key="form"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        onSubmit={formik.handleSubmit}
-                                        className="space-y-4"
-                                    >
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
-                                                <input
-                                                    id="name"
-                                                    type="text"
-                                                    {...formik.getFieldProps('name')}
-                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
-                                                    placeholder="John Doe"
-                                                />
-                                                {formik.touched.name && formik.errors.name ? (
-                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.name}</div>
-                                                ) : null}
-                                            </div>
-
-                                            <div>
-                                                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
-                                                <input
-                                                    id="email"
-                                                    type="email"
-                                                    {...formik.getFieldProps('email')}
-                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
-                                                    placeholder="john@example.com"
-                                                />
-                                                {formik.touched.email && formik.errors.email ? (
-                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.email}</div>
-                                                ) : null}
-                                            </div>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-2">Subject</label>
-                                                <input
-                                                    id="subject"
-                                                    type="text"
-                                                    {...formik.getFieldProps('subject')}
-                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
-                                                    placeholder="Project inquiry, pricing, etc."
-                                                />
-                                                {formik.touched.subject && formik.errors.subject ? (
-                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.subject}</div>
-                                                ) : null}
-                                            </div>
-
-                                            <div>
-                                                <label htmlFor="service" className="block text-sm font-medium text-gray-400 mb-2">Service</label>
-                                                <select
-                                                    id="service"
-                                                    {...formik.getFieldProps('service')}
-                                                    className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
-                                                >
-                                                    {services.map((s) => (
-                                                        <option key={s} value={s}>{s}</option>
-                                                    ))}
-                                                </select>
-                                                {formik.touched.service && formik.errors.service ? (
-                                                    <div className="text-red-400 text-sm mt-1">{formik.errors.service}</div>
-                                                ) : null}
-                                            </div>
-                                        </div>
-
                                         <div>
-                                            <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                                            <textarea
-                                                id="message"
-                                                rows="5"
-                                                {...formik.getFieldProps('message')}
-                                                className="w-full px-4 py-3 rounded-xl bg-[#061021] border border-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
-                                                placeholder="Tell us about your project or requirements..."
-                                            />
-                                            {formik.touched.message && formik.errors.message ? (
-                                                <div className="text-red-400 text-sm mt-1">{formik.errors.message}</div>
-                                            ) : null}
+                                            <h3 className="font-semibold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>Send us a message</h3>
+                                            <p className="text-xs text-slate-500">We'll get back within 24 hours</p>
                                         </div>
+                                    </div>
 
-                                        <motion.button
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.99 }}
-                                            disabled={submitting}
-                                            type="submit"
-                                            className="w-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white py-4 rounded-2xl font-bold hover:brightness-105 transition-all flex items-center justify-center gap-3 shadow-lg disabled:opacity-50"
-                                        >
-                                            {submitting ? (
-                                                <>
-                                                    <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                                                    Sending...
-                                                </>
+                                    <div className="relative">
+                                        <AnimatePresence mode="wait">
+                                            {submitted ? (
+                                                <motion.div
+                                                    key="success"
+                                                    initial={{ opacity: 0, scale: 0.9 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    exit={{ opacity: 0, scale: 0.9 }}
+                                                    className="h-full flex flex-col items-center justify-center text-center p-8 bg-green-500/10 border border-green-500/20 rounded-2xl"
+                                                >
+                                                    <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 mb-4">
+                                                        <Send size={28} />
+                                                    </div>
+                                                    <h2 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>Message Sent!</h2>
+                                                    <p className="text-sm text-slate-400">Thank you for reaching out. We'll get back to you shortly.</p>
+                                                    <button
+                                                        onClick={() => setSubmitted(false)}
+                                                        className="mt-4 text-sky-400 hover:text-sky-300 font-medium text-sm"
+                                                    >
+                                                        Send another message
+                                                    </button>
+                                                </motion.div>
                                             ) : (
-                                                <>
-                                                    Send Message <Send size={18} />
-                                                </>
+                                                <motion.form
+                                                    key="form"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    exit={{ opacity: 0 }}
+                                                    onSubmit={formik.handleSubmit}
+                                                    className="space-y-4"
+                                                >
+                                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                        <div>
+                                                            <label htmlFor="name" className="block text-xs font-medium text-slate-400 mb-1.5" style={{ fontFamily: 'Inter, sans-serif' }}>Full Name</label>
+                                                            <input
+                                                                id="name"
+                                                                type="text"
+                                                                {...formik.getFieldProps('name')}
+                                                                className="w-full px-3 py-2.5 rounded-lg bg-[#0a0f1a] border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all text-sm"
+                                                                placeholder="John Doe"
+                                                                style={{ fontFamily: 'Inter, sans-serif' }}
+                                                            />
+                                                            {formik.touched.name && formik.errors.name ? (
+                                                                <div className="text-red-400 text-xs mt-1">{formik.errors.name}</div>
+                                                            ) : null}
+                                                        </div>
+
+                                                        <div>
+                                                            <label htmlFor="email" className="block text-xs font-medium text-slate-400 mb-1.5" style={{ fontFamily: 'Inter, sans-serif' }}>Email Address</label>
+                                                            <input
+                                                                id="email"
+                                                                type="email"
+                                                                {...formik.getFieldProps('email')}
+                                                                className="w-full px-3 py-2.5 rounded-lg bg-[#0a0f1a] border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all text-sm"
+                                                                placeholder="john@example.com"
+                                                                style={{ fontFamily: 'Inter, sans-serif' }}
+                                                            />
+                                                            {formik.touched.email && formik.errors.email ? (
+                                                                <div className="text-red-400 text-xs mt-1">{formik.errors.email}</div>
+                                                            ) : null}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                        <div>
+                                                            <label htmlFor="subject" className="block text-xs font-medium text-slate-400 mb-1.5" style={{ fontFamily: 'Inter, sans-serif' }}>Subject</label>
+                                                            <input
+                                                                id="subject"
+                                                                type="text"
+                                                                {...formik.getFieldProps('subject')}
+                                                                className="w-full px-3 py-2.5 rounded-lg bg-[#0a0f1a] border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all text-sm"
+                                                                placeholder="Project inquiry, pricing, etc."
+                                                                style={{ fontFamily: 'Inter, sans-serif' }}
+                                                            />
+                                                            {formik.touched.subject && formik.errors.subject ? (
+                                                                <div className="text-red-400 text-xs mt-1">{formik.errors.subject}</div>
+                                                            ) : null}
+                                                        </div>
+
+                                                        <div>
+                                                            <label htmlFor="service" className="block text-xs font-medium text-slate-400 mb-1.5" style={{ fontFamily: 'Inter, sans-serif' }}>Service</label>
+                                                            <select
+                                                                id="service"
+                                                                {...formik.getFieldProps('service')}
+                                                                className="w-full px-3 py-2.5 rounded-lg bg-[#0a0f1a] border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all text-sm"
+                                                                style={{ fontFamily: 'Inter, sans-serif' }}
+                                                            >
+                                                                {services.map((s) => (
+                                                                    <option key={s} value={s} className="bg-[#0a0f1a]">{s}</option>
+                                                                ))}
+                                                            </select>
+                                                            {formik.touched.service && formik.errors.service ? (
+                                                                <div className="text-red-400 text-xs mt-1">{formik.errors.service}</div>
+                                                            ) : null}
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label htmlFor="message" className="block text-xs font-medium text-slate-400 mb-1.5" style={{ fontFamily: 'Inter, sans-serif' }}>Message</label>
+                                                        <textarea
+                                                            id="message"
+                                                            rows="4"
+                                                            {...formik.getFieldProps('message')}
+                                                            className="w-full px-3 py-2.5 rounded-lg bg-[#0a0f1a] border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all text-sm"
+                                                            placeholder="Tell us about your project or requirements..."
+                                                            style={{ fontFamily: 'Inter, sans-serif' }}
+                                                        />
+                                                        {formik.touched.message && formik.errors.message ? (
+                                                            <div className="text-red-400 text-xs mt-1">{formik.errors.message}</div>
+                                                        ) : null}
+                                                    </div>
+
+                                                    <motion.button
+                                                        whileHover={{ scale: 1.02 }}
+                                                        whileTap={{ scale: 0.99 }}
+                                                        disabled={submitting}
+                                                        type="submit"
+                                                        className="w-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-2.5 rounded-xl font-semibold hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 disabled:opacity-50 text-sm"
+                                                        style={{ fontFamily: 'Inter, sans-serif' }}
+                                                    >
+                                                        {submitting ? (
+                                                            <>
+                                                                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                                                Sending...
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                Send Message <Send size={14} />
+                                                            </>
+                                                        )}
+                                                    </motion.button>
+                                                </motion.form>
                                             )}
-                                        </motion.button>
-                                    </motion.form>
-                                )}
-                            </AnimatePresence>
+                                        </AnimatePresence>
+                                    </div>
+                                </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
