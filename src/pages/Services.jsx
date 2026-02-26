@@ -1,9 +1,18 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { useRef } from 'react';
 import { Palette, Brain, Shield, Cloud, Smartphone, Cpu } from 'lucide-react';
 import TechBackground from '../components/3d/TechBackground';
 
 const Services = () => {
+    const servicesSectionRef = useRef(null);
+    const { scrollYProgress: servicesScrollProgress } = useScroll({
+        target: servicesSectionRef,
+        offset: ['start 92%', 'start 55%'],
+    });
+    const servicesSectionOffset = useTransform(servicesScrollProgress, [0, 1], [140, 0]);
+    const smoothServicesSectionOffset = useSpring(servicesSectionOffset, { stiffness: 72, damping: 22, mass: 0.7 });
+
     const services = [
         {
             title: 'AI & Machine Learning',
@@ -86,29 +95,36 @@ const Services = () => {
 
 
             {/* Hero Section */}
-            <section data-navbar-theme="dark" className="bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] text-white pt-40 pb-32 relative overflow-hidden text-center">
-                <TechBackground />
-                <div className="absolute inset-0 bg-black/50 z-0" />
-                <div className="container mx-auto px-6 relative z-10">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-6xl font-bold mb-6"
-                    >
-                        End-to-End <span className="text-blue-400">Technology Services</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-xl text-gray-300 max-w-2xl mx-auto"
-                    >
-                        From strategy to execution, we deliver comprehensive solutions that drive business growth.
-                    </motion.p>
-                </div>
-            </section>
+            <div className="sticky top-0 z-0">
+                <section data-navbar-theme="dark" className="bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#16213e] text-white pt-40 pb-32 relative overflow-hidden text-center">
+                    <TechBackground />
+                    <div className="absolute inset-0 bg-black/50 z-0" />
+                    <div className="container mx-auto px-6 relative z-10">
+                        <motion.h1
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-5xl md:text-6xl font-bold mb-6"
+                        >
+                            End-to-End <span className="text-blue-400">Technology Services</span>
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-xl text-gray-300 max-w-2xl mx-auto mb-10 md:mb-14"
+                        >
+                            From strategy to execution, we deliver comprehensive solutions that drive business growth.
+                        </motion.p>
+                    </div>
+                </section>
+            </div>
 
-            <section data-navbar-theme="light" className="py-24 bg-[#f7fbff] relative rounded-t-[28px] md:rounded-t-[36px] overflow-visible">
+            <motion.section
+                ref={servicesSectionRef}
+                data-navbar-theme="light"
+                className="-mt-16 md:-mt-24 py-24 bg-[#f7fbff] relative rounded-t-[28px] md:rounded-t-[36px] overflow-visible z-20"
+                style={{ y: smoothServicesSectionOffset }}
+            >
                 <div className="absolute inset-0 rounded-t-[28px] md:rounded-t-[36px] bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12),_rgba(247,251,255,0.95),_rgba(247,251,255,1))]" />
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="relative">
@@ -119,11 +135,11 @@ const Services = () => {
                                 style={{ zIndex: 20 + index }}
                             >
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, y: 20, rotate: index === 0 ? 0 : index % 2 === 0 ? -1.1 : 1.1 }}
+                                    whileInView={{ opacity: 1, y: 0, rotate: index === 0 ? 0 : index % 2 === 0 ? -1.1 : 1.1 }}
                                     transition={{ delay: index * 0.08 }}
                                     viewport={{ once: true }}
-                                    whileHover={{ y: -10 }}
+                                    whileHover={{ y: -10, rotate: index === 0 ? 0 : index % 2 === 0 ? -0.2 : 0.2 }}
                                     className="relative overflow-hidden w-full max-w-[72rem] mx-auto rounded-[2rem] border border-slate-200/80 bg-white shadow-[0_22px_60px_-22px_rgba(15,23,42,0.18)] p-6 md:p-8 transition-all duration-300 group min-h-[420px] md:min-h-[500px]"
                                 >
                                     <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_1.12fr] gap-6 md:gap-8 items-stretch h-full">
@@ -168,7 +184,7 @@ const Services = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </motion.section>
         </>
     );
 };

@@ -1,9 +1,16 @@
 import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float, Box, useTexture } from '@react-three/drei';
+import { OrbitControls, Float, Box, Plane, useTexture } from '@react-three/drei';
+import { LinearFilter, SRGBColorSpace } from 'three';
 
 const ScreenMaterial = ({ url }) => {
     const texture = useTexture(url);
+
+    texture.colorSpace = SRGBColorSpace;
+    texture.minFilter = LinearFilter;
+    texture.magFilter = LinearFilter;
+    texture.needsUpdate = true;
+
     return <meshBasicMaterial map={texture} toneMapped={false} />;
 };
 
@@ -33,22 +40,22 @@ const LaptopModel = ({ screenImage }) => {
                     <Box args={[3, 2, 0.1]} position={[0, 1, 0]}>
                         <meshStandardMaterial color="#222" roughness={0.2} metalness={0.8} />
                     </Box>
-                    {/* Screen Display (Emissive for 'lit' look) */}
-                    <Box args={[2.8, 1.8, 0.05]} position={[0, 1, 0.05]}>
+                    {/* Screen Display */}
+                    <Plane args={[2.72, 1.68]} position={[0, 1, 0.056]}>
                         <Suspense fallback={<DefaultScreen />}>
                             {screenImage ? <ScreenMaterial url={screenImage} /> : <DefaultScreen />}
                         </Suspense>
-                    </Box>
+                    </Plane>
                 </group>
             </Float>
         </group>
     );
 };
 
-const Laptop = ({ screenImage }) => {
+const Laptop = ({ screenImage, className = 'h-[400px] w-full' }) => {
     return (
-        <div className="h-[400px] w-full">
-            <Canvas camera={{ position: [0, 2, 5], fov: 45 }}>
+        <div className={className}>
+            <Canvas dpr={[1, 2]} camera={{ position: [0, 2, 5], fov: 45 }}>
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[5, 10, 5]} intensity={1} />
                 <pointLight position={[-5, 5, 5]} color="#00C6FF" intensity={0.8} />

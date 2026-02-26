@@ -50,9 +50,12 @@ const Navbar = () => {
             }
 
             const probeLine = 92;
-            let activeSection = themedSections.find((section) => {
+            let activeSection = null;
+            themedSections.forEach((section) => {
                 const rect = section.getBoundingClientRect();
-                return rect.top <= probeLine && rect.bottom > probeLine;
+                if (rect.top <= probeLine && rect.bottom > probeLine) {
+                    activeSection = section;
+                }
             });
 
             let nextTheme;

@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import abhiroomImg from '../assets/images/abhiroom.jpg';
 import clinicImg from '../assets/images/clinic.jpg';
 import camuImg from '../assets/images/camu.jpg';
@@ -162,7 +162,7 @@ const CareersBenefits = () => {
     };
 
     return (
-        <section data-navbar-theme="light" id="benefits-section" className="w-full bg-white py-14 md:py-20">
+        <section data-navbar-theme="light" id="benefits-section" className="w-full bg-white py-14 md:py-20 sticky top-0 z-0">
             <BlobSVGDefs />
             <div className="mx-auto max-w-[76rem] px-6">
                 <motion.p
@@ -307,8 +307,22 @@ const CornerPlus = ({ style = {}, className = '' }) => (
 );
 
 const CareersPerks = () => {
+    const perksSectionRef = useRef(null);
+    const { scrollYProgress: perksScrollProgress } = useScroll({
+        target: perksSectionRef,
+        offset: ['start 92%', 'start 55%'],
+    });
+    const perksSectionOffset = useTransform(perksScrollProgress, [0, 1], [140, 0]);
+    const smoothPerksSectionOffset = useSpring(perksSectionOffset, { stiffness: 72, damping: 22, mass: 0.7 });
+
     return (
-        <section data-navbar-theme="dark" id="perks-section" className="relative bg-white text-white rounded-t-[28px] md:rounded-t-[36px] overflow-hidden scroll-mt-28">
+        <motion.section
+            ref={perksSectionRef}
+            data-navbar-theme="dark"
+            id="perks-section"
+            className="relative -mt-16 md:-mt-24 bg-white text-white rounded-t-[28px] md:rounded-t-[36px] overflow-hidden scroll-mt-28 z-20"
+            style={{ y: smoothPerksSectionOffset }}
+        >
             <div className="absolute inset-0 rounded-t-[28px] md:rounded-t-[36px] bg-[#0b1424] pointer-events-none" />
             <div className="absolute inset-0 rounded-t-[28px] md:rounded-t-[36px] bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.14),_rgba(11,20,36,0.92),_rgba(11,20,36,1))] pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
@@ -411,7 +425,7 @@ const CareersPerks = () => {
                     </div>
                     </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 
