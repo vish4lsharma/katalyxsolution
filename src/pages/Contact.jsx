@@ -370,7 +370,7 @@ const Contact = () => {
             </section>
 
             {/* Locate us / Contact us section */}
-            <section className="py-20 bg-white">
+            {/* <section className="py-20 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="relative grid lg:grid-cols-2 gap-8 items-start">
                         <div
@@ -464,7 +464,7 @@ const Contact = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
         </>
     );
 };

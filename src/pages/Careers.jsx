@@ -126,27 +126,27 @@ const BlobSVGDefs = () => (
 
 const benefits = [
     {
-        title: 'Health & Wellness',
+        title: 'Builder-First Culture',
         description:
-            'Comprehensive health insurance for you and your family, mental wellness support, and wellness reimbursements.',
+            "At Katalyx, ownership starts on day one. You won't sit on the sidelines - you'll ship real products, solve real business problems, and take responsibility for outcomes.",
         image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&h=400&q=80',
     },
     {
         title: 'Accelerated Growth',
         description:
-            'Work directly with founders, ship production code from week one, and grow faster with mentorship and learning support.',
+            'Work directly with founders and senior engineers. Get real feedback, real mentorship, and real accountability. Growth here comes from execution, not theory.',
         image: aiBlog,
     },
     {
         title: 'Flexible & Remote-First',
         description:
-            'Work from anywhere in India with flexible hours, async-friendly collaboration, and trust-based time off.',
+            'Work from anywhere in India with flexible hours and async-friendly collaboration. We measure impact - not time spent online.',
         image: cloudBlog,
     },
     {
-        title: 'Mission-Driven Team',
+        title: 'Mission-Driven Impact',
         description:
-            "Join a high-impact team fixing India's claims infrastructure where your work directly affects real outcomes.",
+            'We build scalable digital systems that create measurable business results. Your work directly affects clients, users, and growth - not vanity metrics.',
         image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=400&h=400&q=80',
     },
 ];
@@ -162,7 +162,7 @@ const CareersBenefits = () => {
     };
 
     return (
-        <section id="benefits-section" className="w-full bg-white py-14 md:py-20">
+        <section data-navbar-theme="light" id="benefits-section" className="w-full bg-white py-14 md:py-20">
             <BlobSVGDefs />
             <div className="mx-auto max-w-[76rem] px-6">
                 <motion.p
@@ -225,9 +225,9 @@ const perks = [
                 <polyline points="22 4 12 14.01 9 11.01" />
             </svg>
         ),
-        title: 'Full Health Coverage',
+        title: 'Real Ownership',
         description:
-            'Comprehensive medical insurance for you and your family, including dental, vision, and mental health support.',
+            'From day one, you work on live products and real client systems - not internal demos or slide decks.',
     },
     {
         icon: (
@@ -235,9 +235,9 @@ const perks = [
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
             </svg>
         ),
-        title: 'Remote-First, Always',
+        title: 'Fast Execution',
         description:
-            "Work from anywhere in India. We're async-friendly with flexible hours; your output matters, not your location.",
+            'Small teams, clear decisions, and rapid shipping. We move with urgency and accountability.',
     },
     {
         icon: (
@@ -245,9 +245,9 @@ const perks = [
                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
             </svg>
         ),
-        title: 'Competitive Pay + Equity',
+        title: 'Strong Compensation',
         description:
-            "Above-market compensation with meaningful ESOP grants. You're building this company, so you should own part of it.",
+            'Compensation aligned with contribution, responsibility, and the value you create.',
     },
     {
         icon: (
@@ -256,9 +256,9 @@ const perks = [
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
             </svg>
         ),
-        title: 'Learning Budget',
+        title: 'Growth by Building',
         description:
-            'Annual budget for courses, conferences, and certifications. We invest in your growth because our mission demands world-class talent.',
+            'You grow by solving hard problems, reviewing real code, and working closely with experienced operators.',
     },
     {
         icon: (
@@ -269,9 +269,9 @@ const perks = [
                 <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
         ),
-        title: 'Generous Time Off',
+        title: 'Flexible Structure',
         description:
-            'Flexible PTO, public holidays, and wellness days. Recharge when you need to; we trust you to manage your time.',
+            'Remote-first with flexible hours and async workflows built for focused deep work.',
     },
     {
         icon: (
@@ -282,9 +282,9 @@ const perks = [
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
         ),
-        title: 'Team Offsites & Bonding',
+        title: 'Aligned Team',
         description:
-            'Quarterly team offsites, annual retreats, and regular virtual hangouts. Building a company is more fun together.',
+            'A tight, mission-focused team that values clarity, ownership, and high standards over noise.',
     },
 ];
 
@@ -308,7 +308,7 @@ const CornerPlus = ({ style = {}, className = '' }) => (
 
 const CareersPerks = () => {
     return (
-        <section id="perks-section" className="relative bg-white text-white rounded-t-[28px] md:rounded-t-[36px] overflow-hidden scroll-mt-28">
+        <section data-navbar-theme="dark" id="perks-section" className="relative bg-white text-white rounded-t-[28px] md:rounded-t-[36px] overflow-hidden scroll-mt-28">
             <div className="absolute inset-0 rounded-t-[28px] md:rounded-t-[36px] bg-[#0b1424] pointer-events-none" />
             <div className="absolute inset-0 rounded-t-[28px] md:rounded-t-[36px] bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.14),_rgba(11,20,36,0.92),_rgba(11,20,36,1))] pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
@@ -325,7 +325,7 @@ const CareersPerks = () => {
                     >
                         Life at Katalyx is
                         <br />
-                        Full of Perks
+                        Driven by Impact
                     </motion.h2>
 
                     <motion.p
@@ -336,8 +336,8 @@ const CareersPerks = () => {
                         custom={1}
                         className="text-slate-300 text-sm md:text-base leading-relaxed max-w-md lg:pt-2"
                     >
-                        We make sure you're supported with the right balance of growth opportunities,
-                        flexibility, and benefits that help you thrive both at work and in life.
+                        We operate with clarity, speed, and ownership. Your work here ships, scales,
+                        and matters.
                     </motion.p>
                 </div>
 
@@ -417,68 +417,46 @@ const CareersPerks = () => {
 
 const categories = [
     'Engineering',
-    'Leadership',
-    'Operations',
-    'Product Experience',
     'Product',
+    'AI & Innovation',
+    'Platform & Infrastructure',
 ];
 
 const positions = [
     {
-        role: 'VP of Engineering - AI & Healthcare',
-        team: 'Leadership',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Leadership',
-    },
-    {
-        role: 'Senior AI/ML Engineer',
-        team: 'AI & Machine Learning',
+        role: 'Senior Full Stack Engineer',
+        team: 'Engineering',
         workTime: 'Full-time',
         location: 'Remote',
         category: 'Engineering',
     },
     {
-        role: 'Healthcare Product Manager',
-        team: 'Product Management',
+        role: 'Backend Systems Engineer',
+        team: 'Engineering',
+        workTime: 'Full-time',
+        location: 'Remote',
+        category: 'Engineering',
+    },
+    {
+        role: 'AI Product Engineer',
+        team: 'AI & Innovation',
+        workTime: 'Full-time',
+        location: 'Remote',
+        category: 'AI & Innovation',
+    },
+    {
+        role: 'Product Engineer - Frontend',
+        team: 'Product',
         workTime: 'Full-time',
         location: 'Remote',
         category: 'Product',
     },
     {
-        role: 'Full Stack Developer',
-        team: 'Engineering',
+        role: 'DevOps & Infrastructure Engineer',
+        team: 'Platform & Infrastructure',
         workTime: 'Full-time',
         location: 'Remote',
-        category: 'Engineering',
-    },
-    {
-        role: 'UX/UI Designer - Health Tech',
-        team: 'Design & User Experience',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Product Experience',
-    },
-    {
-        role: 'Data Scientist - Medical Analytics',
-        team: 'Data Science & Analytics',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Operations',
-    },
-    {
-        role: 'Clinical Integration Specialist',
-        team: 'Healthcare Operations',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Operations',
-    },
-    {
-        role: 'Backend Engineer - ABDM Integration',
-        team: 'Engineering',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Engineering',
+        category: 'Platform & Infrastructure',
     },
 ];
 
@@ -493,7 +471,7 @@ const CareersPositions = () => {
         <section
             id="available-positions"
             data-navbar-theme="dark"
-            className="relative bg-[#0b1424] text-white overflow-hidden rounded-t-2xl"
+            className="relative bg-[#0b1424] text-white overflow-hidden"
             style={{ overflowAnchor: 'none' }}
         >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.14),_rgba(11,20,36,0.92),_rgba(11,20,36,1))] pointer-events-none" />
@@ -695,9 +673,9 @@ const CareersImpact = () => {
                             custom={2}
                             className="text-slate-300 text-sm md:text-base leading-relaxed max-w-md"
                         >
-                            Join a team that's rebuilding India's claims infrastructure from the ground up.
-                            At Katalyx, your work directly impacts how insurers process millions of claims,
-                            how hospitals get reimbursed, and how patients access insured healthcare.
+                            Join a team that's building scalable digital systems from the ground up.
+                            At Katalyx, your work directly impacts how businesses operate efficiently,
+                            how products scale reliably, and how users experience modern technology.
                         </motion.p>
                     </div>
 
@@ -771,7 +749,7 @@ const Careers = () => {
 
 
             {/* Hero */}
-            <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col pb-32 md:pb-44">
+            <section data-navbar-theme="light" className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col pb-32 md:pb-44">
                 <div className="absolute top-0 -right-[5%] w-[1200px] h-[1200px] bg-blue-50/30 rounded-full blur-[160px] pointer-events-none" style={{ transform: 'translateY(-50%)' }} />
                 <div className="absolute bottom-0 -left-[10%] w-[1000px] h-[1000px] bg-indigo-50/20 rounded-full blur-[140px] pointer-events-none" style={{ transform: 'translateY(50%)' }} />
 

@@ -83,7 +83,7 @@ const Blog = () => {
                     "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://katalyxsolutions.com/" }, { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://katalyxsolutions.com/blog" }] }
                 })}</script>
             </Helmet>
-            <section className="relative min-h-screen overflow-hidden bg-white pt-32 pb-24">
+            <section data-navbar-theme="light" className="relative min-h-screen overflow-hidden bg-white pt-32 pb-24">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.10),_rgba(248,250,252,0.92),_rgba(255,255,255,1))]" />
                 <div className="absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-sky-200/30 blur-3xl" />
                 <div className="absolute bottom-[-18%] left-[-8%] h-[460px] w-[460px] rounded-full bg-indigo-100/30 blur-3xl" />

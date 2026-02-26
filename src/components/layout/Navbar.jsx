@@ -32,19 +32,14 @@ const Navbar = () => {
     // Check if current page has a dark hero section
     const isDarkHero =
         location.pathname === '/' ||
-        location.pathname === '/services' ||
-        location.pathname === '/careers' ||
-        location.pathname.startsWith('/products') ||
         location.pathname.startsWith('/projects') ||
         location.pathname === '/about' ||
         location.pathname === '/contact' ||
-        location.pathname === '/blog' ||
         location.pathname === '/terms' ||
         location.pathname === '/privacy' ||
         location.pathname === '/candidate/login' ||
         location.pathname === '/candidate/register' ||
-        location.pathname === '/admin/login' ||
-        location.pathname === '/get-started';
+        location.pathname === '/admin/login';
 
     useEffect(() => {
         const updateNavbarTheme = () => {
@@ -54,16 +49,22 @@ const Navbar = () => {
                 return;
             }
 
-            const probeY = window.scrollY + 92;
+            const probeLine = 92;
             let activeSection = themedSections.find((section) => {
-                const top = section.offsetTop;
-                const bottom = top + section.offsetHeight;
-                return probeY >= top && probeY < bottom;
+                const rect = section.getBoundingClientRect();
+                return rect.top <= probeLine && rect.bottom > probeLine;
             });
 
-            if (!activeSection) activeSection = themedSections[themedSections.length - 1];
+            let nextTheme;
+            if (!activeSection) {
+                const firstRect = themedSections[0].getBoundingClientRect();
+                nextTheme = firstRect.top > probeLine
+                    ? (isDarkHero ? 'dark' : 'light')
+                    : (themedSections[themedSections.length - 1]?.getAttribute('data-navbar-theme') === 'light' ? 'light' : 'dark');
+            } else {
+                nextTheme = activeSection.getAttribute('data-navbar-theme') === 'light' ? 'light' : 'dark';
+            }
 
-            const nextTheme = activeSection?.getAttribute('data-navbar-theme') === 'light' ? 'light' : 'dark';
             setNavTheme(nextTheme);
         };
 
@@ -94,7 +95,7 @@ const Navbar = () => {
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <div className="absolute inset-x-4 top-2 bottom-2 rounded-3xl pointer-events-none" />
                 <Link to="/" className="z-50 group">
-                    <Logo className="h-14 w-auto" />
+                    <Logo className="h-14 w-auto" theme={navTheme} />
                 </Link>
 
                 {/* Desktop Menu */}
@@ -105,8 +106,8 @@ const Navbar = () => {
                             to={link.to}
                             className={({ isActive }) =>
                                 `text-sm font-medium transition-colors duration-300 ${isActive
-                                    ? (navTheme === 'light' ? 'text-black font-semibold' : 'text-blue-400 font-semibold')
-                                    : navTheme === 'light' ? 'text-black hover:text-black/75' : 'text-gray-300 hover:text-white'
+                                    ? (navTheme === 'light' ? 'text-slate-900 font-semibold' : 'text-blue-400 font-semibold')
+                                    : navTheme === 'light' ? 'text-slate-700 hover:text-slate-900' : 'text-gray-300 hover:text-white'
                                 }`
                             }
                         >
@@ -117,7 +118,7 @@ const Navbar = () => {
                     <Link
                         to="/get-started"
                         className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_10px_24px_rgba(8,20,38,0.24)] ${navTheme === 'light'
-                            ? 'bg-black text-white border border-black hover:bg-black/90'
+                            ? 'bg-slate-900 text-white border border-slate-900 hover:bg-slate-800'
                             : 'bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff]'
                             }`}
                     >

@@ -10,7 +10,7 @@ const GetStarted = () => {
                 <title>Get Started - Katalyx Solutions</title>
             </Helmet>
 
-            <section className="relative min-h-screen overflow-hidden bg-white py-24 flex items-center justify-center">
+            <section data-navbar-theme="light" className="relative min-h-screen overflow-hidden bg-white py-24 flex items-center justify-center">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.12),_rgba(248,250,252,0.92),_rgba(255,255,255,1))]" />
                 <div className="absolute -top-36 right-[-8%] h-[420px] w-[420px] rounded-full bg-sky-200/30 blur-3xl" />
                 <div className="absolute bottom-[-16%] left-[-8%] h-[360px] w-[360px] rounded-full bg-indigo-100/30 blur-3xl" />
