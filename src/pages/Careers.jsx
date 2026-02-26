@@ -1,6 +1,8 @@
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
+import api from '../utils/api';
 import abhiroomImg from '../assets/images/abhiroom.jpg';
 import clinicImg from '../assets/images/clinic.jpg';
 import camuImg from '../assets/images/camu.jpg';
@@ -423,148 +425,320 @@ const CareersPerks = () => {
                             </motion.div>
                         ))}
                     </div>
-                    </div>
+                </div>
             </div>
         </motion.section>
     );
 };
 
-const categories = [
-    'Engineering',
-    'Product',
-    'AI & Innovation',
-    'Platform & Infrastructure',
-];
+const ApplyModal = ({ job, onClose }) => {
+    const [form, setForm] = useState({ name: '', email: '', phone: '', resumeLink: '' });
+    const [status, setStatus] = useState('idle'); // idle | loading | success | error
+    const [errorMsg, setErrorMsg] = useState('');
 
-const positions = [
-    {
-        role: 'Senior Full Stack Engineer',
-        team: 'Engineering',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Engineering',
-    },
-    {
-        role: 'Backend Systems Engineer',
-        team: 'Engineering',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Engineering',
-    },
-    {
-        role: 'AI Product Engineer',
-        team: 'AI & Innovation',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'AI & Innovation',
-    },
-    {
-        role: 'Product Engineer - Frontend',
-        team: 'Product',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Product',
-    },
-    {
-        role: 'DevOps & Infrastructure Engineer',
-        team: 'Platform & Infrastructure',
-        workTime: 'Full-time',
-        location: 'Remote',
-        category: 'Platform & Infrastructure',
-    },
-];
+    const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus('loading');
+        setErrorMsg('');
+        try {
+            await api.post('/applications', {
+                name: form.name,
+                email: form.email,
+                phone: form.phone,
+                jobId: job.id,
+                resumeLink: form.resumeLink,
+            });
+            setStatus('success');
+        } catch (err) {
+            setErrorMsg(err.response?.data?.msg || 'Something went wrong. Please try again.');
+            setStatus('error');
+        }
+    };
+
+    return (
+        <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+        >
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="relative bg-[#0d1829] border border-sky-900/50 rounded-2xl shadow-2xl w-full max-w-md p-7"
+            >
+                <button
+                    onClick={onClose}
+                    className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+                    aria-label="Close"
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+
+                {status === 'success' ? (
+                    <div className="text-center py-6">
+                        <div className="w-14 h-14 bg-green-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-2">Application Submitted!</h3>
+                        <p className="text-slate-400 text-sm">We've received your application for <span className="text-sky-400 font-medium">{job.role}</span>. We'll be in touch soon.</p>
+                        <button onClick={onClose} className="mt-6 px-6 py-2.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition-colors">
+                            Close
+                        </button>
+                    </div>
+                ) : (
+                    <>
+                        <h3 className="text-lg font-bold text-white mb-1">Apply for</h3>
+                        <p className="text-sky-400 font-semibold text-base mb-5">{job.role}</p>
+
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1.5 font-medium tracking-wide uppercase">Full Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="John Doe"
+                                    className="w-full bg-[#1a2740] border border-sky-900/60 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1.5 font-medium tracking-wide uppercase">Email Address</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="you@example.com"
+                                    className="w-full bg-[#1a2740] border border-sky-900/60 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1.5 font-medium tracking-wide uppercase">Phone Number</label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={form.phone}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="+91 98765 43210"
+                                    className="w-full bg-[#1a2740] border border-sky-900/60 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1.5 font-medium tracking-wide uppercase">Resume (Google Drive Link)</label>
+                                <input
+                                    type="url"
+                                    name="resumeLink"
+                                    value={form.resumeLink}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="https://drive.google.com/file/d/..."
+                                    className="w-full bg-[#1a2740] border border-sky-900/60 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                                />
+                                <p className="text-[11px] text-slate-500 mt-1.5">Make sure sharing is set to "Anyone with the link"</p>
+                            </div>
+
+                            {status === 'error' && (
+                                <p className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">{errorMsg}</p>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={status === 'loading'}
+                                className="w-full py-3 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                            >
+                                {status === 'loading' ? 'Submitting...' : 'Submit Application'}
+                            </button>
+                        </form>
+                    </>
+                )}
+            </motion.div>
+        </div>
+    );
+};
 
 const CareersPositions = () => {
-    const [activeFilter, setActiveFilter] = useState('Engineering');
+    const [positions, setPositions] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [activeFilter, setActiveFilter] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState(false);
+    const [applyJob, setApplyJob] = useState(null); // job being applied to
+
+    useEffect(() => {
+        let isMounted = true;
+        const fetchJobs = async () => {
+            try {
+                const res = await api.get('/jobs');
+                if (!isMounted) return;
+                if (res.data && res.data.length > 0) {
+                    const fetched = res.data.map(job => ({
+                        id: job._id,
+                        role: job.title,
+                        team: job.department,
+                        workTime: job.type,
+                        location: job.location,
+                        category: job.department,
+                    }));
+                    setPositions(fetched);
+                    const uniqueCategories = [...new Set(fetched.map(p => p.category))];
+                    setCategories(uniqueCategories);
+                    setActiveFilter(uniqueCategories[0] || null);
+                } else {
+                    setPositions([]);
+                    setCategories([]);
+                }
+            } catch (err) {
+                console.error('Failed to fetch jobs:', err);
+                if (isMounted) setFetchError(true);
+            } finally {
+                if (isMounted) setLoading(false);
+            }
+        };
+        fetchJobs();
+        return () => { isMounted = false; };
+    }, []);
 
     const filteredPositions = activeFilter
-        ? positions.filter((position) => position.category === activeFilter)
+        ? positions.filter(p => p.category === activeFilter)
         : positions;
 
     return (
-        <section
-            id="available-positions"
-            data-navbar-theme="dark"
-            className="relative bg-[#0b1424] text-white overflow-hidden"
-            style={{ overflowAnchor: 'none' }}
-        >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.14),_rgba(11,20,36,0.92),_rgba(11,20,36,1))] pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
+        <>
+            {applyJob && <ApplyModal job={applyJob} onClose={() => setApplyJob(null)} />}
+            <section
+                id="available-positions"
+                data-navbar-theme="dark"
+                className="relative bg-[#0b1424] text-white overflow-hidden"
+                style={{ overflowAnchor: 'none' }}
+            >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.14),_rgba(11,20,36,0.92),_rgba(11,20,36,1))] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="relative z-10 mx-auto max-w-[76rem] px-6 py-20 md:py-28">
-                <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
-                    <div>
-                        <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight">
-                            Available positions
-                        </h2>
-                        <p className="text-slate-300 text-[20px] md:text-[26px] italic mt-1">
-                            waiting to be filled
-                        </p>
-                    </div>
+                <div className="relative z-10 mx-auto max-w-[76rem] px-6 py-20 md:py-28">
+                    <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
+                        <div>
+                            <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight">
+                                Available positions
+                            </h2>
+                            <p className="text-slate-300 text-[20px] md:text-[26px] italic mt-1">
+                                waiting to be filled
+                            </p>
+                        </div>
 
-                    <div className="flex flex-wrap gap-2.5">
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveFilter(activeFilter === category ? null : category)}
-                                className={`px-5 py-2 rounded-full text-sm font-medium border transition-all duration-300 ${
-                                    activeFilter === category
-                                        ? 'bg-white text-[#111111] border-white'
-                                        : 'bg-transparent text-slate-200 border-sky-300/30 hover:border-sky-300 hover:bg-sky-500/10'
-                                }`}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                <div>
-                    <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 px-4 pb-4 text-[11px] md:text-xs tracking-widest uppercase text-slate-400">
-                        <span>Role</span>
-                        <span>Team</span>
-                        <span>Work Time</span>
-                        <span>Location</span>
-                        <span className="w-[90px]" />
-                    </div>
-
-                    <div className="flex flex-col">
-                        {filteredPositions.map((position) => (
-                            <div
-                                key={position.role}
-                                className="border-t border-sky-900/50 py-5 px-4 hover:bg-sky-500/10 transition-colors duration-200"
-                            >
-                                <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 items-center">
-                                    <span className="text-white text-sm font-medium">{position.role}</span>
-                                    <span className="text-slate-300 text-sm">{position.team}</span>
-                                    <span className="text-slate-300 text-sm font-medium">{position.workTime}</span>
-                                    <span className="text-slate-300 text-sm">{position.location}</span>
-                                    <button className="w-[90px] py-2 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-sky-100 transition-colors duration-200">
-                                        Apply
+                        {categories.length > 0 && (
+                            <div className="flex flex-wrap gap-2.5">
+                                {categories.map((category) => (
+                                    <button
+                                        key={category}
+                                        onClick={() => setActiveFilter(activeFilter === category ? null : category)}
+                                        className={`px-5 py-2 rounded-full text-sm font-medium border transition-all duration-300 ${activeFilter === category
+                                            ? 'bg-white text-[#111111] border-white'
+                                            : 'bg-transparent text-slate-200 border-sky-300/30 hover:border-sky-300 hover:bg-sky-500/10'
+                                            }`}
+                                    >
+                                        {category}
                                     </button>
-                                </div>
-
-                                <div className="md:hidden flex flex-col gap-3">
-                                    <div className="flex items-start justify-between gap-4">
-                                        <span className="text-white text-sm font-medium">{position.role}</span>
-                                        <button className="shrink-0 px-5 py-1.5 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-sky-100 transition-colors duration-200">
-                                            Apply
-                                        </button>
-                                    </div>
-                                    <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-slate-400">
-                                        <span>{position.team}</span>
-                                        <span>{position.workTime}</span>
-                                        <span>{position.location}</span>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
+                        )}
                     </div>
 
-                    <div className="border-t border-sky-900/50" />
+                    <div>
+                        {loading ? (
+                            <div className="flex flex-col gap-3">
+                                {[1, 2, 3].map(i => (
+                                    <div key={i} className="border-t border-sky-900/50 py-5 px-4 animate-pulse">
+                                        <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 items-center">
+                                            <div className="h-4 w-48 bg-sky-900/40 rounded" />
+                                            <div className="h-4 w-28 bg-sky-900/40 rounded" />
+                                            <div className="h-4 w-20 bg-sky-900/40 rounded" />
+                                            <div className="h-4 w-20 bg-sky-900/40 rounded" />
+                                            <div className="h-8 w-[90px] bg-sky-900/40 rounded-full" />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : fetchError ? (
+                            <div className="border-t border-sky-900/50 py-14 text-center">
+                                <p className="text-slate-400 text-sm">Could not load positions. Please try again later.</p>
+                            </div>
+                        ) : positions.length === 0 ? (
+                            <div className="border-t border-sky-900/50 py-14 text-center">
+                                <p className="text-slate-300 text-base font-medium">No open positions right now.</p>
+                                <p className="text-slate-500 text-sm mt-1">Check back soon — we're always growing.</p>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 px-4 pb-4 text-[11px] md:text-xs tracking-widest uppercase text-slate-400">
+                                    <span>Role</span>
+                                    <span>Team</span>
+                                    <span>Work Time</span>
+                                    <span>Location</span>
+                                    <span className="w-[90px]" />
+                                </div>
+
+                                <div className="flex flex-col">
+                                    {filteredPositions.length === 0 ? (
+                                        <div className="border-t border-sky-900/50 py-10 text-center">
+                                            <p className="text-slate-400 text-sm">No positions in this category yet.</p>
+                                        </div>
+                                    ) : filteredPositions.map((position) => (
+                                        <div
+                                            key={position.id}
+                                            className="border-t border-sky-900/50 py-5 px-4 hover:bg-sky-500/10 transition-colors duration-200"
+                                        >
+                                            <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 items-center">
+                                                <span className="text-white text-sm font-medium">{position.role}</span>
+                                                <span className="text-slate-300 text-sm">{position.team}</span>
+                                                <span className="text-slate-300 text-sm font-medium">{position.workTime}</span>
+                                                <span className="text-slate-300 text-sm">{position.location}</span>
+                                                <button
+                                                    onClick={() => setApplyJob(position)}
+                                                    className="w-[90px] py-2 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-sky-100 transition-colors duration-200"
+                                                >
+                                                    Apply
+                                                </button>
+                                            </div>
+
+                                            <div className="md:hidden flex flex-col gap-3">
+                                                <div className="flex items-start justify-between gap-4">
+                                                    <span className="text-white text-sm font-medium">{position.role}</span>
+                                                    <button
+                                                        onClick={() => setApplyJob(position)}
+                                                        className="shrink-0 px-5 py-1.5 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-sky-100 transition-colors duration-200"
+                                                    >
+                                                        Apply
+                                                    </button>
+                                                </div>
+                                                <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-slate-400">
+                                                    <span>{position.team}</span>
+                                                    <span>{position.workTime}</span>
+                                                    <span>{position.location}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="border-t border-sky-900/50" />
+                            </>
+                        )}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 
@@ -717,6 +891,8 @@ const CareersImpact = () => {
 };
 
 const Careers = () => {
+    const navigate = useNavigate();
+
     const smoothScrollToSection = (id) => {
         const section = document.getElementById(id);
         if (!section) return;
@@ -843,6 +1019,16 @@ const Careers = () => {
                             className="w-full sm:w-auto bg-white text-sky-700 text-sm sm:text-base font-semibold px-8 py-3.5 rounded-full border border-sky-200 hover:border-sky-300 hover:bg-sky-50 transition-all duration-300"
                         >
                             See Perks
+                        </button>
+                        <button
+                            onClick={() => navigate('/candidate/login')}
+                            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gray-900 text-white text-sm sm:text-base font-semibold px-8 py-3.5 rounded-full border border-gray-700 hover:bg-gray-800 hover:border-gray-600 transition-all duration-300"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                            Candidate Login
                         </button>
                     </motion.div>
                 </div>
