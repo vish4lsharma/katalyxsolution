@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --primary: #007BFF;
-  --secondary: #333333;
-  --bg-light: #F8F9FA;
-  --bg-dark: #212529;
+  --primary: #1b2b4a;
+  --secondary: #0a1220;
+  --bg-light: #0f1a2e;
+  --bg-dark: #05070b;
+  --theme-black: #05070b;
+  --theme-navy: #081321;
+  --theme-navy-soft: #10213b;
+  --theme-text: #ffffff;
 }
 
 html {
@@ -15,19 +19,66 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  color: #e5e7eb;
-  background-color: #0f0f1a;
+  color: var(--theme-text);
+  background-color: var(--theme-black);
   overflow-x: hidden;
 }
+
+/* Let section-level palettes render naturally instead of global blue overrides */
 
 .gradient-bg {
   background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 100%);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #007BFF, #00C6FF);
+  color: #ffffff;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: #ffffff;
+}
+
+/* Opt-in text gradients for accent words */
+.gradient-text-base {
+  color: transparent !important;
+  background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.gradient-intelligent {
+  background-image: linear-gradient(90deg, #BFDBFE 0%, #60A5FA 50%, #2563EB 100%) !important;
+}
+
+.gradient-katalyx {
+  background-image: linear-gradient(120deg, #DBEAFE 0%, #60A5FA 52%, #1D4ED8 100%) !important;
+}
+
+.gradient-services {
+  background-image: linear-gradient(95deg, #DBEAFE 0%, #93C5FD 48%, #3B82F6 100%) !important;
+}
+
+.gradient-insights {
+  background-image: linear-gradient(100deg, #DBEAFE 0%, #60A5FA 50%, #2563EB 100%) !important;
+}
+
+.gradient-expertise {
+  background-image: linear-gradient(100deg, #EFF6FF 0%, #93C5FD 42%, #3B82F6 100%) !important;
+}
+
+.gradient-work {
+  background-image: linear-gradient(90deg, #DBEAFE 0%, #60A5FA 52%, #1D4ED8 100%) !important;
+}
+
+.gradient-future-ready-tech {
+  background-image: linear-gradient(110deg, #EFF6FF 0%, #93C5FD 28%, #60A5FA 68%, #2563EB 100%) !important;
+}
+
+.gradient-measurable-growth {
+  background-image: linear-gradient(85deg, #DBEAFE 0%, #93C5FD 52%, #3B82F6 100%) !important;
+}
+
+.gradient-digital-solutions {
+  background-image: linear-gradient(90deg, #DBEAFE 0%, #60A5FA 50%, #1D4ED8 100%) !important;
 }
 
 @keyframes progress {
@@ -42,4 +93,35 @@ body {
 
 .animate-progress {
   animation: progress 1s ease-in-out;
+}
+
+.btn-gradient-navy {
+  background: linear-gradient(135deg, #7fb3ff 0%, #4f8ff0 42%, #2a5fb8 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(20, 52, 103, 0.48);
+}
+
+.btn-gradient-navy:hover {
+  background: linear-gradient(135deg, #9bc5ff 0%, #6aa5ff 42%, #3a75ce 100%);
+}
+
+.btn-gradient-primary {
+  background: linear-gradient(135deg, #7fb3ff 0%, #4f8ff0 42%, #2a5fb8 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(20, 52, 103, 0.48);
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(135deg, #9bc5ff 0%, #6aa5ff 42%, #3a75ce 100%);
+}
+
+.btn-gradient-secondary {
+  background: linear-gradient(135deg, #0f1d34 0%, #0a1426 100%);
+  color: #ffffff;
+  border: 1px solid rgba(170, 198, 238, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 20px rgba(5, 10, 18, 0.45);
+}
+
+.btn-gradient-secondary:hover {
+  background: linear-gradient(135deg, #162b4a 0%, #0e1d35 100%);
 }

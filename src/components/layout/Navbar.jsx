@@ -7,6 +7,7 @@ import Logo from './Logo';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [navTheme, setNavTheme] = useState('dark');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -31,33 +32,73 @@ const Navbar = () => {
     // Check if current page has a dark hero section
     const isDarkHero =
         location.pathname === '/' ||
-        location.pathname === '/services' ||
-        location.pathname === '/careers' ||
-        location.pathname.startsWith('/products') ||
         location.pathname.startsWith('/projects') ||
         location.pathname === '/about' ||
         location.pathname === '/contact' ||
-        location.pathname === '/blog' ||
         location.pathname === '/terms' ||
         location.pathname === '/privacy' ||
         location.pathname === '/candidate/login' ||
         location.pathname === '/candidate/register' ||
-        location.pathname === '/admin/login' ||
-        location.pathname === '/get-started';
+        location.pathname === '/admin/login';
+
+    useEffect(() => {
+        const updateNavbarTheme = () => {
+            const themedSections = Array.from(document.querySelectorAll('[data-navbar-theme]'));
+            if (themedSections.length === 0) {
+                setNavTheme(isDarkHero ? 'dark' : 'light');
+                return;
+            }
+
+            const probeLine = 92;
+            let activeSection = null;
+            themedSections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= probeLine && rect.bottom > probeLine) {
+                    activeSection = section;
+                }
+            });
+
+            let nextTheme;
+            if (!activeSection) {
+                const firstRect = themedSections[0].getBoundingClientRect();
+                nextTheme = firstRect.top > probeLine
+                    ? (isDarkHero ? 'dark' : 'light')
+                    : (themedSections[themedSections.length - 1]?.getAttribute('data-navbar-theme') === 'light' ? 'light' : 'dark');
+            } else {
+                nextTheme = activeSection.getAttribute('data-navbar-theme') === 'light' ? 'light' : 'dark';
+            }
+
+            setNavTheme(nextTheme);
+        };
+
+        updateNavbarTheme();
+        window.addEventListener('scroll', updateNavbarTheme, { passive: true });
+        window.addEventListener('resize', updateNavbarTheme);
+
+        return () => {
+            window.removeEventListener('scroll', updateNavbarTheme);
+            window.removeEventListener('resize', updateNavbarTheme);
+        };
+    }, [location.pathname, isDarkHero]);
 
     return (
         <motion.nav
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-                ? 'bg-[#0f0f1a]/90 backdrop-blur-lg border-b border-white/10 py-4 shadow-2xl'
-                : 'bg-transparent py-6'
+            className={`fixed w-full z-50 transition-all duration-300 ${navTheme === 'light'
+                ? (scrolled
+                    ? 'bg-white/88 backdrop-blur-lg py-3 border-b border-slate-200/80 shadow-[0_8px_24px_rgba(15,23,42,0.08)]'
+                    : 'bg-white/72 backdrop-blur-md py-4 border-b border-slate-200/70')
+                : (scrolled
+                    ? 'bg-[#081321]/74 backdrop-blur-lg py-3 border-b border-white/10 shadow-md'
+                    : 'bg-[#081321]/42 backdrop-blur-md py-4 border-b border-white/10')
                 }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
+                <div className="absolute inset-x-4 top-2 bottom-2 rounded-3xl pointer-events-none" />
                 <Link to="/" className="z-50 group">
-                    <Logo className="h-12 w-auto" />
+                    <Logo className="h-14 w-auto" theme={navTheme} />
                 </Link>
 
                 {/* Desktop Menu */}
@@ -68,8 +109,8 @@ const Navbar = () => {
                             to={link.to}
                             className={({ isActive }) =>
                                 `text-sm font-medium transition-colors duration-300 ${isActive
-                                    ? 'text-blue-400 font-semibold'
-                                    : (scrolled || isDarkHero) ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-blue-600'
+                                    ? (navTheme === 'light' ? 'text-slate-900 font-semibold' : 'text-blue-400 font-semibold')
+                                    : navTheme === 'light' ? 'text-slate-700 hover:text-slate-900' : 'text-gray-300 hover:text-white'
                                 }`
                             }
                         >
@@ -79,9 +120,9 @@ const Navbar = () => {
 
                     <Link
                         to="/get-started"
-                        className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 shadow-lg ${scrolled || isDarkHero
-                            ? 'bg-white text-gray-900 hover:bg-gray-100 hover:shadow-white/20'
-                            : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-blue-600/30'
+                        className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_10px_24px_rgba(8,20,38,0.24)] ${navTheme === 'light'
+                            ? 'bg-slate-900 text-white border border-slate-900 hover:bg-slate-800'
+                            : 'bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff]'
                             }`}
                     >
                         Get Started
@@ -91,7 +132,7 @@ const Navbar = () => {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`md:hidden p-2 z-50 transition-colors ${scrolled || isDarkHero ? 'text-white' : 'text-gray-900'}`}
+                    className={`md:hidden p-2 z-50 transition-colors ${navTheme === 'light' ? 'text-slate-900' : 'text-white'}`}
                 >
                     {isOpen ? <X /> : <Menu />}
                 </button>
@@ -121,7 +162,7 @@ const Navbar = () => {
                             <Link
                                 to="/get-started"
                                 onClick={() => setIsOpen(false)}
-                                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg shadow-blue-600/30"
+                                className="px-8 py-3 rounded-full text-lg font-bold bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff] transition-colors duration-200"
                             >
                                 Get Started
                             </Link>
