@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, Calendar, User, Tag, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { ArrowLeft, Calendar, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 import aiBlog from '../assets/images/ai_blog.jpg';
 import cloudBlog from '../assets/images/cloud_blog.jpg';
@@ -56,10 +56,10 @@ const BlogDetail = () => {
 
     if (!post) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#0f0f1a]">
+            <div className="min-h-screen flex items-center justify-center bg-white">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold text-white mb-4">Article Not Found</h1>
-                    <Link to="/blog" className="text-blue-400 hover:underline">Back to Blog</Link>
+                    <h1 className="mb-4 text-4xl font-bold text-slate-900">Article Not Found</h1>
+                    <Link to="/blog" className="text-sky-600 hover:underline">Back to Blog</Link>
                 </div>
             </div>
         );
@@ -99,15 +99,18 @@ const BlogDetail = () => {
                 })}</script>
             </Helmet>
 
+            <article className="relative min-h-screen overflow-hidden bg-white pt-32 pb-24">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.10),_rgba(248,250,252,0.92),_rgba(255,255,255,1))]" />
+                <div className="absolute -top-36 right-[-8%] h-[460px] w-[460px] rounded-full bg-sky-200/30 blur-3xl" />
+                <div className="absolute bottom-[-18%] left-[-8%] h-[400px] w-[400px] rounded-full bg-indigo-100/30 blur-3xl" />
 
-            <article className="pt-32 pb-24 bg-[#0f0f1a] min-h-screen">
-                <div className="container mx-auto px-6 max-w-4xl">
+                <div className="relative z-10 mx-auto max-w-4xl px-6">
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         className="mb-8"
                     >
-                        <Link to="/blog" className="flex items-center gap-2 text-blue-400 hover:text-white transition-colors group">
+                        <Link to="/blog" className="group flex items-center gap-2 text-sky-600 transition-colors hover:text-sky-700">
                             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
                             Back to Insights
                         </Link>
@@ -117,66 +120,66 @@ const BlogDetail = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <div className="flex items-center gap-4 text-sm text-blue-400 font-semibold mb-6">
-                            <span className="bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full uppercase tracking-wider">{post.category}</span>
-                            <span className="flex items-center gap-1 text-gray-400"><Calendar size={14} /> {post.date}</span>
+                        <div className="mb-6 flex items-center gap-4 text-sm font-semibold text-sky-600">
+                            <span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 uppercase tracking-wider">{post.category}</span>
+                            <span className="flex items-center gap-1 text-slate-500"><Calendar size={14} /> {post.date}</span>
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+                        <h1 className="mb-8 text-4xl font-bold leading-tight text-slate-900 md:text-5xl lg:text-6xl">
                             {post.title}
                         </h1>
 
-                        <div className="flex items-center gap-4 mb-12 border-b border-gray-800 pb-8">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-white">
+                        <div className="mb-12 flex items-center gap-4 border-b border-sky-100 pb-8">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 font-bold text-white">
                                 {post.author.split(' ').map(n => n[0]).join('')}
                             </div>
                             <div>
-                                <p className="text-white font-semibold">{post.author}</p>
-                                <p className="text-gray-500 text-sm">Tech Strategist @ Katalyx</p>
+                                <p className="font-semibold text-slate-900">{post.author}</p>
+                                <p className="text-sm text-slate-500">Tech Strategist @ Katalyx</p>
                             </div>
                         </div>
 
-                        <div className="rounded-2xl overflow-hidden mb-12 shadow-2xl border border-gray-800">
+                        <div className="mb-12 overflow-hidden rounded-3xl border border-sky-100 shadow-[0_18px_35px_rgba(14,116,144,0.14)]">
                             <img src={post.image} alt={post.title} className="w-full h-auto object-cover max-h-[500px]" />
                         </div>
 
-                        <div className="prose prose-invert max-w-none">
+                        <div className="max-w-none">
                             {post.content.map((paragraph, i) => (
-                                <p key={i} className="text-gray-300 text-lg leading-relaxed mb-6">
+                                <p key={i} className="mb-6 text-lg leading-relaxed text-slate-700">
                                     {paragraph}
                                 </p>
                             ))}
                         </div>
 
-                        <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-8">
+                        <div className="mt-16 flex flex-col items-center justify-between gap-8 border-t border-sky-100 pt-8 md:flex-row">
                             <div className="flex items-center gap-4">
-                                <span className="text-gray-400 font-semibold flex items-center gap-2 italic"><Share2 size={18} /> Share this article:</span>
+                                <span className="flex items-center gap-2 font-semibold italic text-slate-600"><Share2 size={18} /> Share this article:</span>
                                 <div className="flex gap-4">
                                     <button
                                         onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
-                                        className="text-gray-400 hover:text-blue-500 transition-colors"
+                                        className="text-slate-500 transition-colors hover:text-sky-600"
                                         aria-label="Share on Facebook"
                                     >
                                         <Facebook size={20} />
                                     </button>
                                     <button
                                         onClick={() => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`, '_blank')}
-                                        className="text-gray-400 hover:text-blue-400 transition-colors"
+                                        className="text-slate-500 transition-colors hover:text-sky-500"
                                         aria-label="Share on Twitter"
                                     >
                                         <Twitter size={20} />
                                     </button>
                                     <button
                                         onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
-                                        className="text-gray-400 hover:text-blue-700 transition-colors"
+                                        className="text-slate-500 transition-colors hover:text-sky-700"
                                         aria-label="Share on LinkedIn"
                                     >
                                         <Linkedin size={20} />
                                     </button>
-                                    {navigator.share && (
+                                    {typeof navigator !== 'undefined' && navigator.share && (
                                         <button
-                                            onClick={() => navigator.share({ title: post.title, text: post.excerpt, url: window.location.href })}
-                                            className="text-gray-400 hover:text-green-500 transition-colors"
+                                            onClick={() => navigator.share({ title: post.title, text: post.content[0], url: window.location.href })}
+                                            className="text-slate-500 transition-colors hover:text-sky-600"
                                             aria-label="Share via..."
                                         >
                                             <Share2 size={20} />
@@ -188,7 +191,7 @@ const BlogDetail = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors"
+                                    className="rounded-full border border-sky-500 bg-sky-400 px-8 py-3 font-bold text-white shadow-lg shadow-sky-500/20 transition-colors hover:bg-sky-500"
                                 >
                                     Discuss Your Strategy
                                 </motion.button>

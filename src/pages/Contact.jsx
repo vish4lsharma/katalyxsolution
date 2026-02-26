@@ -372,14 +372,17 @@ const Contact = () => {
             {/* Locate us / Contact us section */}
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-8 items-start">
+                    <div className="relative grid lg:grid-cols-2 gap-8 items-start">
+                        <div
+                            className="hidden lg:block absolute top-24 bottom-12 left-[46%] -translate-x-1/2 border-l-2 border-dotted border-sky-400/35 pointer-events-none"
+                            aria-hidden="true"
+                        />
                         <div>
                             <h2 className="text-4xl font-bold text-slate-900 mb-4">We'd love to hear from <span className="text-sky-500">you!</span></h2>
-                            <a className="text-sky-500 text-sm font-medium mb-4 inline-block">Locate us</a>
 
                             <div className="w-full max-w-md mt-3 overflow-hidden">
                                 {showMapFallback ? (
-                                    <svg viewBox="0 0 600 800" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="India map">
+                                    <svg viewBox="0 0 600 800" className="w-full h-auto opacity-55" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="India map">
                                         <defs>
                                             <pattern id="indiaDotPatternFallback" width="8" height="8" patternUnits="userSpaceOnUse">
                                                 <circle cx="2" cy="2" r="1.2" fill="#f8fafc" />
@@ -397,7 +400,7 @@ const Contact = () => {
                                     <img
                                         src="/india-map.svg"
                                         alt=""
-                                        className="w-full h-auto opacity-[0.14]"
+                                        className="w-full h-auto opacity-[0.05]"
                                         loading="lazy"
                                         onError={() => setShowMapFallback(true)}
                                     />
@@ -405,55 +408,55 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        <div className="mt-6 lg:mt-[106px] lg:-ml-6 pl-0 lg:pl-2 border-l border-dashed border-sky-100/40 self-start">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-stretch">
-                                <div className="p-9 min-h-[190px] h-full border rounded-xl shadow-sm flex items-start">
-                                    <div className="flex items-start gap-3.5">
-                                        <div className="w-12 h-12 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
-                                            <Mail size={20} />
+                        <div className="mt-6 lg:mt-[106px] lg:-ml-14 pl-0 lg:pl-2 self-start">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
+                                <div className="p-6 min-h-[160px] h-full border rounded-xl shadow-sm flex items-start">
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-10 h-10 mt-0.5 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
+                                            <Mail size={18} />
                                         </div>
-                                        <div className="flex-1 min-w-0 text-left">
-                                            <div className="text-base font-semibold text-slate-900 leading-snug">Email Us</div>
-                                            <div className="text-sm text-sky-500 mt-1.5 leading-relaxed break-all">vedanth.padigelwar@aarogyaid.com</div>
+                                        <div className="flex-1 min-w-0 text-left space-y-1.5">
+                                            <div className="min-h-[20px] text-sm font-semibold leading-5 text-slate-900">Email Us</div>
+                                            <div className="text-xs md:text-sm leading-5 text-sky-500 break-words">vedanth.padigelwar@aarogyaid.com</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="p-9 min-h-[190px] h-full border rounded-xl shadow-sm flex items-start">
-                                    <div className="flex items-start gap-3.5">
-                                        <div className="w-12 h-12 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
-                                            <MessageCircle size={20} />
+                                <div className="p-6 min-h-[160px] h-full border rounded-xl shadow-sm flex items-start">
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-10 h-10 mt-0.5 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
+                                            <MessageCircle size={18} />
                                         </div>
-                                        <div className="flex-1 min-w-0 text-left">
-                                            <div className="text-base font-semibold text-slate-900 leading-snug">Chat to support</div>
-                                            <div className="text-sm text-slate-500 mt-1.5 leading-relaxed">
+                                        <div className="flex-1 min-w-0 text-left space-y-1.5">
+                                            <div className="min-h-[20px] text-sm font-semibold leading-5 text-slate-900">Chat to support</div>
+                                            <div className="text-xs md:text-sm leading-5 text-slate-500">
                                                 <span className="block">We're here to help</span>
-                                                <span className="block text-sky-500 break-all">vedanth.padigelwar@aarogyaid.com</span>
+                                                <span className="block text-sky-500 break-words">vedanth.padigelwar@aarogyaid.com</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="p-9 min-h-[190px] h-full border rounded-xl shadow-sm flex items-start">
-                                    <div className="flex items-start gap-3.5">
-                                        <div className="w-12 h-12 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
-                                            <Headphones size={20} />
+                                <div className="p-6 min-h-[160px] h-full border rounded-xl shadow-sm flex items-start">
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-10 h-10 mt-0.5 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
+                                            <Headphones size={18} />
                                         </div>
-                                        <div className="flex-1 min-w-0 text-left">
-                                            <div className="text-base font-semibold text-slate-900 leading-snug">Visit us</div>
-                                            <div className="text-sm text-slate-500 mt-1.5 leading-relaxed">Vittal Rao Nagar, Madhapur,<br/>Hyderabad, Telangana 500081</div>
+                                        <div className="flex-1 min-w-0 text-left space-y-1.5">
+                                            <div className="min-h-[20px] text-sm font-semibold leading-5 text-slate-900">Visit us</div>
+                                            <div className="text-xs md:text-sm leading-5 text-slate-500">Vittal Rao Nagar, Madhapur,<br/>Hyderabad, Telangana 500081</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="p-9 min-h-[190px] h-full border rounded-xl shadow-sm flex items-start">
-                                    <div className="flex items-start gap-3.5">
-                                        <div className="w-12 h-12 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
-                                            <Phone size={20} />
+                                <div className="p-6 min-h-[160px] h-full border rounded-xl shadow-sm flex items-start">
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-10 h-10 mt-0.5 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500">
+                                            <Phone size={18} />
                                         </div>
-                                        <div className="flex-1 min-w-0 text-left">
-                                            <div className="text-base font-semibold text-slate-900 leading-snug">Call us</div>
-                                            <div className="text-sm text-slate-500 mt-1.5 leading-relaxed">Mon–Fri from 8am–5pm<br/><span className="text-sky-500">+91 (990) 876-0036</span></div>
+                                        <div className="flex-1 min-w-0 text-left space-y-1.5">
+                                            <div className="min-h-[20px] text-sm font-semibold leading-5 text-slate-900">Call us</div>
+                                            <div className="text-xs md:text-sm leading-5 text-slate-500">Mon-Fri from 8am-5pm<br/><span className="text-sky-500">+91 (990) 876-0036</span></div>
                                         </div>
                                     </div>
                                 </div>

@@ -10,43 +10,45 @@ const GetStarted = () => {
                 <title>Get Started - Katalyx Solutions</title>
             </Helmet>
 
-            <section className="min-h-screen bg-[#0f0f1a] flex items-center justify-center py-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#0f0f1a] to-[#0f0f1a] opacity-80" />
+            <section className="relative min-h-screen overflow-hidden bg-white py-24 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.12),_rgba(248,250,252,0.92),_rgba(255,255,255,1))]" />
+                <div className="absolute -top-36 right-[-8%] h-[420px] w-[420px] rounded-full bg-sky-200/30 blur-3xl" />
+                <div className="absolute bottom-[-16%] left-[-8%] h-[360px] w-[360px] rounded-full bg-indigo-100/30 blur-3xl" />
 
-                <div className="container mx-auto px-6 relative z-10">
+                <div className="relative z-10 mx-auto max-w-[76rem] px-6">
                     <div className="text-center mb-16">
                         <motion.h1
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl"
                         >
-                            How can we <span className="text-blue-500">help you?</span>
+                            How can we <span className="text-sky-500">help you?</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-xl text-gray-400 max-w-2xl mx-auto"
+                            className="mx-auto max-w-2xl text-xl text-slate-600"
                         >
                             Choose the path that best describes your needs.
                         </motion.p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
                         <Link to="/contact">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
                                 whileHover={{ y: -10 }}
-                                className="bg-[#16213e] p-8 rounded-2xl border border-gray-700 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all group h-full flex flex-col items-center text-center cursor-pointer"
+                                className="group flex h-full cursor-pointer flex-col items-center rounded-2xl border border-sky-100 bg-white p-8 text-center shadow-sm transition-all hover:border-sky-300 hover:shadow-[0_14px_30px_rgba(14,116,144,0.14)]"
                             >
-                                <div className="w-20 h-20 bg-blue-500/10 rounded-full flex items-center justify-center mb-6 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-sky-50 text-sky-500 transition-all group-hover:bg-sky-500 group-hover:text-white">
                                     <Rocket size={40} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-4">Start a Project</h3>
-                                <p className="text-gray-400 mb-8 flex-1">I have a vision and need a technical partner to build or scale it.</p>
-                                <span className="text-blue-400 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                                <h3 className="mb-4 text-2xl font-bold text-slate-900">Start a Project</h3>
+                                <p className="mb-8 flex-1 text-slate-600">I have a vision and need a technical partner to build or scale it.</p>
+                                <span className="flex items-center gap-2 font-bold text-sky-600 transition-all group-hover:gap-3">
                                     Let's Build <ArrowRight size={18} />
                                 </span>
                             </motion.div>
@@ -58,14 +60,14 @@ const GetStarted = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
                                 whileHover={{ y: -10 }}
-                                className="bg-[#16213e] p-8 rounded-2xl border border-gray-700 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 transition-all group h-full flex flex-col items-center text-center cursor-pointer"
+                                className="group flex h-full cursor-pointer flex-col items-center rounded-2xl border border-sky-100 bg-white p-8 text-center shadow-sm transition-all hover:border-sky-300 hover:shadow-[0_14px_30px_rgba(14,116,144,0.14)]"
                             >
-                                <div className="w-20 h-20 bg-purple-500/10 rounded-full flex items-center justify-center mb-6 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all">
+                                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-sky-50 text-sky-500 transition-all group-hover:bg-sky-500 group-hover:text-white">
                                     <Briefcase size={40} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-4">Join the Team</h3>
-                                <p className="text-gray-400 mb-8 flex-1">I'm looking for career opportunities and want to join Katalyx.</p>
-                                <span className="text-purple-400 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                                <h3 className="mb-4 text-2xl font-bold text-slate-900">Join the Team</h3>
+                                <p className="mb-8 flex-1 text-slate-600">I'm looking for career opportunities and want to join Katalyx.</p>
+                                <span className="flex items-center gap-2 font-bold text-sky-600 transition-all group-hover:gap-3">
                                     View Openings <ArrowRight size={18} />
                                 </span>
                             </motion.div>
@@ -77,14 +79,14 @@ const GetStarted = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
                                 whileHover={{ y: -10 }}
-                                className="bg-[#16213e] p-8 rounded-2xl border border-gray-700 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all group h-full flex flex-col items-center text-center cursor-pointer"
+                                className="group flex h-full cursor-pointer flex-col items-center rounded-2xl border border-sky-100 bg-white p-8 text-center shadow-sm transition-all hover:border-sky-300 hover:shadow-[0_14px_30px_rgba(14,116,144,0.14)]"
                             >
-                                <div className="w-20 h-20 bg-cyan-500/10 rounded-full flex items-center justify-center mb-6 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all">
+                                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-sky-50 text-sky-500 transition-all group-hover:bg-sky-500 group-hover:text-white">
                                     <MessageSquare size={40} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-4">General Inquiry</h3>
-                                <p className="text-gray-400 mb-8 flex-1">I have a question or want to explore partnership opportunities.</p>
-                                <span className="text-cyan-400 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                                <h3 className="mb-4 text-2xl font-bold text-slate-900">General Inquiry</h3>
+                                <p className="mb-8 flex-1 text-slate-600">I have a question or want to explore partnership opportunities.</p>
+                                <span className="flex items-center gap-2 font-bold text-sky-600 transition-all group-hover:gap-3">
                                     Get in Touch <ArrowRight size={18} />
                                 </span>
                             </motion.div>

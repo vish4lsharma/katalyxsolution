@@ -162,55 +162,56 @@ const CareersBenefits = () => {
     };
 
     return (
-        <section id="benefits-section" className="mx-auto max-w-screen-2xl px-6 py-20 md:py-28 bg-white">
+        <section id="benefits-section" className="w-full bg-white py-14 md:py-20">
             <BlobSVGDefs />
+            <div className="mx-auto max-w-[76rem] px-6">
+                <motion.p
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    custom={0}
+                    className="text-xs md:text-sm text-gray-500 italic mb-2"
+                >
+                    Our benefits
+                </motion.p>
 
-            <motion.p
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={0}
-                className="text-sm md:text-base text-gray-500 italic mb-3"
-            >
-                Our benefits
-            </motion.p>
+                <motion.h2
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    custom={1}
+                    className="text-[24px] md:text-[32px] lg:text-[38px] font-semibold text-gray-900 leading-tight tracking-tight mb-10"
+                >
+                    A culture built for builders
+                </motion.h2>
 
-            <motion.h2
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={1}
-                className="text-[28px] md:text-[36px] lg:text-[44px] font-semibold text-gray-900 leading-tight tracking-tight mb-16"
-            >
-                A culture built for builders
-            </motion.h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-                {benefits.map((benefit, index) => (
-                    <motion.div
-                        key={benefit.title}
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        custom={index + 2}
-                        className="flex flex-col"
-                    >
-                        <div className="w-full aspect-square mb-6 flex items-center justify-center">
-                            <div
-                                className="w-full h-full overflow-hidden"
-                                style={{ clipPath: `url(#blob-${index})`, WebkitClipPath: `url(#blob-${index})` }}
-                            >
-                                <img src={benefit.image} alt={benefit.title} className="w-full h-full object-cover" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 lg:gap-6">
+                    {benefits.map((benefit, index) => (
+                        <motion.div
+                            key={benefit.title}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={index + 2}
+                            className="flex flex-col"
+                        >
+                            <div className="w-full aspect-square mb-4 flex items-center justify-center">
+                                <div
+                                    className="w-full h-full overflow-hidden"
+                                    style={{ clipPath: `url(#blob-${index})`, WebkitClipPath: `url(#blob-${index})` }}
+                                >
+                                    <img src={benefit.image} alt={benefit.title} className="w-full h-full object-cover" />
+                                </div>
                             </div>
-                        </div>
 
-                        <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">{benefit.title}</h3>
-                        <p className="text-sm text-gray-500 leading-relaxed">{benefit.description}</p>
-                    </motion.div>
-                ))}
+                            <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                            <p className="text-xs md:text-sm text-gray-500 leading-relaxed">{benefit.description}</p>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </section>
     );
@@ -307,7 +308,8 @@ const CornerPlus = ({ style = {}, className = '' }) => (
 
 const CareersPerks = () => {
     return (
-        <section id="perks-section" className="relative bg-[#0b1424] text-white rounded-t-[28px] md:rounded-t-[36px] overflow-hidden scroll-mt-28">
+        <section id="perks-section" className="relative bg-white text-white rounded-t-[28px] md:rounded-t-[36px] overflow-hidden scroll-mt-28">
+            <div className="absolute inset-0 rounded-t-[28px] md:rounded-t-[36px] bg-[#0b1424] pointer-events-none" />
             <div className="absolute inset-0 rounded-t-[28px] md:rounded-t-[36px] bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.14),_rgba(11,20,36,0.92),_rgba(11,20,36,1))] pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -340,23 +342,55 @@ const CareersPerks = () => {
                 </div>
 
                 <div className="relative">
-                    <CornerPlus style={{ top: 0, left: 0 }} />
-                    <CornerPlus style={{ top: 0, left: '33.333%' }} className="hidden lg:block" />
-                    <CornerPlus style={{ top: 0, left: '50%' }} className="hidden sm:block lg:hidden" />
-                    <CornerPlus style={{ top: 0, left: '66.666%' }} className="hidden lg:block" />
-                    <CornerPlus style={{ top: 0, left: '100%' }} />
+                    {/* Mobile: 1 column x 6 rows */}
+                    <CornerPlus style={{ top: '0%', left: '0%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '16.666%', left: '0%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '33.333%', left: '0%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '50%', left: '0%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '66.666%', left: '0%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '83.333%', left: '0%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '100%', left: '0%' }} className="sm:hidden" />
 
-                    <CornerPlus style={{ top: '50%', left: 0 }} />
-                    <CornerPlus style={{ top: '50%', left: '33.333%' }} className="hidden lg:block" />
-                    <CornerPlus style={{ top: '50%', left: '50%' }} className="hidden sm:block lg:hidden" />
-                    <CornerPlus style={{ top: '50%', left: '66.666%' }} className="hidden lg:block" />
-                    <CornerPlus style={{ top: '50%', left: '100%' }} />
+                    <CornerPlus style={{ top: '0%', left: '100%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '16.666%', left: '100%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '33.333%', left: '100%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '50%', left: '100%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '66.666%', left: '100%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '83.333%', left: '100%' }} className="sm:hidden" />
+                    <CornerPlus style={{ top: '100%', left: '100%' }} className="sm:hidden" />
 
-                    <CornerPlus style={{ top: '100%', left: 0 }} />
-                    <CornerPlus style={{ top: '100%', left: '33.333%' }} className="hidden lg:block" />
-                    <CornerPlus style={{ top: '100%', left: '50%' }} className="hidden sm:block lg:hidden" />
-                    <CornerPlus style={{ top: '100%', left: '66.666%' }} className="hidden lg:block" />
-                    <CornerPlus style={{ top: '100%', left: '100%' }} />
+                    {/* Small/Medium: 2 columns x 3 rows */}
+                    <CornerPlus style={{ top: '0%', left: '0%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '0%', left: '50%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '0%', left: '100%' }} className="hidden sm:flex lg:hidden" />
+
+                    <CornerPlus style={{ top: '33.333%', left: '0%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '33.333%', left: '50%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '33.333%', left: '100%' }} className="hidden sm:flex lg:hidden" />
+
+                    <CornerPlus style={{ top: '66.666%', left: '0%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '66.666%', left: '50%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '66.666%', left: '100%' }} className="hidden sm:flex lg:hidden" />
+
+                    <CornerPlus style={{ top: '100%', left: '0%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '100%', left: '50%' }} className="hidden sm:flex lg:hidden" />
+                    <CornerPlus style={{ top: '100%', left: '100%' }} className="hidden sm:flex lg:hidden" />
+
+                    {/* Large+: 3 columns x 2 rows */}
+                    <CornerPlus style={{ top: '0%', left: '0%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '0%', left: '33.333%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '0%', left: '66.666%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '0%', left: '100%' }} className="hidden lg:flex" />
+
+                    <CornerPlus style={{ top: '50%', left: '0%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '50%', left: '33.333%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '50%', left: '66.666%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '50%', left: '100%' }} className="hidden lg:flex" />
+
+                    <CornerPlus style={{ top: '100%', left: '0%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '100%', left: '33.333%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '100%', left: '66.666%' }} className="hidden lg:flex" />
+                    <CornerPlus style={{ top: '100%', left: '100%' }} className="hidden lg:flex" />
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border border-dashed border-slate-700">
                         {perks.map((perk, index) => (
@@ -375,7 +409,7 @@ const CareersPerks = () => {
                             </motion.div>
                         ))}
                     </div>
-                </div>
+                    </div>
             </div>
         </section>
     );
@@ -459,13 +493,13 @@ const CareersPositions = () => {
         <section
             id="available-positions"
             data-navbar-theme="dark"
-            className="relative bg-[#0b1424] text-white overflow-hidden"
+            className="relative bg-[#0b1424] text-white overflow-hidden rounded-t-2xl"
             style={{ overflowAnchor: 'none' }}
         >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.14),_rgba(11,20,36,0.92),_rgba(11,20,36,1))] pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="relative z-10 mx-auto max-w-screen-2xl px-6 py-20 md:py-28">
+            <div className="relative z-10 mx-auto max-w-[76rem] px-6 py-20 md:py-28">
                 <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
                     <div>
                         <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold leading-[1.1] tracking-tight">
@@ -484,7 +518,7 @@ const CareersPositions = () => {
                                 className={`px-5 py-2 rounded-full text-sm font-medium border transition-all duration-300 ${
                                     activeFilter === category
                                         ? 'bg-white text-[#111111] border-white'
-                                        : 'bg-transparent text-white border-[#444] hover:border-white'
+                                        : 'bg-transparent text-slate-200 border-sky-300/30 hover:border-sky-300 hover:bg-sky-500/10'
                                 }`}
                             >
                                 {category}
@@ -494,7 +528,7 @@ const CareersPositions = () => {
                 </div>
 
                 <div>
-                    <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 px-4 pb-4 text-[11px] md:text-xs tracking-widest uppercase text-[#888]">
+                    <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 px-4 pb-4 text-[11px] md:text-xs tracking-widest uppercase text-slate-400">
                         <span>Role</span>
                         <span>Team</span>
                         <span>Work Time</span>
@@ -506,14 +540,14 @@ const CareersPositions = () => {
                         {filteredPositions.map((position) => (
                             <div
                                 key={position.role}
-                                className="border-t border-[#2a2a2a] py-5 px-4 hover:bg-[#1a1a1a] transition-colors duration-200"
+                                className="border-t border-sky-900/50 py-5 px-4 hover:bg-sky-500/10 transition-colors duration-200"
                             >
                                 <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_auto] gap-4 items-center">
                                     <span className="text-white text-sm font-medium">{position.role}</span>
-                                    <span className="text-[#ccc] text-sm">{position.team}</span>
-                                    <span className="text-[#ccc] text-sm font-medium">{position.workTime}</span>
-                                    <span className="text-[#ccc] text-sm">{position.location}</span>
-                                    <button className="w-[90px] py-2 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
+                                    <span className="text-slate-300 text-sm">{position.team}</span>
+                                    <span className="text-slate-300 text-sm font-medium">{position.workTime}</span>
+                                    <span className="text-slate-300 text-sm">{position.location}</span>
+                                    <button className="w-[90px] py-2 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-sky-100 transition-colors duration-200">
                                         Apply
                                     </button>
                                 </div>
@@ -521,11 +555,11 @@ const CareersPositions = () => {
                                 <div className="md:hidden flex flex-col gap-3">
                                     <div className="flex items-start justify-between gap-4">
                                         <span className="text-white text-sm font-medium">{position.role}</span>
-                                        <button className="shrink-0 px-5 py-1.5 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
+                                        <button className="shrink-0 px-5 py-1.5 rounded-full bg-white text-[#0a0a0a] text-sm font-medium hover:bg-sky-100 transition-colors duration-200">
                                             Apply
                                         </button>
                                     </div>
-                                    <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-[#999]">
+                                    <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-slate-400">
                                         <span>{position.team}</span>
                                         <span>{position.workTime}</span>
                                         <span>{position.location}</span>
@@ -535,7 +569,7 @@ const CareersPositions = () => {
                         ))}
                     </div>
 
-                    <div className="border-t border-[#2a2a2a]" />
+                    <div className="border-t border-sky-900/50" />
                 </div>
             </div>
         </section>
@@ -626,7 +660,7 @@ const CareersImpact = () => {
                 </svg>
             </div>
 
-            <div className="relative z-10 mx-auto max-w-screen-2xl px-6 py-20 md:py-28">
+            <div className="relative z-10 mx-auto max-w-[76rem] px-6 py-20 md:py-28">
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
                     <div className="lg:w-[45%] shrink-0">
                         <motion.span
@@ -713,7 +747,7 @@ const Careers = () => {
     };
 
     return (
-        <>
+        <div className="bg-white">
             <Helmet>
                 <title>Careers at Katalyx Solutions – Join Our AI & Software Team India</title>
                 <meta name="description" content="Explore career opportunities at Katalyx Solutions. We're hiring software engineers, AI specialists, and digital product managers in India. Build the future of enterprise software with us." />
@@ -808,7 +842,7 @@ const Careers = () => {
                     >
                         <button
                             onClick={scrollToPositions}
-                            className="w-full sm:w-auto bg-gradient-to-r from-sky-500 to-indigo-500 text-white text-sm sm:text-base font-semibold px-8 py-3.5 rounded-full hover:from-sky-600 hover:to-indigo-600 transition-all duration-300 shadow-lg shadow-sky-500/25"
+                            className="w-full sm:w-auto border border-sky-500 bg-sky-400 text-white text-sm sm:text-base font-semibold px-8 py-3.5 rounded-full hover:bg-sky-500 transition-all duration-300 shadow-lg shadow-sky-500/25"
                         >
                             See openings
                         </button>
@@ -837,7 +871,7 @@ const Careers = () => {
 
             <CareersPositions />
             <CareersImpact />
-        </>
+        </div>
     );
 };
 
