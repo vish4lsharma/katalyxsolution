@@ -109,11 +109,11 @@ const MissionValues = () => {
         <section
             ref={sectionRef}
             data-navbar-theme="light"
-            className="relative bg-white overflow-visible -mt-6 md:-mt-8 pt-6 md:pt-8 z-20 rounded-t-[28px] md:rounded-t-[36px]"
+            className="relative bg-white overflow-x-hidden overflow-y-visible -mt-6 md:-mt-8 pt-6 md:pt-8 z-20 rounded-t-[28px] md:rounded-t-[36px]"
         >
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute -top-12 -left-16 w-56 h-56 rounded-full bg-cyan-100/30 blur-3xl" />
-                <div className="absolute -bottom-16 right-[-50px] w-60 h-60 rounded-full bg-sky-100/30 blur-3xl" />
+                <div className="absolute -bottom-16 right-[-20px] md:right-[-50px] w-60 h-60 rounded-full bg-sky-100/30 blur-3xl" />
             </div>
             <div className="container mx-auto px-6 max-w-screen-2xl py-16 md:py-24 lg:py-28">
                 <motion.div

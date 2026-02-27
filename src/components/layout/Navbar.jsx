@@ -81,12 +81,24 @@ const Navbar = () => {
         };
     }, [location.pathname, isDarkHero]);
 
+    useEffect(() => {
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+        return () => {
+            document.body.style.overflow = originalOverflow;
+        };
+    }, [isOpen]);
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [location.pathname]);
+
     return (
         <motion.nav
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`fixed w-full z-50 transition-all duration-300 ${navTheme === 'light'
+            className={`fixed w-full z-[200] transition-all duration-300 max-md:bg-[#081321]/92 max-md:backdrop-blur-lg max-md:py-[clamp(0.6rem,2.6vw,0.9rem)] max-md:border-b max-md:border-white/10 ${navTheme === 'light'
                 ? (scrolled
                     ? 'bg-white/88 backdrop-blur-lg py-3 border-b border-slate-200/80 shadow-[0_8px_24px_rgba(15,23,42,0.08)]'
                     : 'bg-white/72 backdrop-blur-md py-4 border-b border-slate-200/70')
@@ -95,10 +107,10 @@ const Navbar = () => {
                     : 'bg-[#081321]/42 backdrop-blur-md py-4 border-b border-white/10')
                 }`}
         >
-            <div className="container mx-auto px-6 flex justify-between items-center">
+            <div className="container mx-auto px-3 sm:px-6 flex justify-between items-center gap-3">
                 <div className="absolute inset-x-4 top-2 bottom-2 rounded-3xl pointer-events-none" />
                 <Link to="/" className="z-50 group">
-                    <Logo className="h-14 w-auto" theme={navTheme} />
+                    <Logo className="h-[clamp(2.35rem,7.3vw,3.1rem)] w-auto" theme={navTheme} />
                 </Link>
 
                 {/* Desktop Menu */}
@@ -132,7 +144,7 @@ const Navbar = () => {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`md:hidden p-2 z-50 transition-colors ${navTheme === 'light' ? 'text-slate-900' : 'text-white'}`}
+                    className={`md:hidden p-2.5 z-[220] rounded-xl border transition-colors ${navTheme === 'light' ? 'text-slate-900 border-slate-300/80 bg-white/70' : 'text-white border-white/20 bg-white/5'}`}
                 >
                     {isOpen ? <X /> : <Menu />}
                 </button>
@@ -141,31 +153,37 @@ const Navbar = () => {
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            initial={{ opacity: 0, x: '100%' }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: '100%' }}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'calc(100vh - 76px)' }}
+                            exit={{ opacity: 0, height: 0 }}
                             transition={{ type: 'tween', duration: 0.3 }}
-                            className="fixed inset-0 bg-[#0f0f1a] z-40 flex flex-col justify-center items-center gap-8 md:hidden"
+                            className="absolute left-0 right-0 top-full bg-[#0b1422] z-[210] md:hidden overflow-y-auto border-t border-white/10"
                         >
-                            {links.map((link) => (
-                                <NavLink
-                                    key={link.name}
-                                    to={link.to}
+                            <div className="min-h-full w-full flex flex-col items-center pt-4 pb-[max(2rem,env(safe-area-inset-bottom))] px-4">
+                                <div className="w-full max-w-sm space-y-2">
+                                    {links.map((link) => (
+                                        <NavLink
+                                            key={link.name}
+                                            to={link.to}
+                                            onClick={() => setIsOpen(false)}
+                                            className={({ isActive }) =>
+                                                `w-full flex items-center justify-between rounded-xl border px-4 py-3 text-[clamp(0.95rem,3.8vw,1.05rem)] font-semibold transition-colors ${isActive ? 'text-sky-300 border-sky-400/50 bg-sky-500/15' : 'text-white border-white/20 bg-white/10 hover:bg-white/15'}`
+                                            }
+                                        >
+                                            <span>{link.name}</span>
+                                            <ChevronRight size={16} />
+                                        </NavLink>
+                                    ))}
+                                </div>
+
+                                <Link
+                                    to="/get-started"
                                     onClick={() => setIsOpen(false)}
-                                    className={({ isActive }) =>
-                                        `text-2xl font-medium transition-colors ${isActive ? 'text-blue-400' : 'text-gray-300 hover:text-white'}`
-                                    }
+                                    className="mt-4 w-full max-w-sm px-8 py-3 rounded-xl text-[clamp(0.95rem,3.8vw,1.05rem)] font-bold text-center bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff] transition-colors duration-200"
                                 >
-                                    {link.name}
-                                </NavLink>
-                            ))}
-                            <Link
-                                to="/get-started"
-                                onClick={() => setIsOpen(false)}
-                                className="px-8 py-3 rounded-full text-lg font-bold bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff] transition-colors duration-200"
-                            >
-                                Get Started
-                            </Link>
+                                    Get Started
+                                </Link>
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
