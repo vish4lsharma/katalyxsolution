@@ -128,17 +128,17 @@ export default function HeroSection() {
     };
 
     return (
-        <section data-navbar-theme="dark" className="relative min-h-[76vh] md:min-h-[84vh] flex items-center overflow-hidden bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846] pt-8 pb-14 md:pt-10 md:pb-20">
+        <section data-navbar-theme="dark" className="relative min-h-[92vh] md:min-h-[84vh] flex items-center overflow-hidden bg-gradient-to-br from-[#07111f] via-[#0b1b2f] to-[#102846] pt-24 sm:pt-28 pb-16 md:pt-10 md:pb-20">
             <div className="absolute inset-0 bg-[#081321]/70" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(56,189,248,0.22),transparent_55%)]" />
 
-            <div className="container mx-auto px-6 grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-center relative z-10">
-                <motion.div {...fadeIn} className="z-10 order-2 md:order-1">
-                    <motion.span className="inline-block py-1 px-3 rounded-full bg-transparent text-sky-500 text-sm font-semibold mb-4 border border-sky-300 tracking-widest uppercase">
+            <div className="container mx-auto px-5 sm:px-6 grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr] gap-6 md:gap-12 items-start md:items-center relative z-10">
+                <motion.div {...fadeIn} className="z-10 order-1 md:order-1 mt-6 sm:mt-8 md:mt-0">
+                    <motion.span className="inline-block py-1 px-3 rounded-full bg-transparent text-sky-500 text-xs sm:text-sm font-semibold mb-3 border border-sky-300 tracking-widest uppercase">
                         KATALYX Solutions
                     </motion.span>
 
-                    <motion.p className="text-base md:text-lg font-semibold text-white mb-4 md:mb-5 tracking-tight">
+                    <motion.p className="text-sm sm:text-base md:text-lg font-semibold text-white mb-3 md:mb-5 tracking-tight">
                         Build Faster.{' '}
                         <span className="text-sky-300">Scale Smarter.</span>
                     </motion.p>
@@ -146,8 +146,8 @@ export default function HeroSection() {
                     <div className="mb-8 relative z-20">
                         <motion.h1 className="font-bold leading-[1.02] text-white mb-4">
                             <div className="flex items-baseline gap-2 md:gap-3 whitespace-nowrap">
-                                <span className="text-slate-100 text-3xl md:text-4xl">We build</span>
-                                <span className="text-3xl md:text-4xl text-white">Future-Ready</span>
+                                <span className="text-slate-100 text-xl sm:text-2xl md:text-4xl">We build</span>
+                                <span className="text-xl sm:text-2xl md:text-4xl text-white">Future-Ready</span>
                             </div>
                             <div className="min-h-[1.2em] md:min-h-[1.0em]">
                                     <div className="mt-3 md:mt-4">
@@ -155,7 +155,7 @@ export default function HeroSection() {
                                             text="Digital Solutions"
                                             speed={65}
                                             restartDelay={1300}
-                                            className="text-5xl md:text-7xl font-bold text-sky-300 leading-[1.02]"
+                                            className="text-3xl sm:text-4xl md:text-7xl font-bold text-sky-300 leading-[1.02]"
                                         />
                                     </div>
                                 </div>
@@ -164,34 +164,34 @@ export default function HeroSection() {
                         <motion.p className="text-lg text-white leading-7 max-w-lg mt-4">
                             {/* We are a passionate team of innovators dedicated to crafting scalable, high-performance digital solutions for modern enterprises. */}
                         </motion.p>
-                        <motion.p className="text-sm text-white leading-6 max-w-lg mt-3 font-medium border-l-2 border-blue-500/40 pl-3">
+                        <motion.p className="text-xs sm:text-sm text-white leading-6 max-w-lg mt-3 font-medium border-l-2 border-blue-500/40 pl-3">
                             Katalyx Solutions builds AI-powered software, automation systems, and scalable digital platforms for startups and businesses.
                         </motion.p>
                     </div>
 
                     <motion.div className="flex flex-wrap gap-4">
                         <Link to="/products">
-                            <EnergyButton variant="primary">
+                            <EnergyButton variant="primary" className="w-[170px] justify-center">
                                 Our Work <ArrowRight size={20} />
                             </EnergyButton>
                         </Link>
                         <Link to="/contact">
-                            <EnergyButton variant="secondary">Let's Talk</EnergyButton>
+                            <EnergyButton variant="secondary" className="w-[170px] justify-center">Let's Talk</EnergyButton>
                         </Link>
                     </motion.div>
                 </motion.div>
 
-                <div className="order-1 md:order-2 h-[340px] md:h-[560px] w-full relative flex items-center justify-center mt-4 mb-4 md:mt-6 md:mb-6">
+                <div className="order-2 md:order-2 h-[290px] sm:h-[330px] md:h-[560px] w-full max-w-[420px] sm:max-w-[500px] md:max-w-none mx-auto relative flex items-end justify-center mt-20 sm:mt-24 mb-2 md:mt-6 md:mb-6 overflow-visible">
                     <div
-                        className="w-full h-full relative"
+                        className="w-full h-full relative max-md:scale-[0.78] sm:max-md:scale-[0.85] md:scale-100 origin-bottom"
                         onMouseMove={handleParallaxMove}
                         onMouseLeave={handleParallaxLeave}
                     >
-                        <motion.div className="absolute left-[7%] right-[7%] bottom-[18%] md:bottom-[20%] z-20 [perspective:1400px]" style={{ x: farX, y: farY }}>
+                        <motion.div className="absolute left-[9%] right-[9%] bottom-[4%] sm:bottom-[8%] md:bottom-[20%] z-20 [perspective:1400px]" style={{ x: farX, y: farY }}>
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={`step-card-${currentStage.id}`}
-                                    className="relative rounded-2xl border border-white/20 bg-[#0a1220]/90 shadow-[0_22px_60px_rgba(6,18,35,0.74)] backdrop-blur-md p-4 md:p-5 overflow-hidden"
+                                    className="relative rounded-2xl border border-white/20 bg-[#0a1220]/90 shadow-[0_18px_42px_rgba(6,18,35,0.64)] backdrop-blur-md p-3.5 sm:p-4 md:p-5 overflow-hidden"
                                     initial={shouldReduce ? { opacity: 1 } : { opacity: 0, rotateY: -16, rotateX: 6, z: -30 }}
                                     animate={shouldReduce ? { opacity: 1 } : { opacity: 1, rotateY: 0, rotateX: 0, z: 0 }}
                                     exit={shouldReduce ? { opacity: 0 } : { opacity: 0, rotateY: 14, rotateX: -4, z: -35 }}
@@ -213,11 +213,11 @@ export default function HeroSection() {
 
                                     <div className="relative flex items-center gap-3 mb-3">
                                         <motion.div
-                                            className="w-10 h-10 rounded-xl border border-white/25 bg-white/10 flex items-center justify-center relative"
+                                            className="w-9 h-9 md:w-10 md:h-10 rounded-xl border border-white/25 bg-white/10 flex items-center justify-center relative"
                                             animate={shouldReduce ? { opacity: 1 } : { scale: [1, 1.09, 1], opacity: [0.8, 1, 0.8] }}
                                             transition={{ duration: 2.6, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
                                         >
-                                            <CurrentIcon className="w-5 h-5 text-white relative z-10" />
+                                            <CurrentIcon className="w-4 h-4 md:w-5 md:h-5 text-white relative z-10" />
                                             {!shouldReduce && [0, 1, 2, 3].map((orbit) => (
                                                 <motion.span
                                                     key={`orbit-${orbit}`}
@@ -248,7 +248,7 @@ export default function HeroSection() {
                                         {currentStage.narrative}
                                     </motion.p>
 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 mb-3">
                                         <motion.div className="rounded-lg border border-white/12 bg-[#08101d]/88 px-2.5 py-2" initial={shouldReduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.08 }}>
                                             <p className="text-[10px] uppercase tracking-[0.1em] text-white/65">Now Building</p>
                                             <p className="text-xs text-white/95 mt-0.5">{currentStage.signal}</p>
@@ -273,7 +273,7 @@ export default function HeroSection() {
                                         Next: <span className="text-white/90">{nextStage.subtitle}</span>
                                     </p>
 
-                                    <div className="relative h-6 mb-2 overflow-hidden rounded-md bg-[#08101d] border border-white/12">
+                                    <div className="relative h-5 md:h-6 mb-2 overflow-hidden rounded-md bg-[#08101d] border border-white/12">
                                         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden>
                                             <path d={WAVE_PATH} stroke="rgba(255,255,255,0.28)" strokeWidth="1.1" fill="none" />
                                             <motion.path
@@ -296,7 +296,7 @@ export default function HeroSection() {
                                         ))}
                                     </div>
 
-                                    <div className="grid grid-cols-5 gap-1.5">
+                                    <div className="grid grid-cols-5 gap-1">
                                         {JOURNEY_STAGES.map((stage, index) => (
                                             <div
                                                 key={`${stage.id}-bar`}

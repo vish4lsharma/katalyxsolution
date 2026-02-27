@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import {
     ArrowRight,
     Check,
@@ -250,7 +251,45 @@ const ContactFormMockup = () => {
 };
 
 const Contact = () => {
+    const location = useLocation();
     const [showMapFallback, setShowMapFallback] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState('idle');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
+
+    const handleTalkToUsClick = () => {
+        requestAnimationFrame(() => {
+            document.getElementById('contact-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    };
+
+    useEffect(() => {
+        if (location.hash !== '#contact-card') return;
+        requestAnimationFrame(() => {
+            document.getElementById('contact-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }, [location.hash]);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+
+        await new Promise((resolve) => setTimeout(resolve, 900));
+
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setIsSubmitting(false);
+    };
 
     return (
         <>
@@ -338,10 +377,15 @@ const Contact = () => {
                                 transition={{ delay: 0.28 }}
                                 className="mt-8"
                             >
-                                <a href="#contact-mockup" className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-6 py-2.5 rounded-full shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 transition-all group text-sm font-medium" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                <button
+                                    type="button"
+                                    onClick={handleTalkToUsClick}
+                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-6 py-2.5 rounded-full shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 transition-all group text-sm font-medium"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
+                                >
                                     <span>TALK TO US</span>
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                </a>
+                                </button>
                             </motion.div>
 
                             <motion.div
@@ -360,6 +404,98 @@ const Contact = () => {
                                     </div>
                                 </div>
                             </motion.div>
+
+                            <motion.form
+                                id="contact-card"
+                                onSubmit={handleSubmit}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.38 }}
+                                className="relative overflow-hidden mt-[13.5rem] w-full sm:w-[138%] lg:w-[156%] max-w-[1060px] min-h-[460px] sm:relative sm:left-1/2 sm:-translate-x-1/2 text-left rounded-3xl border border-slate-700/80 bg-gradient-to-br from-[#0f1628]/95 via-[#101a2c]/95 to-[#0b1220]/95 p-6 sm:p-8 shadow-[0_24px_65px_rgba(2,6,23,0.52)]"
+                            >
+                                <div className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-sky-400/10 blur-3xl pointer-events-none" />
+                                <div className="absolute -bottom-20 -left-16 w-52 h-52 rounded-full bg-indigo-400/10 blur-3xl pointer-events-none" />
+
+                                <div className="relative z-10">
+                                    <div className="flex flex-wrap items-center justify-between gap-3">
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-slate-100" style={{ fontFamily: 'Inter, sans-serif' }}>Let's Build Something Great</h3>
+                                            <p className="mt-1 text-xs text-slate-300/80" style={{ fontFamily: 'Inter, sans-serif' }}>Share your details and we will connect with you shortly.</p>
+                                        </div>
+                                        <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/30 bg-sky-400/10 px-3 py-1 text-[11px] font-medium text-sky-200" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <CheckCircle2 size={12} />
+                                            Fast response
+                                        </span>
+                                    </div>
+
+                                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <label className="block">
+                                            <span className="mb-1.5 block text-[11px] font-medium text-slate-300" style={{ fontFamily: 'Inter, sans-serif' }}>Your Name</span>
+                                            <div className="relative">
+                                                <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    value={formData.name}
+                                                    onChange={handleInputChange}
+                                                    required
+                                                    placeholder="Enter your name"
+                                                    className="w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 pl-9 pr-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20"
+                                                />
+                                            </div>
+                                        </label>
+
+                                        <label className="block">
+                                            <span className="mb-1.5 block text-[11px] font-medium text-slate-300" style={{ fontFamily: 'Inter, sans-serif' }}>Email Address</span>
+                                            <div className="relative">
+                                                <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleInputChange}
+                                                    required
+                                                    placeholder="you@company.com"
+                                                    className="w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 pl-9 pr-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20"
+                                                />
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <label className="mt-4 block">
+                                        <span className="mb-1.5 block text-[11px] font-medium text-slate-300" style={{ fontFamily: 'Inter, sans-serif' }}>Project Message</span>
+                                        <div className="relative">
+                                            <MessageCircle size={14} className="absolute left-3 top-3 text-slate-500" />
+                                            <textarea
+                                                name="message"
+                                                value={formData.message}
+                                                onChange={handleInputChange}
+                                                required
+                                                rows={5}
+                                                placeholder="Tell us about your project goals and requirements..."
+                                                className="w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 pl-9 pr-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20 resize-none"
+                                            />
+                                        </div>
+                                    </label>
+
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="mt-5 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 via-cyan-500 to-indigo-500 text-white px-5 py-3 rounded-xl text-sm font-semibold shadow-[0_10px_24px_rgba(14,116,144,0.32)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(59,130,246,0.35)] disabled:opacity-70 disabled:cursor-not-allowed"
+                                        style={{ fontFamily: 'Inter, sans-serif' }}
+                                    >
+                                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                                        <Send size={14} />
+                                    </button>
+
+                                    {submitStatus === 'success' && (
+                                        <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-emerald-200 bg-emerald-500/15 border border-emerald-400/30 rounded-lg px-3 py-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <CheckCircle2 size={13} />
+                                            Thanks! Your message has been sent.
+                                        </p>
+                                    )}
+                                </div>
+                            </motion.form>
                         </div>
 
                         <div id="contact-mockup" className="relative w-full mt-4 lg:mt-0">

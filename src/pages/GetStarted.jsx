@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Rocket, Briefcase, MessageSquare, ArrowRight } from 'lucide-react';
+import { Rocket, MessageSquare, ArrowRight } from 'lucide-react';
 
 const GetStarted = () => {
     return (
@@ -34,8 +34,8 @@ const GetStarted = () => {
                         </motion.p>
                     </div>
 
-                    <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
-                        <Link to="/contact">
+                    <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
+                        <Link to="/contact#contact-card">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -54,30 +54,11 @@ const GetStarted = () => {
                             </motion.div>
                         </Link>
 
-                        <Link to="/careers">
+                        <Link to="/contact#contact-card">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                whileHover={{ y: -10 }}
-                                className="group flex h-full cursor-pointer flex-col items-center rounded-2xl border border-sky-100 bg-white p-8 text-center shadow-sm transition-all hover:border-sky-300 hover:shadow-[0_14px_30px_rgba(14,116,144,0.14)]"
-                            >
-                                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-sky-50 text-sky-500 transition-all group-hover:bg-sky-500 group-hover:text-white">
-                                    <Briefcase size={40} />
-                                </div>
-                                <h3 className="mb-4 text-2xl font-bold text-slate-900">Join the Team</h3>
-                                <p className="mb-8 flex-1 text-slate-600">I'm looking for career opportunities and want to join Katalyx.</p>
-                                <span className="flex items-center gap-2 font-bold text-sky-600 transition-all group-hover:gap-3">
-                                    View Openings <ArrowRight size={18} />
-                                </span>
-                            </motion.div>
-                        </Link>
-
-                        <Link to="/contact">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 }}
                                 whileHover={{ y: -10 }}
                                 className="group flex h-full cursor-pointer flex-col items-center rounded-2xl border border-sky-100 bg-white p-8 text-center shadow-sm transition-all hover:border-sky-300 hover:shadow-[0_14px_30px_rgba(14,116,144,0.14)]"
                             >
