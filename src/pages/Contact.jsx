@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import {
     ArrowRight,
     Check,
@@ -12,6 +13,7 @@ import {
     Phone,
     Send,
     User,
+    X,
 } from 'lucide-react';
 
 const useTypewriter = (text, startDelay = 0, speed = 60) => {
@@ -250,9 +252,11 @@ const ContactFormMockup = () => {
 };
 
 const Contact = () => {
+    const location = useLocation();
     const [showMapFallback, setShowMapFallback] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState('idle');
+    const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -261,10 +265,32 @@ const Contact = () => {
     });
 
     const handleTalkToUsClick = () => {
+        setIsContactPopupOpen(true);
+    };
+
+    useEffect(() => {
+        if (!isContactPopupOpen) return undefined;
+
+        const originalOverflow = document.body.style.overflow;
+        const onEscape = (event) => {
+            if (event.key === 'Escape') setIsContactPopupOpen(false);
+        };
+
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', onEscape);
+
+        return () => {
+            document.body.style.overflow = originalOverflow;
+            window.removeEventListener('keydown', onEscape);
+        };
+    }, [isContactPopupOpen]);
+
+    useEffect(() => {
+        if (location.hash !== '#contact-card') return;
         requestAnimationFrame(() => {
             document.getElementById('contact-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-    };
+    }, [location.hash]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -512,6 +538,90 @@ const Contact = () => {
                     </div>
                 </div>
             </section>
+
+            {isContactPopupOpen && (
+                <div className="fixed inset-0 z-[120] flex items-center justify-center px-4 py-6 sm:px-6" role="dialog" aria-modal="true" aria-label="Contact form popup">
+                    <button
+                        type="button"
+                        onClick={() => setIsContactPopupOpen(false)}
+                        className="absolute inset-0 bg-[#030712]/75 backdrop-blur-sm"
+                        aria-label="Close popup"
+                    />
+
+                    <div className="relative w-full max-w-2xl rounded-3xl border border-slate-700/80 bg-gradient-to-br from-[#0f1628]/98 via-[#101a2c]/98 to-[#0b1220]/98 p-5 sm:p-7 shadow-[0_24px_65px_rgba(2,6,23,0.58)]">
+                        <button
+                            type="button"
+                            onClick={() => setIsContactPopupOpen(false)}
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full border border-slate-600/70 text-slate-300 hover:text-white hover:border-slate-400/80 transition-colors flex items-center justify-center"
+                            aria-label="Close form"
+                        >
+                            <X size={15} />
+                        </button>
+
+                        <h3 className="text-lg font-semibold text-slate-100" style={{ fontFamily: 'Inter, sans-serif' }}>Talk To Us</h3>
+                        <p className="mt-1 text-xs text-slate-300/80" style={{ fontFamily: 'Inter, sans-serif' }}>Share your details and we will reach out shortly.</p>
+
+                        <form onSubmit={handleSubmit} className="mt-5">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleInputChange}
+                                    required
+                                    placeholder="Name"
+                                    className="w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20"
+                                />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                    required
+                                    placeholder="Email"
+                                    className="w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20"
+                                />
+                            </div>
+
+                            <input
+                                type="text"
+                                name="contact"
+                                value={formData.contact}
+                                onChange={handleInputChange}
+                                required
+                                placeholder="Contact Number"
+                                className="mt-3.5 w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20"
+                            />
+
+                            <textarea
+                                name="message"
+                                value={formData.message}
+                                onChange={handleInputChange}
+                                required
+                                rows={5}
+                                placeholder="Tell us about your requirement"
+                                className="mt-3.5 w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20 resize-none"
+                            />
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 via-cyan-500 to-indigo-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-[0_10px_24px_rgba(14,116,144,0.32)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(59,130,246,0.35)] disabled:opacity-70 disabled:cursor-not-allowed"
+                                style={{ fontFamily: 'Inter, sans-serif' }}
+                            >
+                                {isSubmitting ? 'Sending...' : 'Send Message'}
+                                <Send size={14} />
+                            </button>
+
+                            {submitStatus === 'success' && (
+                                <p className="mt-3 text-xs text-emerald-200 bg-emerald-500/15 border border-emerald-400/30 rounded-lg px-3 py-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                    Thanks! Your message has been sent.
+                                </p>
+                            )}
+                        </form>
+                    </div>
+                </div>
+            )}
 
             {/* Locate us / Contact us section */}
             {/* <section className="py-20 bg-white">
