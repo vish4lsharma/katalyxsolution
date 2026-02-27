@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
+import api from '../utils/api';
 import {
     ArrowRight,
     Check,
@@ -284,11 +285,16 @@ const Contact = () => {
         setIsSubmitting(true);
         setSubmitStatus('idle');
 
-        await new Promise((resolve) => setTimeout(resolve, 900));
-
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-        setIsSubmitting(false);
+        try {
+            await api.post('/contact', formData);
+            setSubmitStatus('success');
+            setFormData({ name: '', email: '', message: '' });
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setSubmitStatus('error');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -492,6 +498,12 @@ const Contact = () => {
                                         <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-emerald-200 bg-emerald-500/15 border border-emerald-400/30 rounded-lg px-3 py-2" style={{ fontFamily: 'Inter, sans-serif' }}>
                                             <CheckCircle2 size={13} />
                                             Thanks! Your message has been sent.
+                                        </p>
+                                    )}
+
+                                    {submitStatus === 'error' && (
+                                        <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-rose-200 bg-rose-500/15 border border-rose-400/30 rounded-lg px-3 py-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            Failed to send message. Please try again.
                                         </p>
                                     )}
                                 </div>
