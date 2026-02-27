@@ -258,7 +258,6 @@ const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        contact: '',
         message: '',
     });
 
@@ -288,7 +287,7 @@ const Contact = () => {
         await new Promise((resolve) => setTimeout(resolve, 900));
 
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', contact: '', message: '' });
+        setFormData({ name: '', email: '', message: '' });
         setIsSubmitting(false);
     };
 
@@ -462,22 +461,6 @@ const Contact = () => {
                                             </div>
                                         </label>
                                     </div>
-
-                                    <label className="mt-4 block">
-                                        <span className="mb-1.5 block text-[11px] font-medium text-slate-300" style={{ fontFamily: 'Inter, sans-serif' }}>Contact Number</span>
-                                        <div className="relative">
-                                            <Phone size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-                                            <input
-                                                type="text"
-                                                name="contact"
-                                                value={formData.contact}
-                                                onChange={handleInputChange}
-                                                required
-                                                placeholder="+91 XXXXX XXXXX"
-                                                className="w-full rounded-xl bg-[#0d1524]/95 border border-slate-600/70 pl-9 pr-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition-all focus:border-sky-400/80 focus:ring-2 focus:ring-sky-400/20"
-                                            />
-                                        </div>
-                                    </label>
 
                                     <label className="mt-4 block">
                                         <span className="mb-1.5 block text-[11px] font-medium text-slate-300" style={{ fontFamily: 'Inter, sans-serif' }}>Project Message</span>
