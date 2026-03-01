@@ -130,6 +130,18 @@ const Navbar = () => {
                         </NavLink>
                     ))}
 
+                    <a
+                        href="https://katalyxhrerp.online"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_10px_24px_rgba(8,20,38,0.24)] ${navTheme === 'light'
+                            ? 'bg-blue-600 text-white border border-blue-600 hover:bg-blue-700'
+                            : 'bg-blue-500 text-white border border-blue-500 hover:bg-blue-600'
+                            }`}
+                    >
+                        Employee Login
+                    </a>
+
                     <Link
                         to="/get-started"
                         className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_10px_24px_rgba(8,20,38,0.24)] ${navTheme === 'light'
@@ -176,10 +188,20 @@ const Navbar = () => {
                                     ))}
                                 </div>
 
+                                <a
+                                    href="https://katalyxhrerp.online"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsOpen(false)}
+                                    className="mt-6 w-full max-w-sm px-8 py-3 rounded-xl text-[clamp(0.95rem,3.8vw,1.05rem)] font-bold text-center bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition-colors duration-200"
+                                >
+                                    Employee Login
+                                </a>
+
                                 <Link
                                     to="/get-started"
                                     onClick={() => setIsOpen(false)}
-                                    className="mt-4 w-full max-w-sm px-8 py-3 rounded-xl text-[clamp(0.95rem,3.8vw,1.05rem)] font-bold text-center bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff] transition-colors duration-200"
+                                    className="mt-3 w-full max-w-sm px-8 py-3 rounded-xl text-[clamp(0.95rem,3.8vw,1.05rem)] font-bold text-center bg-white text-[#0b2342] border border-white/95 hover:bg-[#f3f8ff] transition-colors duration-200"
                                 >
                                     Get Started
                                 </Link>
